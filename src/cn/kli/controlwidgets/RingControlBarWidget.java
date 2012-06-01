@@ -5,7 +5,7 @@ import android.media.AudioManager;
 import android.util.AttributeSet;
 import cn.kli.controlpanel.R;
 
-public class RingControlBarWidget extends ControlBar implements IWidget {
+public class RingControlBarWidget extends AControlBar implements IWidget {
 	private AudioManager am;
 	private final static int TYPE = AudioManager.STREAM_RING;
 	private final static int TYPE2 = AudioManager.STREAM_NOTIFICATION;

@@ -5,7 +5,7 @@ import android.media.AudioManager;
 import android.util.AttributeSet;
 import cn.kli.controlpanel.R;
 
-public class AlarmControlBarWidget extends ControlBar implements IWidget {
+public class AlarmControlBarWidget extends AControlBar implements IWidget {
 	private AudioManager am;
 	private final static int TYPE = AudioManager.STREAM_ALARM;
 

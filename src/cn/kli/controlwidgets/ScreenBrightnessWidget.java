@@ -7,7 +7,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
 import android.view.WindowManager;
 
-public class ScreenBrightnessWidget extends ControlBar implements IWidget {
+public class ScreenBrightnessWidget extends AControlBar implements IWidget {
 	private Context mContext;
 
 	public ScreenBrightnessWidget(Context context) {

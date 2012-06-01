@@ -15,19 +15,19 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import cn.kli.controlpanel.KLog;
 import cn.kli.controlpanel.R;
 
-public abstract class ControlBar extends LinearLayout{
+public abstract class AControlBar extends LinearLayout{
 	protected Context mContext;
 	private ImageView mIcon;
 	private SeekBar mBar;
 	private TextView mDescription;
 	
-	public ControlBar(Context context){
+	public AControlBar(Context context){
 		super(context);
 		mContext = context;
 		initViews();
 	}
 	
-	public ControlBar(Context context, AttributeSet attrs){
+	public AControlBar(Context context, AttributeSet attrs){
 		super(context,attrs);
 		mContext = context;
 		initViews();
