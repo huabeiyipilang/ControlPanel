@@ -1,0 +1,49 @@
+package cn.kli.controlwidgets;
+
+import cn.kli.controlpanel.R;
+import android.app.Activity;
+import android.content.Context;
+import android.provider.Settings.SettingNotFoundException;
+import android.util.AttributeSet;
+import android.view.WindowManager;
+
+public class ScreenBrightnessWidget extends ControlBar implements IWidget {
+	private Context mContext;
+
+	public ScreenBrightnessWidget(Context context) {
+		super(context);
+		init(context);
+	}
+	
+	public ScreenBrightnessWidget(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init(context);
+	}
+	
+	private void init(Context context){
+		mContext = context;
+		int current = 255;
+		try {
+			current = android.provider.Settings.System.getInt(context.getContentResolver()
+					, android.provider.Settings.System.SCREEN_BRIGHTNESS);
+		} catch (SettingNotFoundException e) {
+			e.printStackTrace();
+		}
+		int max = 255;
+		setIcon(R.drawable.ic_settings_display);
+		setBar(max, current);
+		setDescription(R.string.description_screen_brightness);
+		
+	}
+	
+	@Override
+	void updateValue(int value) {
+		if(value == 0) return;
+		android.provider.Settings.System.putInt(mContext.getContentResolver(), 
+				android.provider.Settings.System.SCREEN_BRIGHTNESS, value);
+		WindowManager.LayoutParams lp = ((Activity)mContext).getWindow().getAttributes();
+		lp.screenBrightness = Float.valueOf(value)*(1f/255f);
+		((Activity)mContext).getWindow().setAttributes(lp);
+	}
+
+}

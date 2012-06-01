@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ControlPanelActivity!</string>
+    <string name="app_name">快捷面板</string>
+    <string name="description_music">音乐、视频、游戏和其他媒体</string>
+    <string name="description_ring_notify">铃声和通知</string>
+    <string name="description_alarm">闹钟</string>
+    <string name="description_screen_brightness">屏幕亮度</string>
+    <string name="description_screen_brightness_check">自动</string>
+    <string name="setting_display_in_notification">在通知栏中显示快捷方式</string>
+    <string name="notification_summary">点击打开快捷面板</string>
+    <string name="setting_on">开启</string>
+    <string name="setting_off">关闭</string>
+    <string name="setting_theme">主题设置</string>
+    <string name="setting_theme_summary">设置背景颜色、透明度</string>
+    <string name="setting_theme_save">保存</string>
+    <string name="setting_theme_default">还原默认值</string>
+    <string name="setting_theme_alpha">透明度</string>
+    <string name="setting_theme_red">红</string>
+    <string name="setting_theme_green">绿</string>
+    <string name="setting_theme_blue">蓝</string>
+    <string name="setting_theme_select_area">当前调整区域：%s</string>
+    <string name="setting_theme_area_title">标题栏</string>
+    <string name="setting_theme_area_container">正文</string>
+
+</resources>
