@@ -1,5 +1,7 @@
 package cn.kli.controlpanel;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -79,4 +81,17 @@ public class ControlPanel extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+	}
+	
 }

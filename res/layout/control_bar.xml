@@ -28,8 +28,7 @@
             android:id="@+id/bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" 
-            android:progressDrawable="@drawable/seekbar_style"
-            android:thumb="@drawable/seekbar_thumb"/>
+            style="@style/seek_bar"/>
     </LinearLayout>
 
 </LinearLayout>
