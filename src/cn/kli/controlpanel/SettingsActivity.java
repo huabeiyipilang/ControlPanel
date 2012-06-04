@@ -105,7 +105,7 @@ public class SettingsActivity extends PreferenceActivity implements
 //		.setTicker(getResources().getText(R.string.app_name))
 //		.getNotification();
     	Notification notif = new Notification();
-    	notif.icon = R.drawable.ic_launcher;
+    	notif.icon = R.drawable.ic_logo;
     	notif.tickerText = getResources().getText(R.string.app_name);
     	notif.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
     	notif.setLatestEventInfo(this, 
