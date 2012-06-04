@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="seek_bar">
-        <item name="android:progressDrawable">@drawable/seekbar_style</item>
-        <item name="android:thumb">@drawable/seekbar_thumb</item>
-    </style>
-    
-</resources>
