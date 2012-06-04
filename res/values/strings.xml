@@ -23,5 +23,7 @@
     <string name="setting_theme_select_area">当前调整区域：%s</string>
     <string name="setting_theme_area_title">标题栏</string>
     <string name="setting_theme_area_container">正文</string>
+    <string name="setting_about">关于</string>
+    <string name="dialog_close">关闭</string>
 
 </resources>

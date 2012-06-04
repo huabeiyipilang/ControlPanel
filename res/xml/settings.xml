@@ -12,5 +12,9 @@
         android:key="key_theme"
         android:summary="@string/setting_theme_summary"
         android:title="@string/setting_theme" />
+        
+    <Preference
+        android:key="key_about"
+        android:title="@string/setting_about" />
 
 </PreferenceScreen>

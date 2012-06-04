@@ -1,22 +1,31 @@
 package cn.kli.controlpanel;
 
+import java.io.InputStream;
+
+import org.apache.http.util.EncodingUtils;
+
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.webkit.WebView;
 
 public class SettingsActivity extends PreferenceActivity implements
 	OnSharedPreferenceChangeListener,OnPreferenceClickListener {
 	
 	private final static String KEY_PREF_NOTIFICATION = "key_notification";
 	private final static String KEY_PREF_THEME = "key_theme";
+	private final static String KEY_PREF_ABOUT = "key_about";
 	
 	private final static int ID_NOTIFICATION = 0;
 	
@@ -29,13 +38,18 @@ public class SettingsActivity extends PreferenceActivity implements
         PreferenceManager.getDefaultSharedPreferences(this)
         	.registerOnSharedPreferenceChangeListener(this);
         findPreference(KEY_PREF_THEME).setOnPreferenceClickListener(this);
+        findPreference(KEY_PREF_ABOUT).setOnPreferenceClickListener(this);
         updateNotification();
     }
 
 	public boolean onPreferenceClick(Preference pref) {
 		String key = pref.getKey();
+		KLog.i("key = "+key);
 		if(key.equals(KEY_PREF_THEME)){
 			startActivity(new Intent(this, ThemeSetting.class));
+			return true;
+		}else if(key.equals(KEY_PREF_ABOUT)){
+			showAboutDialog();
 			return true;
 		}
 		return false;
@@ -46,6 +60,25 @@ public class SettingsActivity extends PreferenceActivity implements
 			updateNotification();
 		}
 	}
+	
+	private void showAboutDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		WebView view = new WebView(this);
+		view.loadUrl("file:///android_asset/html/about.html");
+		builder.setTitle(R.string.setting_about)
+				.setView(view)
+				.setPositiveButton(R.string.dialog_close, new OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					arg0.dismiss();
+				}
+				
+			});
+		KLog.i("dialog show");
+		builder.show();
+	}
+
 
     private void updateNotification(){
     	SharedPreferences sprf = PreferenceManager.getDefaultSharedPreferences(this);
