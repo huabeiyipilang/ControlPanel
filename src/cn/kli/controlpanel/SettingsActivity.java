@@ -99,11 +99,12 @@ public class SettingsActivity extends PreferenceActivity implements
     private void showNotification(){
     	Intent intent = new Intent(this, ControlPanel.class);
     	PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,0); 
-
-//    	Notification.Builder notifBuilder = new Notification.Builder(this);
-//    	notif.setSmallIcon(R.drawable.ic_launcher)
-//		.setTicker(getResources().getText(R.string.app_name))
-//		.getNotification();
+    	
+    	/* Notification.Builder   Since: API Level 11;
+    	Notification.Builder notifBuilder = new Notification.Builder(this);
+    	notif.setSmallIcon(R.drawable.ic_launcher)
+		.setTicker(getResources().getText(R.string.app_name))
+		.getNotification(); */
     	Notification notif = new Notification();
     	notif.icon = R.drawable.ic_logo;
     	notif.tickerText = getResources().getText(R.string.app_name);
