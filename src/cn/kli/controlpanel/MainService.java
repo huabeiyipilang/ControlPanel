@@ -19,6 +19,7 @@ import cn.kli.controlwidgets.WidgetFactory;
 import com.baidu.mobstat.StatService;
 
 public class MainService extends Service implements OnClickListener {
+	
 	private WindowManager mWinManager;
 	private View mFloatPanel;
 	private WindowManager.LayoutParams mParams;
@@ -28,21 +29,21 @@ public class MainService extends Service implements OnClickListener {
 	public void onCreate() {
 		super.onCreate();
 		KLog.i("MainService onCreate(");
-    	mFloatPanel = LayoutInflater.from(this).inflate(R.layout.float_panel, null);
+    	mFloatPanel = LayoutInflater.from(this).inflate(R.layout.control_panel, null);
 		mFloatPanel.findViewById(R.id.setting).setOnClickListener(this);
 		mFloatPanel.findViewById(R.id.close).setOnClickListener(this);
-		
 	}
-
+	
 	@Override
-	public void onStart(Intent intent, int startId) {
-		super.onStart(intent, startId);
+	public int onStartCommand(Intent intent, int flags, int startId) {
     	loadWidgets();
     	loadTheme();
 		initFloat();
+		return START_NOT_STICKY;
 	}
 
 	private void initFloat() {
+    	KLog.i("1initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 		//init WindowManager
 		mWinManager = (WindowManager) getSystemService("window");
 
@@ -71,6 +72,7 @@ public class MainService extends Service implements OnClickListener {
 		//reopen panel
 		closePanel();
 		openPanel();
+    	KLog.i("2initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 	}
 
     private void loadWidgets(){
@@ -86,6 +88,7 @@ public class MainService extends Service implements OnClickListener {
     			
     		}
     	}
+    	KLog.i("loadWidgets() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
     }
     
     private void loadTheme(){
@@ -136,6 +139,8 @@ public class MainService extends Service implements OnClickListener {
 		if(header != null) header.setBackgroundColor(colorHeader);
 		View container = mFloatPanel.findViewById(R.id.container);
 		if(container != null) container.setBackgroundColor(colorContainer);
+		View tags = mFloatPanel.findViewById(R.id.tags);
+		if(tags != null) tags.setBackgroundColor(colorHeader);
     }
     
 	@Override
