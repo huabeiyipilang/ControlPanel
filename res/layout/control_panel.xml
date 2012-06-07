@@ -49,14 +49,14 @@
         android:background="@color/translucent_background"
         android:orientation="vertical" >
     </LinearLayout>
-    
+    <!--
     <LinearLayout 
         android:id="@+id/tags"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal">
-
         
     </LinearLayout>
+  -->
 
 </LinearLayout>

@@ -60,14 +60,14 @@ public class MainService extends Service implements OnClickListener {
 		mParams.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		mParams.gravity = Gravity.TOP | Gravity.LEFT;
+		mParams.gravity = Gravity.CENTER; // Gravity.TOP | Gravity.LEFT;
 		
 		KLog.i("screenWidth = "+screenWidth);
 		KLog.i("screenHeight = "+screenHeight);
 		KLog.i("mFloatPanel.getWidth() = "+mFloatPanel.getWidth());
 		KLog.i("mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
-		mParams.x = (screenWidth - mFloatPanel.getWidth())/2;
-		mParams.y = (screenHeight - mFloatPanel.getHeight())/2;
+//		mParams.x = (screenWidth - mFloatPanel.getWidth())/2;
+//		mParams.y = (screenHeight - mFloatPanel.getHeight())/2;
 		
 		//reopen panel
 		closePanel();
@@ -105,33 +105,32 @@ public class MainService extends Service implements OnClickListener {
 		}
 		View header = mFloatPanel.findViewById(R.id.header);
 		header.setOnTouchListener(new OnTouchListener(){
-			float touchX;
-			float touchY;
+			float startX;
+			float startY;
+			int originX, originY;
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
-				float x = event.getRawX();
-				float y = event.getRawY() - 25;
 				switch(event.getAction()){
 				case MotionEvent.ACTION_DOWN:
-					touchX = event.getX();
-					touchY = event.getY() + view.getHeight()/2;
-					KLog.i("ACTION_DOWN: touchX = "+touchX+", touchY = "+touchY);
-					KLog.i("ACTION_DOWN: 	  x = "+x+",      y = "+y);
+					//位移起点
+					startX = event.getRawX();
+					startY = event.getRawY();
+					//FloatPanel初始坐标
+					originX = mParams.x;
+					originY = mParams.y;
 					break;
 				case MotionEvent.ACTION_MOVE:
-					updateLocation(x - touchX,y - touchY);
-					break;
 				case MotionEvent.ACTION_UP:
-					updateLocation(x - touchX,y - touchY);
-					touchX = touchY = 0;
+					updateLocation(event.getRawX() - startX,event.getRawY() - startY);
 					break;
 				}
 				return true;
 			}
 			
 			private void updateLocation(float x, float y){
-				mParams.x = (int)x;
-				mParams.y = (int)y;
+				//新坐标 = 位移 + 初始坐标
+				mParams.x = (int)x + originX;
+				mParams.y = (int)y + originY;
 				mWinManager.updateViewLayout(mFloatPanel, mParams);
 			}
 			
@@ -139,8 +138,8 @@ public class MainService extends Service implements OnClickListener {
 		if(header != null) header.setBackgroundColor(colorHeader);
 		View container = mFloatPanel.findViewById(R.id.container);
 		if(container != null) container.setBackgroundColor(colorContainer);
-		View tags = mFloatPanel.findViewById(R.id.tags);
-		if(tags != null) tags.setBackgroundColor(colorHeader);
+//		View tags = mFloatPanel.findViewById(R.id.tags);
+//		if(tags != null) tags.setBackgroundColor(colorHeader);
     }
     
 	@Override
