@@ -4,6 +4,8 @@ import java.io.InputStream;
 
 import org.apache.http.util.EncodingUtils;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -62,6 +64,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 	
 	private void showAboutDialog(){
+		StatService.onEvent(this, Baidu.SETTINGS, "show about dialog");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		WebView view = new WebView(this);
 		view.loadUrl("file:///android_asset/html/about.html");
@@ -97,7 +100,9 @@ public class SettingsActivity extends PreferenceActivity implements
     }
     
     private void showNotification(){
-    	Intent intent = new Intent(this, ControlPanel.class);
+    	StatService.onEvent(this, Baidu.SETTINGS, "show notification");
+    	Intent intent = new Intent(this, Launcher.class);
+    	intent.putExtra(Launcher.START_FROM, "Notification");
     	PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,0); 
     	
     	/* Notification.Builder   Since: API Level 11;
@@ -119,8 +124,23 @@ public class SettingsActivity extends PreferenceActivity implements
     }
     
     private void cancelNotification(){
+    	StatService.onEvent(this, Baidu.SETTINGS, "cancel notification");
     	NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     	nm.cancel(KEY_PREF_NOTIFICATION, ID_NOTIFICATION);
     }
+
+	@Override
+	protected void onPause() {
+		StatService.onPause(this);
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		StatService.onResume(this);
+		super.onResume();
+	}
+    
+    
 
 }

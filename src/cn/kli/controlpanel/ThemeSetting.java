@@ -1,5 +1,7 @@
 package cn.kli.controlpanel;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -209,6 +211,19 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 			updatePreview(true);
 			break;
 		}
+	}
+	
+
+	@Override
+	protected void onPause() {
+		StatService.onPause(this);
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		StatService.onResume(this);
+		super.onResume();
 	}
 	
 }

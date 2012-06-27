@@ -20,6 +20,9 @@ import com.baidu.mobstat.StatService;
 
 public class MainService extends Service implements OnClickListener {
 	
+	public static final String SERVICE_CMD = "cmd";
+	public static final int CMD_OPEN_CONTROL_PANEL = 1;
+	
 	private WindowManager mWinManager;
 	private View mFloatPanel;
 	private WindowManager.LayoutParams mParams;
@@ -29,16 +32,22 @@ public class MainService extends Service implements OnClickListener {
 	public void onCreate() {
 		super.onCreate();
 		KLog.i("MainService onCreate(");
-    	mFloatPanel = LayoutInflater.from(this).inflate(R.layout.control_panel, null);
-		mFloatPanel.findViewById(R.id.setting).setOnClickListener(this);
-		mFloatPanel.findViewById(R.id.close).setOnClickListener(this);
 	}
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-    	loadWidgets();
-    	loadTheme();
-		initFloat();
+		int cmd = intent.getIntExtra(SERVICE_CMD, 0);
+		switch(cmd){
+		case CMD_OPEN_CONTROL_PANEL:
+	    	mFloatPanel = LayoutInflater.from(this).inflate(R.layout.control_panel, null);
+			mFloatPanel.findViewById(R.id.setting).setOnClickListener(this);
+			mFloatPanel.findViewById(R.id.close).setOnClickListener(this);
+	    	loadWidgets();
+	    	loadTheme();
+			initFloat();
+			break;
+		}
+		
 		return START_NOT_STICKY;
 	}
 
@@ -48,10 +57,10 @@ public class MainService extends Service implements OnClickListener {
 		mWinManager = (WindowManager) getSystemService("window");
 
 		// get screen size;
-		DisplayMetrics dm = new DisplayMetrics();
-		mWinManager.getDefaultDisplay().getMetrics(dm);
-		screenWidth = dm.widthPixels;
-		screenHeight = dm.heightPixels;
+//		DisplayMetrics dm = new DisplayMetrics();
+//		mWinManager.getDefaultDisplay().getMetrics(dm);
+//		screenWidth = dm.widthPixels;
+//		screenHeight = dm.heightPixels;
 
 		//init params
 		mParams = new WindowManager.LayoutParams();
@@ -71,6 +80,7 @@ public class MainService extends Service implements OnClickListener {
 		
 		//reopen panel
 		closePanel();
+		
 		openPanel();
     	KLog.i("2initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 	}
@@ -165,6 +175,7 @@ public class MainService extends Service implements OnClickListener {
 			try {
 				mWinManager.addView(mFloatPanel, mParams);
 				StatService.onResume(this);
+				StatService.onEvent(getApplicationContext(), "openPanel()", "openPanel()");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -174,6 +185,7 @@ public class MainService extends Service implements OnClickListener {
 	private void closePanel(){
 		if(mWinManager != null && mFloatPanel != null){
 			try {
+				
 				mWinManager.removeView(mFloatPanel);
 				StatService.onPause(this);
 			} catch (Exception e) {

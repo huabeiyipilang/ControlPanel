@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.kli.controlpanel"
-    android:versionCode="1"
-    android:versionName="1.0 beta" >
+    android:versionCode="2"
+    android:versionName="1.1 beta" >
 
-    <uses-sdk android:minSdkVersion="8" /> 
+    <uses-sdk android:minSdkVersion="7" /> 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name" >
         
-		<meta-data android:name="BaiduMobAd_CHANNEL" android:value="just for test" />
+		<meta-data android:name="BaiduMobAd_CHANNEL" android:value="nduo market" />
 		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="3c625eeff3" />
 		<meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
 		<meta-data android:name="BaiduMobAd_SEND_STRATEGY" android:value="APP_START" />
@@ -31,7 +31,7 @@
             android:name=".SettingsActivity">
         </activity>
         
-        <activity android:name=".ControlPanel"
+        <activity android:name=".Launcher"
              android:theme="@style/translucent" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
