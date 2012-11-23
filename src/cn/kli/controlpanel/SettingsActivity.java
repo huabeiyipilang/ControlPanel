@@ -25,13 +25,10 @@ import android.webkit.WebView;
 public class SettingsActivity extends PreferenceActivity implements
 	OnSharedPreferenceChangeListener,OnPreferenceClickListener {
 	
-	private final static String KEY_PREF_NOTIFICATION = "key_notification";
+	public final static String KEY_PREF_NOTIFICATION = "key_notification";
 	private final static String KEY_PREF_THEME = "key_theme";
 	private final static String KEY_PREF_ABOUT = "key_about";
 	
-	private final static int ID_NOTIFICATION = 0;
-	
-	private boolean mIsNotifShow;
 	
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +60,10 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 	}
 	
+	private void updateNotification() {
+		sendCmd(MainService.CMD_UPDATE_NOTIFICATION);
+	}
+
 	private void showAboutDialog(){
 		StatService.onEvent(this, Baidu.SETTINGS, "show about dialog");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -83,51 +84,6 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 
 
-    private void updateNotification(){
-    	SharedPreferences sprf = PreferenceManager.getDefaultSharedPreferences(this);
-    	boolean inNotifOn = sprf.getBoolean(KEY_PREF_NOTIFICATION, false);
-    	if(mIsNotifShow == inNotifOn){
-    		return;
-    	}
-    	mIsNotifShow = inNotifOn;
-    	if(inNotifOn){
-    		showNotification();
-    		KLog.i("notification on");
-    	}else{
-    		cancelNotification();
-    		KLog.i("notification off");
-    	}
-    }
-    
-    private void showNotification(){
-    	StatService.onEvent(this, Baidu.SETTINGS, "show notification");
-    	Intent intent = new Intent(this, Launcher.class);
-    	intent.putExtra(Launcher.START_FROM, "Notification");
-    	PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,0); 
-    	
-    	/* Notification.Builder   Since: API Level 11;
-    	Notification.Builder notifBuilder = new Notification.Builder(this);
-    	notif.setSmallIcon(R.drawable.ic_launcher)
-		.setTicker(getResources().getText(R.string.app_name))
-		.getNotification(); */
-    	Notification notif = new Notification();
-    	notif.icon = R.drawable.ic_logo;
-    	notif.tickerText = getResources().getText(R.string.app_name);
-    	notif.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
-    	notif.setLatestEventInfo(this, 
-    			getResources().getText(R.string.app_name), 
-    			getResources().getText(R.string.notification_summary), 
-    			contentIntent);
-    	
-    	NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-    	nm.notify(KEY_PREF_NOTIFICATION, ID_NOTIFICATION, notif);
-    }
-    
-    private void cancelNotification(){
-    	StatService.onEvent(this, Baidu.SETTINGS, "cancel notification");
-    	NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-    	nm.cancel(KEY_PREF_NOTIFICATION, ID_NOTIFICATION);
-    }
 
 	@Override
 	protected void onPause() {
@@ -141,6 +97,11 @@ public class SettingsActivity extends PreferenceActivity implements
 		super.onResume();
 	}
     
+	private void sendCmd(int cmd){
+		Intent intent_service = new Intent(this, MainService.class);
+		intent_service.putExtra(MainService.SERVICE_CMD, cmd);
+		startService(intent_service);
+	}
     
 
 }

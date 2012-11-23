@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETE"/>D
     <!-- for baidu api -->
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
@@ -41,7 +42,18 @@
             </intent-filter>
 		</activity>
         <activity android:name=".ThemeSetting"></activity>
-        <service android:name="MainService"></service>
+        
+        <service android:name="MainService" >
+            <intent-filter>
+                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="AppBroadCastReceiver">
+            <intent-filter>
+                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL"/>
+            </intent-filter>
+        </receiver>
         
     </application>
 
