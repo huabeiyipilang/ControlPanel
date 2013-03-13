@@ -4,57 +4,106 @@
     android:versionCode="2"
     android:versionName="1.1 beta" >
 
-    <uses-sdk android:minSdkVersion="7" /> 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETE"/>D
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETE" />
     <!-- for baidu api -->
-	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-	<uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <!-- for lock screen -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" >
+    </uses-permission>
 
     <application
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name" >
-        
-		<meta-data android:name="BaiduMobAd_CHANNEL" android:value="nduo market" />
-		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="3c625eeff3" />
-		<meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
-		<meta-data android:name="BaiduMobAd_SEND_STRATEGY" android:value="APP_START" />
-		<meta-data android:name="BaiduMobAd_ONLY_WIFI" android:value="false" />
-		
+        <meta-data
+            android:name="BaiduMobAd_CHANNEL"
+            android:value="nduo market" />
+        <meta-data
+            android:name="BaiduMobAd_STAT_ID"
+            android:value="3c625eeff3" />
+        <meta-data
+            android:name="BaiduMobAd_EXCEPTION_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="BaiduMobAd_SEND_STRATEGY"
+            android:value="APP_START" />
+        <meta-data
+            android:name="BaiduMobAd_ONLY_WIFI"
+            android:value="false" />
+
         <activity
-            android:label="@string/app_name"
-            android:name=".SettingsActivity">
+            android:name=".SettingsActivity"
+            android:label="@string/app_name" >
         </activity>
-        
-        <activity android:name=".Launcher"
-             android:theme="@style/translucent" android:launchMode="singleTop">
+        <activity
+            android:name=".Launcher"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ThemeSetting" >
+        </activity>
+
+        <service android:name="MainService" >
+            <intent-filter>
+                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="AppBroadCastReceiver" >
+            <intent-filter>
+                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="OneKeyLockScreen"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-		</activity>
-        <activity android:name=".ThemeSetting"></activity>
-        
-        <service android:name="MainService" >
+        </activity>
+
+        <receiver
+            android:name="DeviceReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/lock_screen" />
+
             <intent-filter>
-                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </service>
-        <receiver android:name="AppBroadCastReceiver">
-            <intent-filter>
-                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL"/>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
-        
     </application>
 
 </manifest>
