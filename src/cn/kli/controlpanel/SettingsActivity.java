@@ -1,32 +1,27 @@
 package cn.kli.controlpanel;
 
-import java.io.InputStream;
-
-import org.apache.http.util.EncodingUtils;
-
-import com.baidu.mobstat.StatService;
-
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.webkit.WebView;
+
+import com.baidu.mobstat.StatService;
 
 public class SettingsActivity extends PreferenceActivity implements
 	OnSharedPreferenceChangeListener,OnPreferenceClickListener {
 	
 	public final static String KEY_PREF_NOTIFICATION = "key_notification";
 	private final static String KEY_PREF_THEME = "key_theme";
+	private final static String KEY_PREF_LOCKSCREEN = "key_lockscreen";
 	private final static String KEY_PREF_ABOUT = "key_about";
 	
 	
@@ -38,6 +33,7 @@ public class SettingsActivity extends PreferenceActivity implements
         	.registerOnSharedPreferenceChangeListener(this);
         findPreference(KEY_PREF_THEME).setOnPreferenceClickListener(this);
         findPreference(KEY_PREF_ABOUT).setOnPreferenceClickListener(this);
+        findPreference(KEY_PREF_LOCKSCREEN).setOnPreferenceClickListener(this);
         updateNotification();
     }
 
@@ -50,6 +46,8 @@ public class SettingsActivity extends PreferenceActivity implements
 		}else if(key.equals(KEY_PREF_ABOUT)){
 			showAboutDialog();
 			return true;
+		}else if(key.equals(KEY_PREF_LOCKSCREEN)){
+			
 		}
 		return false;
 	}
@@ -103,5 +101,28 @@ public class SettingsActivity extends PreferenceActivity implements
 		startService(intent_service);
 	}
     
+	public static void addShortcut(Context context) {
+		 
+        String ACTION_INSTALL_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT";
+        // 快捷方式要启动的包
+        Intent intent = new Intent();
+        
+
+        // 设置快捷方式的参数
+        Intent shortcutIntent = new Intent(ACTION_INSTALL_SHORTCUT);
+        // 设置名称
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getResources()
+                        .getString(R.string.setting_lockscreen)); // 设置启动 Intent
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
+        // 设置图标
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                        Intent.ShortcutIconResource.fromContext(context,
+                                        R.drawable.ic_logo));
+        // 只创建一次快捷方式
+        shortcutIntent.putExtra("duplicate", false);
+        // 创建
+        context.sendBroadcast(shortcutIntent);
+
+	}
 
 }

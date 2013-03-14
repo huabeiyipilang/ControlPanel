@@ -10,6 +10,8 @@
     <string name="description_screen_brightness_check">自动</string>
     <string name="setting_display_in_notification">在通知栏中显示快捷方式</string>
     <string name="notification_summary">点击打开快捷面板</string>
+    
+    <!--  settings -->
     <string name="setting_on">开启</string>
     <string name="setting_off">关闭</string>
     <string name="setting_theme">主题设置</string>
@@ -24,6 +26,10 @@
     <string name="setting_theme_area_title">标题栏</string>
     <string name="setting_theme_area_container">正文</string>
     <string name="setting_about">关于</string>
+    <string name="setting_lockscreen">一键锁屏</string>
+    <string name="setting_lockscreen_summary">在桌面创建一键锁屏图标</string>
+    
+    
     <string name="dialog_close">关闭</string>
 
 </resources>

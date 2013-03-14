@@ -14,6 +14,11 @@
         android:title="@string/setting_theme" />
         
     <Preference
+        android:key="key_lockscreen"
+        android:summary="@string/setting_lockscreen_summary"
+        android:title="@string/setting_lockscreen" />
+    
+    <Preference
         android:key="key_about"
         android:title="@string/setting_about" />
 
