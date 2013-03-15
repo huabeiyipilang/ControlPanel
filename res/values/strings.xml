@@ -28,6 +28,8 @@
     <string name="setting_about">关于</string>
     <string name="setting_lockscreen">一键锁屏</string>
     <string name="setting_lockscreen_summary">在桌面创建一键锁屏图标</string>
+    <string name="lockscreen_added_toast">已在桌面创建快捷方式</string>
+    <string name="get_device_admin_toast">请点击“激活”，以启用设备。</string>
     
     
     <string name="dialog_close">关闭</string>

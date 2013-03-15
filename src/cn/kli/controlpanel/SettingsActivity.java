@@ -1,6 +1,7 @@
 package cn.kli.controlpanel;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -13,6 +14,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 
@@ -47,7 +49,9 @@ public class SettingsActivity extends PreferenceActivity implements
 			showAboutDialog();
 			return true;
 		}else if(key.equals(KEY_PREF_LOCKSCREEN)){
-			
+			addShortcut(this);
+			Toast.makeText(this, R.string.lockscreen_added_toast, Toast.LENGTH_LONG).show();
+			return true;
 		}
 		return false;
 	}
@@ -105,8 +109,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		 
         String ACTION_INSTALL_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT";
         // 快捷方式要启动的包
-        Intent intent = new Intent();
-        
+        Intent intent = new Intent(context, OneKeyLockScreen.class);
 
         // 设置快捷方式的参数
         Intent shortcutIntent = new Intent(ACTION_INSTALL_SHORTCUT);
@@ -117,7 +120,7 @@ public class SettingsActivity extends PreferenceActivity implements
         // 设置图标
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                         Intent.ShortcutIconResource.fromContext(context,
-                                        R.drawable.ic_logo));
+                                        R.drawable.lock));
         // 只创建一次快捷方式
         shortcutIntent.putExtra("duplicate", false);
         // 创建
