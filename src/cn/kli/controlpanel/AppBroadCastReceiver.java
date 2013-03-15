@@ -22,7 +22,8 @@ public class AppBroadCastReceiver extends BroadcastReceiver {
 			intent_service.putExtra(MainService.SERVICE_CMD, MainService.CMD_OPEN_CONTROL_PANEL);
 			context.startService(intent_service);
 		}else if(action.equals(Intent.ACTION_BOOT_COMPLETED)){
-			intent_service.putExtra(MainService.SERVICE_CMD, MainService.CMD_OPEN_CONTROL_PANEL);
+			intent_service.putExtra(MainService.SERVICE_CMD, MainService.CMD_BOOT_COMPLETED);
+			context.startService(intent_service);
 		}
 	}
 
