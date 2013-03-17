@@ -32,7 +32,15 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+    
+    <com.baidu.mobads.AdView
+		xmlns:baiduadsdk="http://schemas.android.com/apk/res/cn.kli.controlpanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        baiduadsdk:adSize="0"
+        />
+        
+    
     <TextView
         android:id="@+id/notice"
         android:layout_width="wrap_content"
@@ -161,14 +169,21 @@
 
                 <Button
                     android:id="@+id/save"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/setting_theme_save" />
 
                 <Button
+                    android:id="@+id/swap"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_theme_swap" />
+
+                <Button
                     android:id="@+id/reset"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/setting_theme_default" />

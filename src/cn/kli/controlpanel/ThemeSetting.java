@@ -23,7 +23,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 	private final static int MODE_HEAD_SELECTED = 1;
 	private final static int MODE_CONTAINER_SELECTED = 2;
 	
-	private int mSelectedMode = MODE_HEAD_SELECTED;
+	private int mSelectedMode = MODE_CONTAINER_SELECTED;
 	private int mColorHeader;
 	private int mColorContainer;
 	
@@ -65,6 +65,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 		mContainer.setOnClickListener(this);
 		findViewById(R.id.save).setOnClickListener(this);
 		findViewById(R.id.reset).setOnClickListener(this);
+		findViewById(R.id.swap).setOnClickListener(this);
 		mNotice = (TextView)findViewById(R.id.notice);
 		
 		//get selected color
@@ -173,21 +174,23 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 	}
 	
 	private boolean save(){
-		KLog.i("save");
+		klilog.i("save");
 		SharedPreferences share = getSharedPreferences(SETTING_PREFERENCES, MODE_PRIVATE);
 		SharedPreferences.Editor editor = share.edit();
 		editor.putInt(THEME_HEADER_COLOR, mColorHeader);
 		editor.putInt(THEME_CONTAINER_COLOR, mColorContainer);
 		editor.commit();
+		StatService.onEvent(this, Baidu.EVENT_THEME_SETTINGS, Baidu.SET_THEME+"header: "+dumpColor(mColorHeader)+";   container: "+dumpColor(mColorContainer));
 		return true;
 	}
 	
-	@SuppressWarnings("unused")
-	private void dumpColor(int color){
-		KLog.i("color = "+color+", alpha = "+Color.alpha(color)+","
+	private String dumpColor(int color){
+		String log = "color = "+color+", alpha = "+Color.alpha(color)+","
 				+Color.red(color)+","
 				+Color.green(color)+","
-				+Color.blue(color));
+				+Color.blue(color);
+		klilog.i(log);
+		return log;
 	}
 
 	public void onClick(View view) {
@@ -195,6 +198,14 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 		case R.id.save:
 			save();
 			finish();
+			break;
+		case R.id.swap:
+			if(mSelectedMode == MODE_HEAD_SELECTED){
+				mSelectedMode = MODE_CONTAINER_SELECTED;
+			}else{
+				mSelectedMode = MODE_HEAD_SELECTED;
+			}
+			updatePreview(true);
 			break;
 		case R.id.reset:
 			mColorHeader = getResources().getColor(R.color.translucent_background_dark);

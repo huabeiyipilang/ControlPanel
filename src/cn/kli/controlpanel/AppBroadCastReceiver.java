@@ -15,7 +15,7 @@ public class AppBroadCastReceiver extends BroadcastReceiver {
 		if(TextUtils.isEmpty(action)){
 			return;
 		}else{
-			KLog.i("broadcast received action is "+action);
+			klilog.i("broadcast received action is "+action);
 		} 
 		
 		if(action.equals("cn.kli.controlpanel.action.SHOW_PANEL")){

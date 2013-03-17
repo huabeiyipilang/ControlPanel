@@ -41,7 +41,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 	public boolean onPreferenceClick(Preference pref) {
 		String key = pref.getKey();
-		KLog.i("key = "+key);
+		klilog.i("key = "+key);
 		if(key.equals(KEY_PREF_THEME)){
 			startActivity(new Intent(this, ThemeSetting.class));
 			return true;
@@ -81,7 +81,7 @@ public class SettingsActivity extends PreferenceActivity implements
 				}
 				
 			});
-		KLog.i("dialog show");
+		klilog.i("dialog show");
 		builder.show();
 	}
 
@@ -106,6 +106,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
     
 	public static void addShortcut(Context context) {
+		StatService.onEvent(context, Baidu.EVENT_LOCK_SCREEN, Baidu.ADD_SHORTCUTS);
 		 
         String ACTION_INSTALL_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT";
         // 快捷方式要启动的包

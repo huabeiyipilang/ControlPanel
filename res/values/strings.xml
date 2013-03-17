@@ -18,16 +18,17 @@
     <string name="setting_theme_summary">设置背景颜色、透明度</string>
     <string name="setting_theme_save">保存</string>
     <string name="setting_theme_default">还原默认值</string>
+    <string name="setting_theme_swap">切换配色区</string>
     <string name="setting_theme_alpha">透明度</string>
     <string name="setting_theme_red">红</string>
     <string name="setting_theme_green">绿</string>
     <string name="setting_theme_blue">蓝</string>
-    <string name="setting_theme_select_area">当前调整区域：%s</string>
+    <string name="setting_theme_select_area">当前配色区域：%s</string>
     <string name="setting_theme_area_title">标题栏</string>
     <string name="setting_theme_area_container">正文</string>
     <string name="setting_about">关于</string>
-    <string name="setting_lockscreen">一键锁屏</string>
-    <string name="setting_lockscreen_summary">在桌面创建一键锁屏图标</string>
+    <string name="setting_lockscreen">添加一键锁屏图标</string>
+    <string name="setting_lockscreen_summary">在桌面创建一键锁屏快捷方式</string>
     <string name="lockscreen_added_toast">已在桌面创建快捷方式</string>
     <string name="get_device_admin_toast">请点击“激活”，以启用设备。</string>
     

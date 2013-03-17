@@ -4,13 +4,18 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
 
@@ -65,7 +71,7 @@ public class MainService extends Service implements OnClickListener {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		KLog.i("MainService onCreate(");
+		klilog.i("MainService onCreate(");
 	}
 	
 	@Override
@@ -112,7 +118,7 @@ public class MainService extends Service implements OnClickListener {
     			
     		}
     	}
-    	KLog.i("loadWidgets() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
+    	klilog.i("loadWidgets() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
     }
 
     
@@ -170,7 +176,7 @@ public class MainService extends Service implements OnClickListener {
     }
     
 	private void initFloat() {
-    	KLog.i("1initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
+    	klilog.i("1initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 		//init WindowManager
 		mWinManager = (WindowManager) getSystemService("window");
 
@@ -189,10 +195,10 @@ public class MainService extends Service implements OnClickListener {
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.gravity = Gravity.CENTER; // Gravity.TOP | Gravity.LEFT;
 		
-		KLog.i("screenWidth = "+screenWidth);
-		KLog.i("screenHeight = "+screenHeight);
-		KLog.i("mFloatPanel.getWidth() = "+mFloatPanel.getWidth());
-		KLog.i("mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
+		klilog.i("screenWidth = "+screenWidth);
+		klilog.i("screenHeight = "+screenHeight);
+		klilog.i("mFloatPanel.getWidth() = "+mFloatPanel.getWidth());
+		klilog.i("mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 //		mParams.x = (screenWidth - mFloatPanel.getWidth())/2;
 //		mParams.y = (screenHeight - mFloatPanel.getHeight())/2;
 		
@@ -200,7 +206,7 @@ public class MainService extends Service implements OnClickListener {
 		closePanel();
 		
 		openPanel();
-    	KLog.i("2initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
+    	klilog.i("2initFloat() mFloatPanel.getHeight() = "+mFloatPanel.getHeight());
 	}
 
     
@@ -264,10 +270,10 @@ public class MainService extends Service implements OnClickListener {
     	isNotifShow = inNotifOn;
     	if(inNotifOn){
     		showNotification();
-    		KLog.i("notification on");
+    		klilog.i("notification on");
     	}else{
     		cancelNotification();
-    		KLog.i("notification off");
+    		klilog.i("notification off");
     	}
     }
     

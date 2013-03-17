@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import cn.kli.controlpanel.KLog;
+import cn.kli.controlpanel.klilog;
 import cn.kli.controlpanel.R;
 
 public abstract class AControlBar extends LinearLayout{
@@ -44,7 +44,7 @@ public abstract class AControlBar extends LinearLayout{
 	
 	protected void setBar(int max, int current){
 		mBar.setMax(max);
-		KLog.i("current = "+current);
+		klilog.i("current = "+current);
 		mBar.setProgress(current);
 	}
 	
@@ -57,7 +57,7 @@ public abstract class AControlBar extends LinearLayout{
 		
 		public void onProgressChanged(SeekBar seekBar, int progress,
 				boolean fromUser) {
-			KLog.i("onProgressChanged  fromUser = "+fromUser);
+			klilog.i("onProgressChanged  fromUser = "+fromUser);
 			if(fromUser && lastProgress != progress){
 				updateValue(progress);
 				lastProgress = progress;

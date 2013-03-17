@@ -11,10 +11,10 @@ public class Launcher extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        KLog.i("onCreate()");
+        klilog.i("onCreate()");
         String startFrom = getIntent().getStringExtra(START_FROM);
-        KLog.i("launcher start from "+startFrom);
-        StatService.onEvent(getApplicationContext(), Baidu.OPEN_PANEL, Baidu.OPEN_PANEL_FROM_LAUNCHER+":"+startFrom);
+        klilog.i("launcher start from "+startFrom);
+        StatService.onEvent(getApplicationContext(), Baidu.EVENT_OPEN_PANEL, Baidu.OPEN_PANEL_FROM_LAUNCHER+":"+startFrom);
         startService(new Intent(this,MainService.class).putExtra(MainService.SERVICE_CMD, MainService.CMD_OPEN_CONTROL_PANEL));
         finish();
     }

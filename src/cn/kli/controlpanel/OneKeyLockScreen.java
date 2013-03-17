@@ -1,5 +1,7 @@
 package cn.kli.controlpanel;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -23,8 +25,8 @@ public class OneKeyLockScreen extends Activity {
 			devicePloicyManager = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 			powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
 			devicePloicyManager.lockNow();
+			StatService.onEvent(this, Baidu.EVENT_LOCK_SCREEN, Baidu.LOCK_SCREEN);
 			Log.i("klilog", "lock now");
-			finish();
 	    }else{
 			Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 			ComponentName componentName = new ComponentName(this, DeviceReceiver.class); 
@@ -32,6 +34,7 @@ public class OneKeyLockScreen extends Activity {
 			startActivity(intent);
 			Toast.makeText(this, R.string.get_device_admin_toast, Toast.LENGTH_LONG).show();
 	    }
+		finish();
 	}
 
 }
