@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <com.baidu.mobads.AdView
+		xmlns:baiduadsdk="http://schemas.android.com/apk/res/cn.kli.controlpanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        baiduadsdk:adSize="0"
+        />
     <LinearLayout
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -33,12 +39,6 @@
         </LinearLayout>
     </LinearLayout>
     
-    <com.baidu.mobads.AdView
-		xmlns:baiduadsdk="http://schemas.android.com/apk/res/cn.kli.controlpanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        baiduadsdk:adSize="0"
-        />
         
     
     <TextView
