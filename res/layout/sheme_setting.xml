@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.baidu.mobads.AdView
-		xmlns:baiduadsdk="http://schemas.android.com/apk/res/cn.kli.controlpanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        baiduadsdk:adSize="0"
-        />
     <LinearLayout
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -38,9 +32,30 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    
-        
-    
+
+    <LinearLayout
+        android:id="@+id/ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <com.baidu.mobads.AdView
+            android:id="@+id/ad_view"
+            xmlns:baiduadsdk="http://schemas.android.com/apk/res/cn.kli.controlpanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            baiduadsdk:adSize="0" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="点击广告可隐藏"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/notice"
         android:layout_width="wrap_content"
@@ -79,8 +94,8 @@
                     android:textColor="@android:color/white" />
 
                 <SeekBar
-                    android:id="@+id/alpha_bar" 
-            		style="@style/seek_bar"
+                    android:id="@+id/alpha_bar"
+                    style="@style/seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -104,8 +119,8 @@
                     android:textColor="@android:color/white" />
 
                 <SeekBar
-                    android:id="@+id/red_bar" 
-            		style="@style/seek_bar"
+                    android:id="@+id/red_bar"
+                    style="@style/seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -130,7 +145,7 @@
 
                 <SeekBar
                     android:id="@+id/green_bar"
-            		style="@style/seek_bar"
+                    style="@style/seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -155,7 +170,7 @@
 
                 <SeekBar
                     android:id="@+id/blue_bar"
-            		style="@style/seek_bar"
+                    style="@style/seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

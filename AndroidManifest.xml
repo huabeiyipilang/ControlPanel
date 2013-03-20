@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.kli.controlpanel"
     android:versionCode="2"
-    android:versionName="1.1 beta" >
+    android:versionName="1.2 beta" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -32,7 +32,7 @@
         android:label="@string/app_name" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="nduo market" />
+            android:value="baidu market" />
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="3c625eeff3" />
@@ -49,11 +49,11 @@
         <!-- 您从百度移动联盟网站获取的APPSID -->
         <meta-data
             android:name="BaiduMobAd_APP_ID"
-            android:value="debug" />
+            android:value="ba428a14" />
         <!-- 您从百度移动联盟网站获取的计费名 -->
         <meta-data
             android:name="BaiduMobAd_APP_SEC"
-            android:value="debug" />
+            android:value="ba428a14" />
         
         <activity
             android:name=".SettingsActivity"

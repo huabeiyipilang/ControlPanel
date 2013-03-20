@@ -1,6 +1,6 @@
 package cn.kli.controlpanel;
 
-import com.baidu.mobstat.StatService;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,8 +11,12 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+
+import com.baidu.mobads.AdView;
+import com.baidu.mobads.AdViewListener;
+import com.baidu.mobstat.StatService;
 
 public class ThemeSetting extends Activity implements OnSeekBarChangeListener, OnClickListener{
 	
@@ -70,6 +74,53 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 		
 		//get selected color
 		updatePreview(true);
+		
+		//init ad view
+		final LinearLayout adContainer = (LinearLayout)findViewById(R.id.ad_container);
+		AdView adView = (AdView)findViewById(R.id.ad_view);
+		adView.setListener(new AdViewListener(){
+
+			@Override
+			public void onAdClick(JSONObject arg0) {
+				klilog.i("onAdClick");
+				adContainer.setVisibility(View.GONE);
+			}
+
+			@Override
+			public void onAdFailed(String arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAdReady(AdView arg0) {
+				adContainer.setVisibility(View.VISIBLE);
+				klilog.i("onAdReady");
+			}
+
+			@Override
+			public void onAdShow(JSONObject arg0) {
+				klilog.i("onAdShow");
+			}
+
+			@Override
+			public void onAdSwitch() {
+				klilog.i("onAdSwitch");
+			}
+
+			@Override
+			public void onVideoFinish() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onVideoStart() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 	}
 	
 	
