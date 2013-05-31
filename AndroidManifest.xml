@@ -14,7 +14,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name=”android.permission.CAMERA”/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     
     <!-- for baidu api -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,6 +24,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    
     <!-- for lock screen -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -77,7 +79,7 @@
         <activity android:name=".ThemeSetting" >
         </activity>
 
-        <service android:name="MainService" >
+        <service android:name="cn.kli.controlpanel.MainService" >
             <intent-filter>
                 <action android:name="cn.kli.controlpanel.action.SHOW_PANEL" />
 
@@ -101,7 +103,7 @@
         </activity>
 
         <receiver
-            android:name="DeviceReceiver"
+            android:name="cn.kli.controlpanel.DeviceReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
@@ -116,9 +118,11 @@
         <activity
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
+        
         <activity android:name="ControlActivity"
             android:theme="@style/translucent"></activity>
-        <activity android:name="LightControlActivity">
+        
+        <activity android:name="cn.kli.controlpanel.LightControlActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

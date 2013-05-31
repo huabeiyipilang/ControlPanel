@@ -36,7 +36,16 @@
     <string name="lockscreen_added_toast">已在桌面创建快捷方式</string>
     <string name="get_device_admin_toast">请点击“激活”，以启用设备。</string>
     
+	<string name="sync_failed">同步失败！</string>
+	<string name="checking">正在检查</string>
+	<string name="loading_local_module">正在加载本地组件</string>
+	
     
     <string name="dialog_close">关闭</string>
 
+	<string name="update">升级</string>
+	<string name="install">安装</string>
+	<string name="uninstall">卸载</string>
+	
+	<string name="download_title">正在下载：%s</string>
 </resources>

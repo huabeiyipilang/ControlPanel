@@ -1,7 +1,11 @@
 package cn.kli.controlpanel;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -10,6 +14,9 @@ public class LightControlActivity extends Activity implements OnClickListener {
 	
 	private boolean isLightOn;
 	private ImageButton mIbSwitch;
+	
+	private boolean hasSu;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -22,6 +29,7 @@ public class LightControlActivity extends Activity implements OnClickListener {
 		switch(view.getId()){
 		case R.id.ib_light_switch:
 			switchLight();
+//			homeKeyEvent();
 			break;
 		}
 	}
@@ -52,5 +60,55 @@ public class LightControlActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	private void homeKeyEvent(){
+		new Thread(){
+
+			@Override
+			public void run() {
+				super.run();
+				if(hasSu){
+					try {
+						Runtime.getRuntime().exec("input keyevent 3 \n");
+						Log.i("klilog", "send keyevent 3");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else{
+					rootCommand("input keyevent 3 \n");
+					Log.i("klilog", "send keyevent 3 su");
+				}
+			}
+			
+		}.start();
+	}
+	
+	private boolean rootCommand(String command) {
+		Process process = null;
+		DataOutputStream os = null;
+		try {
+			process = Runtime.getRuntime().exec("su");
+			os = new DataOutputStream(process.getOutputStream());
+			os.writeBytes(command + "\n");
+			os.writeBytes("exit\n");
+			os.flush();
+			process.waitFor();
+			hasSu = true;
+		} catch (Exception e) {
+			Log.d("*** DEBUG ***", "ROOT REE" + e.getMessage());
+			return false;
+		} finally {
+			try {
+				if (os != null) {
+					os.close();
+				}
+				process.destroy();
+			} catch (Exception e) {
+				// nothing
+			}
+		}
+
+		Log.d("*** DEBUG ***", "Root SUC ");
+		return true;
+	}
 	
 }
