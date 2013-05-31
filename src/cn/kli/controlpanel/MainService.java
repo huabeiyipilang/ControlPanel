@@ -33,9 +33,10 @@ import com.baidu.mobstat.StatService;
 public class MainService extends Service implements OnClickListener {
 	
 	public static final String SERVICE_CMD = "cmd";
-	public static final int CMD_OPEN_CONTROL_PANEL = 1;
-	public static final int CMD_BOOT_COMPLETED = 2;
+	public static final int CMD_OPEN_CONTROL_PANEL 	= 1;
+	public static final int CMD_BOOT_COMPLETED 		= 2;
 	public static final int CMD_UPDATE_NOTIFICATION = 3;
+	public static final int CMD_LIGHT_SWITCH 		= 4;
 	
 	private final static int NOTIFICATION_ID = 0;
 	private final static String NOTIFICATION_TAG = "notification";
@@ -44,6 +45,8 @@ public class MainService extends Service implements OnClickListener {
 	private View mFloatPanel;
 	private WindowManager.LayoutParams mParams;
 	private int screenWidth, screenHeight;
+	
+	private boolean isLightOn;
 	
 	//status
 	private boolean isPanelShow = false;
@@ -63,6 +66,8 @@ public class MainService extends Service implements OnClickListener {
 				break;
 			case CMD_UPDATE_NOTIFICATION:
 				updateNotification();
+				break;
+			case CMD_LIGHT_SWITCH:
 				break;
 			}
 		}

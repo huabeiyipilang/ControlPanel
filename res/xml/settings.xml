@@ -16,7 +16,12 @@
     <Preference
         android:key="key_lockscreen"
         android:summary="@string/setting_lockscreen_summary"
-        android:title="@string/setting_lockscreen" />
+        android:title="@string/setting_add_lockscreen_icon" />
+    
+    <Preference
+        android:key="key_lightcontrol"
+        android:summary="@string/setting_lightcontrol_summary"
+        android:title="@string/setting_add_lightcontrol_icon" />
     
     <Preference
         android:key="key_about"

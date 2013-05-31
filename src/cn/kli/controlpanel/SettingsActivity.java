@@ -24,6 +24,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	public final static String KEY_PREF_NOTIFICATION = "key_notification";
 	private final static String KEY_PREF_THEME = "key_theme";
 	private final static String KEY_PREF_LOCKSCREEN = "key_lockscreen";
+	private final static String KEY_PREF_LIGHTCONTROL = "key_lightcontrol";
 	private final static String KEY_PREF_ABOUT = "key_about";
 	
 	
@@ -36,6 +37,7 @@ public class SettingsActivity extends PreferenceActivity implements
         findPreference(KEY_PREF_THEME).setOnPreferenceClickListener(this);
         findPreference(KEY_PREF_ABOUT).setOnPreferenceClickListener(this);
         findPreference(KEY_PREF_LOCKSCREEN).setOnPreferenceClickListener(this);
+        findPreference(KEY_PREF_LIGHTCONTROL).setOnPreferenceClickListener(this);
         updateNotification();
     }
 
@@ -49,7 +51,14 @@ public class SettingsActivity extends PreferenceActivity implements
 			showAboutDialog();
 			return true;
 		}else if(key.equals(KEY_PREF_LOCKSCREEN)){
-			addShortcut(this);
+			StatService.onEvent(this, Baidu.EVENT_LOCK_SCREEN, Baidu.ADD_SHORTCUTS);
+	        Intent intent = new Intent(this, OneKeyLockScreen.class);
+			addShortcut(this, intent, R.string.setting_lockscreen, R.drawable.lock);
+			Toast.makeText(this, R.string.lockscreen_added_toast, Toast.LENGTH_LONG).show();
+			return true;
+		}else if(key.equals(KEY_PREF_LIGHTCONTROL)){
+	        Intent intent = new Intent(this, LightControlActivity.class);
+			addShortcut(this, intent, R.string.setting_lightcontrol, R.drawable.light_on);
 			Toast.makeText(this, R.string.lockscreen_added_toast, Toast.LENGTH_LONG).show();
 			return true;
 		}
@@ -105,23 +114,21 @@ public class SettingsActivity extends PreferenceActivity implements
 		startService(intent_service);
 	}
     
-	public static void addShortcut(Context context) {
-		StatService.onEvent(context, Baidu.EVENT_LOCK_SCREEN, Baidu.ADD_SHORTCUTS);
+	public static void addShortcut(Context context, Intent intent, int name, int icon) {
 		 
         String ACTION_INSTALL_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT";
         // 快捷方式要启动的包
-        Intent intent = new Intent(context, OneKeyLockScreen.class);
 
         // 设置快捷方式的参数
         Intent shortcutIntent = new Intent(ACTION_INSTALL_SHORTCUT);
         // 设置名称
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getResources()
-                        .getString(R.string.setting_lockscreen)); // 设置启动 Intent
+                        .getString(name)); // 设置启动 Intent
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
         // 设置图标
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                         Intent.ShortcutIconResource.fromContext(context,
-                                        R.drawable.lock));
+                        		icon));
         // 只创建一次快捷方式
         shortcutIntent.putExtra("duplicate", false);
         // 创建

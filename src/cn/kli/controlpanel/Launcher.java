@@ -11,6 +11,7 @@ public class Launcher extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        startActivity(new Intent(this, ControlActivity.class));
         klilog.i("onCreate()");
         String startFrom = getIntent().getStringExtra(START_FROM);
         klilog.i("launcher start from "+startFrom);
