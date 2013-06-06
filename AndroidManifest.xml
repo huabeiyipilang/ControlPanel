@@ -119,8 +119,7 @@
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
         
-        <activity android:name="ControlActivity"
-            android:theme="@style/translucent"></activity>
+        <activity android:name="ControlActivity"></activity>
         
         <activity android:name="cn.kli.controlpanel.LightControlActivity">
             <intent-filter>

@@ -16,6 +16,8 @@ import android.preference.PreferenceManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import cn.kli.utils.klilog;
+
 import com.baidu.mobstat.StatService;
 
 public class SettingsActivity extends PreferenceActivity implements

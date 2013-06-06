@@ -1,5 +1,6 @@
 package cn.kli.controlpanel.launcher;
 
+import cn.kli.controlpanel.Module;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,14 +13,14 @@ import android.util.DisplayMetrics;
 
 public class TagView extends BaseTagView {
 	private Context mContext;
-	private ResolveInfo mResolveInfo;
+	private Module mModule;
 
-	public TagView(Context context, ResolveInfo info) {
+	public TagView(Context context, Module module) {
 		super(context);
 		mContext = context;
-		mResolveInfo = info;
+		mModule = module;
 //		init();
-		bindApp(mResolveInfo);
+		bindApp(mModule);
 	}
 	
 	private void init(){
@@ -33,25 +34,17 @@ public class TagView extends BaseTagView {
 		this.setLayoutParams(params);
 	}
 
-	private void bindApp(ResolveInfo info){
-		PackageManager pm = mContext.getPackageManager();
-		String name = info.loadLabel(pm).toString();
-		setTagName(name);
-		Drawable icon = info.loadIcon(pm);
-		setTagIcon(icon);
+	private void bindApp(Module module){
+		setTagIcon(module.icon);
 	}
 	
 	@Override
 	public void onClick(){
-		launchApp(mResolveInfo);
+		launchApp(mModule);
 	}
 	
-	private void launchApp(ResolveInfo reInfo){
-		String packageName = reInfo.activityInfo.packageName;
-		String name = reInfo.activityInfo.name;
-		ComponentName cn = new ComponentName(packageName,name);
-		Intent intent = new Intent();
-		intent.setComponent(cn);
+	private void launchApp(Module module){
+		Intent intent = new Intent(mContext, module.cls);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mContext.startActivity(intent);
 	}

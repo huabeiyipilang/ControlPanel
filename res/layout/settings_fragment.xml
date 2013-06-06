@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <PreferenceScreen
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_notification"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_display_in_notification" />
+
+        <Preference
+            android:key="key_theme"
+            android:summary="@string/setting_theme_summary"
+            android:title="@string/setting_theme" />
+
+        <Preference
+            android:key="key_lockscreen"
+            android:summary="@string/setting_lockscreen_summary"
+            android:title="@string/setting_add_lockscreen_icon" />
+
+        <Preference
+            android:key="key_lightcontrol"
+            android:summary="@string/setting_lightcontrol_summary"
+            android:title="@string/setting_add_lightcontrol_icon" />
+
+        <Preference
+            android:key="key_about"
+            android:title="@string/setting_about" />
+    </PreferenceScreen>
+
+</LinearLayout>

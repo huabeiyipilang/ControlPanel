@@ -4,6 +4,7 @@ import cn.kli.controlpanel.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,13 @@ public class TagGridView extends LinearLayout {
 		init(context);
 	}
 	
+	public TagGridView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init(context);
+	}
+
+
+
 	private void init(Context context) {
 		mContext = context;
 		mAdapter = new TagViewAdapter(mContext);

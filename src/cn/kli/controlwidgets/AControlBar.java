@@ -8,8 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import cn.kli.controlpanel.klilog;
 import cn.kli.controlpanel.R;
+import cn.kli.utils.klilog;
 
 public abstract class AControlBar extends LinearLayout{
 	protected Context mContext;

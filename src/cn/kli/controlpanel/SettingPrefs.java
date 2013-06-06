@@ -1,5 +1,7 @@
 package cn.kli.controlpanel;
 
+import cn.kli.utils.klilog;
+
 import com.baidu.mobstat.StatService;
 
 import android.content.Context;

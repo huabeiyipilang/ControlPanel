@@ -3,6 +3,9 @@ package cn.kli.controlpanel.launcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.controlpanel.Config;
+import cn.kli.controlpanel.Module;
+
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.view.View;
@@ -11,13 +14,13 @@ import android.widget.BaseAdapter;
 
 public class TagViewAdapter extends BaseAdapter {
 	private Context mContext;
-	private List<ResolveInfo> mAppList;
+	private List<Module> mAppList;
 
 	
 	public TagViewAdapter(Context context) {
 		super();
 		mContext = context;
-		mAppList = ControlModuleManager.getInstance(mContext).getQueenApps();
+		mAppList = Config.getModules();
 	}
 
 	@Override

@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
+import cn.kli.utils.klilog;
 
 import com.baidu.mobstat.StatService;
 

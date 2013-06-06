@@ -31,8 +31,8 @@ public abstract class BaseTagView extends LinearLayout {
 		mName.setText(name);
 	}
 	
-	public void setTagIcon(Drawable icon){
-		mIcon.setImageDrawable(icon);
+	public void setTagIcon(int icon){
+		mIcon.setImageResource(icon);
 	}
 	
 	public abstract void onClick();
