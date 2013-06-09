@@ -64,4 +64,8 @@
 	<!-- About Group -->
 	<string name="group_about">关于</string>
 	
+	
+	<!-- 设备信息模块 -->
+	<string name="info_group_hardware">硬件信息</string>
+	<string name="info_group_system">系统信息</string>
 </resources>
