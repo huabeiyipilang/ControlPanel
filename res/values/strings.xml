@@ -48,4 +48,20 @@
 	<string name="uninstall">卸载</string>
 	
 	<string name="download_title">正在下载：%s</string>
+	
+	
+	<!-- Control Panel Group -->
+	<string name="group_control_panel">控制面板</string>
+	
+	<!-- Tools Group -->
+	<string name="group_tools">小工具</string>
+	<string name="module_light">手电筒</string>
+	<string name="module_lock_screen">锁屏</string>
+	
+	<!-- Settings Group -->
+	<string name="group_settings">设置</string>
+	
+	<!-- About Group -->
+	<string name="group_about">关于</string>
+	
 </resources>

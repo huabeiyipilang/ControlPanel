@@ -119,7 +119,9 @@
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
         
-        <activity android:name="ControlActivity"></activity>
+        <activity android:name="ControlActivity"
+            android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
+        </activity>
         
         <activity android:name="cn.kli.controlpanel.LightControlActivity">
             <intent-filter>

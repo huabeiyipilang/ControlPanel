@@ -1,9 +1,13 @@
 package cn.kli.controlpanel;
 
-import android.app.Activity;
-
 public class Module {
-	public String name;
+	public int name;
 	public int icon;
 	public Class<?> cls;
+	Group parent;
+	
+	public void setParentGroup(Group group){
+		parent = group;
+		parent.addChild(this);
+	}
 }

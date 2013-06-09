@@ -1,36 +1,30 @@
 package cn.kli.controlpanel.launcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.kli.controlpanel.Config;
-import cn.kli.controlpanel.Module;
-
 import android.content.Context;
-import android.content.pm.ResolveInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import cn.kli.controlpanel.Group;
 
 public class TagViewAdapter extends BaseAdapter {
 	private Context mContext;
-	private List<Module> mAppList;
+	private Group mGroup;
 
 	
-	public TagViewAdapter(Context context) {
+	public TagViewAdapter(Context context, Group group) {
 		super();
 		mContext = context;
-		mAppList = Config.getModules();
+		mGroup = group;
 	}
 
 	@Override
 	public int getCount() {
-		return mAppList.size();
+		return mGroup.getModuleList().size();
 	}
 
 	@Override
 	public Object getItem(int location) {
-		return mAppList.get(location);
+		return mGroup.getModuleList().get(location);
 	}
 
 	@Override
@@ -40,7 +34,7 @@ public class TagViewAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int location, View arg1, ViewGroup arg2) {
-		return new TagView(mContext, mAppList.get(location));
+		return new TagView(mContext, mGroup.getModuleList().get(location));
 	}
 
 }

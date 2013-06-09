@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ModulesFragment extends Fragment {
+public class GroupControlFragment extends GroupBaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

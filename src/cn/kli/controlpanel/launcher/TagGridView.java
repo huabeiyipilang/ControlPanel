@@ -1,5 +1,6 @@
 package cn.kli.controlpanel.launcher;
 
+import cn.kli.controlpanel.Group;
 import cn.kli.controlpanel.R;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,19 +23,22 @@ public class TagGridView extends LinearLayout {
 
 	public TagGridView(Context context) {
 		super(context);
-		init(context);
+		mContext = context;
 	}
 	
 	public TagGridView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		mContext = context;
 	}
 
+	public void setGroup(Group group){
+		if(group != null){
+			init(group);
+		}
+	}
 
-
-	private void init(Context context) {
-		mContext = context;
-		mAdapter = new TagViewAdapter(mContext);
+	private void init(Group group) {
+		mAdapter = new TagViewAdapter(mContext, group);
 		LayoutInflater inflater = LayoutInflater.from(mContext);
 		View root = inflater.inflate(R.layout.launcher_tag_gridview, this);
 		mGridView = (GridView)root.findViewById(R.id.gridview);
