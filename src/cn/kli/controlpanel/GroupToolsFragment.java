@@ -16,5 +16,5 @@ public class GroupToolsFragment extends GroupBaseFragment {
 		root.setGroup(Config.getGroupByClassName(this.getClass().getName()));
 		return root;
 	}
-	
+
 }

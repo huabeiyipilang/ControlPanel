@@ -17,5 +17,4 @@ public class GroupAboutFragment extends GroupBaseFragment {
 		return view;
 	}
 	
-	
 }

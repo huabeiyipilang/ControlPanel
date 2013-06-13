@@ -9,10 +9,4 @@ import android.view.ViewGroup;
 
 public class GroupSettingsFragment extends GroupBaseFragment {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return new TagGridView(getActivity());
-	}
-	
 }

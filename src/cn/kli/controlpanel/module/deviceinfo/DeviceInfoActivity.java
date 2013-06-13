@@ -7,10 +7,12 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import cn.kli.controlpanel.R;
 
 public class DeviceInfoActivity extends Activity {
@@ -18,6 +20,7 @@ public class DeviceInfoActivity extends Activity {
 	private ExpandableListView mInfoList;
 	private List<InfoGroup> mGroups;
 	private DeviceInfoManager mInfoManager;
+	private LayoutInflater mInflater;
 	private Handler mHandler = new Handler(){
 
 		@Override
@@ -37,6 +40,7 @@ public class DeviceInfoActivity extends Activity {
 		setContentView(R.layout.activity_device_info);
 		mInfoList = (ExpandableListView)findViewById(R.id.elv_device_info);
 		mInfoManager = new DeviceInfoManager(this);
+		mInflater = getLayoutInflater();
 		new Thread(){
 
 			@Override
@@ -58,28 +62,26 @@ public class DeviceInfoActivity extends Activity {
 		}
 
 		@Override
-		public Object getChild(int arg0, int arg1) {
-			// TODO Auto-generated method stub
-			return null;
+		public InfoChild getChild(int gpos, int cpos) {
+			return mGroups.get(gpos).children.get(cpos);
 		}
 
 		@Override
 		public long getChildId(int arg0, int arg1) {
-			// TODO Auto-generated method stub
-			return 0;
+			return arg1;
 		}
 
 		@Override
-		public View getChildView(int arg0, int arg1, boolean arg2, View arg3,
+		public View getChildView(int gpos, int cpos, boolean arg2, View convertView,
 				ViewGroup arg4) {
-			// TODO Auto-generated method stub
-			return null;
+			TextView tv = new TextView(DeviceInfoActivity.this);
+			tv.setText(getChild(gpos, cpos).name);
+			return tv;
 		}
 
 		@Override
-		public int getChildrenCount(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
+		public int getChildrenCount(int gpos) {
+			return mGroups.get(gpos).children.size();
 		}
 
 		@Override
@@ -95,70 +97,79 @@ public class DeviceInfoActivity extends Activity {
 		}
 
 		@Override
-		public Object getGroup(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
+		public InfoGroup getGroup(int pos) {
+			return mGroups.get(pos);
 		}
 
 		@Override
 		public int getGroupCount() {
-			// TODO Auto-generated method stub
-			return 0;
+			return mGroups.size();
 		}
 
 		@Override
 		public long getGroupId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
+			return arg0;
 		}
 
 		@Override
-		public View getGroupView(int arg0, boolean arg1, View arg2,
+		public View getGroupView(int arg0, boolean arg1, View convertView,
 				ViewGroup arg3) {
-			// TODO Auto-generated method stub
-			return null;
+			GroupHolder holder = null;
+			if(convertView == null){
+				holder = new GroupHolder();
+				View root = mInflater.inflate(R.layout.module_deviceinfo_group_item, null);
+				holder.title = (TextView)root.findViewById(R.id.tv_deviceinfo_group_title);
+				convertView = root;
+			}else{
+				
+			}
+			TextView tv = new TextView(DeviceInfoActivity.this);
+			tv.setText(getGroup(arg0).name);
+			return tv;
 		}
 
 		@Override
 		public boolean hasStableIds() {
-			// TODO Auto-generated method stub
-			return false;
+			return true;
 		}
 
 		@Override
 		public boolean isChildSelectable(int arg0, int arg1) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public boolean isEmpty() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void onGroupCollapsed(int arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onGroupExpanded(int arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void registerDataSetObserver(DataSetObserver arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void unregisterDataSetObserver(DataSetObserver arg0) {
-			// TODO Auto-generated method stub
 			
+		}
+		
+		class GroupHolder{
+			TextView title;
+		}
+		
+		class ChildHolder{
+			TextView title;
+			TextView context;
 		}
 		
 	}

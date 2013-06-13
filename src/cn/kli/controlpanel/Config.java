@@ -3,6 +3,8 @@ package cn.kli.controlpanel;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.controlpanel.module.deviceinfo.DeviceInfoActivity;
+
 import android.os.Build;
 
 public class Config {
@@ -31,6 +33,13 @@ public class Config {
 			controlGroup.name = R.string.group_control_panel;
 			controlGroup.cls = GroupControlFragment.class;
 
+			//device info module
+			Module deviceInfoModule = new Module();
+			deviceInfoModule.name = R.string.device_info_group;
+			deviceInfoModule.icon = R.drawable.light_on;
+			deviceInfoModule.cls = DeviceInfoActivity.class;
+			deviceInfoModule.setParentGroup(controlGroup);
+			
 			//Tools group
 			Group toolsGroup = new Group();
 			toolsGroup.name = R.string.group_tools;

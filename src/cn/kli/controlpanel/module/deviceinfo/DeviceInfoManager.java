@@ -37,6 +37,8 @@ public class DeviceInfoManager {
 	private InfoGroup initHardwareInfo(){
 		InfoGroup group = new InfoGroup();
 		group.name = R.string.info_group_hardware;
+		
+		InfoChild androidVersion = new InfoChild();
 		return group;
 	}
 	
