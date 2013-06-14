@@ -74,9 +74,20 @@ public class DeviceInfoActivity extends Activity {
 		@Override
 		public View getChildView(int gpos, int cpos, boolean arg2, View convertView,
 				ViewGroup arg4) {
-			TextView tv = new TextView(DeviceInfoActivity.this);
-			tv.setText(getChild(gpos, cpos).name);
-			return tv;
+			ChildHolder holder = null;
+			if(convertView == null){
+				holder = new ChildHolder();
+				View root = mInflater.inflate(R.layout.module_deviceinfo_child_item, null);
+				holder.title = (TextView)root.findViewById(R.id.tv_child_title);
+				holder.content = (TextView)root.findViewById(R.id.tv_child_content);
+				convertView = root;
+				convertView.setTag(holder);
+			}else{
+				holder = (ChildHolder)convertView.getTag();
+			}
+			holder.title.setText(getChild(gpos, cpos).name);
+			holder.content.setText(getChild(gpos, cpos).value);
+			return convertView;
 		}
 
 		@Override
@@ -120,12 +131,12 @@ public class DeviceInfoActivity extends Activity {
 				View root = mInflater.inflate(R.layout.module_deviceinfo_group_item, null);
 				holder.title = (TextView)root.findViewById(R.id.tv_deviceinfo_group_title);
 				convertView = root;
+				convertView.setTag(holder);
 			}else{
-				
+				holder = (GroupHolder)convertView.getTag();
 			}
-			TextView tv = new TextView(DeviceInfoActivity.this);
-			tv.setText(getGroup(arg0).name);
-			return tv;
+			holder.title.setText(getGroup(arg0).name);
+			return convertView;
 		}
 
 		@Override
@@ -169,7 +180,7 @@ public class DeviceInfoActivity extends Activity {
 		
 		class ChildHolder{
 			TextView title;
-			TextView context;
+			TextView content;
 		}
 		
 	}

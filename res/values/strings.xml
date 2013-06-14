@@ -69,4 +69,24 @@
 	<string name="device_info_group">设备信息</string>
 	<string name="info_group_hardware">硬件信息</string>
 	<string name="info_group_system">系统信息</string>
+	<string name="info_device_build_id">ID</string>
+	<string name="info_device_build_display">DISPLAY</string>
+	<string name="info_device_build_product">PRODUCT</string>
+	<string name="info_device_build_device">DEVICE</string>
+	<string name="info_device_build_board">BOARD</string>
+	<string name="info_device_build_cpu_abi">CPU ABI</string>
+	<string name="info_device_build_cpu_abi2">CPU ABI2</string>
+	<string name="info_device_build_manufacturer">制造商</string>
+	<string name="info_device_build_brand">商标</string>
+	<string name="info_device_build_model">型号</string>
+	<string name="info_device_build_bootloader">BOOTLOADER</string>
+	<string name="info_device_build_radio">RADIO</string>
+	<string name="info_device_build_hardware">HARDWARE</string>
+	<string name="info_device_build_serial">序列号</string>
+	<string name="info_device_display_resolution">分辨率</string>
+	<string name="info_device_ram_total">RAM</string>
+	<string name="info_device_system_version">系统版本</string>
+	<string name="info_device_kernal_version">内核版本</string>
+	<string name="info_device_compile_time">编译日期</string>
+	<string name="info_device_version">版本号</string>
 </resources>

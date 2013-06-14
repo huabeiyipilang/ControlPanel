@@ -60,6 +60,13 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 	
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		translateToFragment(Config.getGroupList().get(0).cls
+				.getName());
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
 		case android.R.id.home:
