@@ -1,5 +1,7 @@
 package cn.kli.controlpanel;
 
+import cn.kli.controlpanel.floatpanel.FloatPanelLauncher;
+
 import com.baidu.mobstat.StatService;
 
 import android.app.Activity;
@@ -11,7 +13,8 @@ public class Launcher extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, ControlActivity.class));
+//        startActivity(new Intent(this, ControlActivity.class));
+        startActivity(new Intent(this, FloatPanelLauncher.class));
 //        klilog.i("onCreate()");
 //        String startFrom = getIntent().getStringExtra(START_FROM);
 //        klilog.i("launcher start from "+startFrom);

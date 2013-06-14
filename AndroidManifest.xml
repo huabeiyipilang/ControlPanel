@@ -138,6 +138,9 @@
         <activity android:name=".module.deviceinfo.DeviceInfoActivity"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
         </activity>
+        <service android:name=".floatpanel.FloatPanelService"></service>
+        <activity android:name=".floatpanel.FloatPanelLauncher"
+            android:theme="@android:style/Theme.NoDisplay"></activity>
     </application>
 
 </manifest>
