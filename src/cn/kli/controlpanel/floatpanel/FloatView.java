@@ -3,14 +3,15 @@ package cn.kli.controlpanel.floatpanel;
 import cn.kli.utils.klilog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 
 public abstract class FloatView {
-	private Context mContext;
-	private View mContentView;
+	protected Context mContext;
+	protected View mContentView;
 	private WindowManager mWinManager;
 	private WindowManager.LayoutParams mParams;
 	private int screenWidth, screenHeight;
@@ -19,14 +20,26 @@ public abstract class FloatView {
 	public FloatView(Context context, WindowManager winManager){
 		mContext = context;
 		mWinManager = winManager;
+		mContentView = LayoutInflater.from(mContext).inflate(onInflaterContentView(), null);
+		onFloatPrepare();
 	}
 	
-	protected void onLayoutPrepare(int contentLayout, int dragView){
-		
+	abstract int onInflaterContentView();
+	
+	protected int onInitDragView(){
+		return 0;
 	}
 	
 	private void onFloatPrepare(){
 		initParams();
+		initDragView();
+	}
+	
+	private void initDragView(){
+		View dragView = mContentView.findViewById(onInitDragView());
+		if(dragView == null){
+			return;
+		}
 		mContentView.setOnTouchListener(new OnTouchListener(){
 			float startX;
 			float startY;
