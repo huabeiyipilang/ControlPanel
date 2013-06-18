@@ -13,8 +13,8 @@ public class Launcher extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        startActivity(new Intent(this, ControlActivity.class));
-        startActivity(new Intent(this, FloatPanelLauncher.class));
+        startActivity(new Intent(this, ControlActivity.class));
+//        startActivity(new Intent(this, FloatPanelLauncher.class));
 //        klilog.i("onCreate()");
 //        String startFrom = getIntent().getStringExtra(START_FROM);
 //        klilog.i("launcher start from "+startFrom);

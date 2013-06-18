@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, ControlPanelActivity!</string>
-    <string name="app_name">快捷面板</string>
+    <string name="app_name">控制面板</string>
     <string name="description_music">音乐、视频、游戏和其他媒体</string>
     <string name="description_ring_notify">铃声和通知</string>
     <string name="description_alarm">闹钟</string>
@@ -89,4 +89,7 @@
 	<string name="info_device_kernal_version">内核版本</string>
 	<string name="info_device_compile_time">编译日期</string>
 	<string name="info_device_version">版本号</string>
+	
+	<!-- 悬浮窗 -->
+    <string name="module_float_panel">快捷面板</string>
 </resources>

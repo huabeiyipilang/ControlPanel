@@ -14,7 +14,6 @@ public abstract class FloatView {
 	protected View mContentView;
 	private WindowManager mWinManager;
 	private WindowManager.LayoutParams mParams;
-	private int screenWidth, screenHeight;
 	private boolean isPanelShow = false;
 	
 	public FloatView(Context context, WindowManager winManager){
@@ -35,6 +34,10 @@ public abstract class FloatView {
 		initDragView();
 	}
 	
+	protected View getContentView(){
+		return mContentView;
+	}
+	
 	private void initDragView(){
 		View dragView = mContentView.findViewById(onInitDragView());
 		if(dragView == null){
@@ -44,7 +47,6 @@ public abstract class FloatView {
 			float startX;
 			float startY;
 			int originX, originY;
-			View activeView;
 			
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
@@ -87,17 +89,14 @@ public abstract class FloatView {
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.gravity = Gravity.CENTER; // Gravity.TOP | Gravity.LEFT;
 		
-		klilog.i("screenWidth = "+screenWidth);
-		klilog.i("screenHeight = "+screenHeight);
 		klilog.i("mFloatPanel.getWidth() = "+mContentView.getWidth());
 		klilog.i("mFloatPanel.getHeight() = "+mContentView.getHeight());
     	klilog.i("2initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 	}
 	
 	public void openPanel(){
-		if(mWinManager != null && mContentView != null && mParams != null){
+		if(mWinManager != null && mContentView != null && mParams != null && !isShow()){
 			try {
-				closePanel();
 				mWinManager.addView(mContentView, mParams);
 				isPanelShow = true;
 			} catch (Exception e) {
@@ -107,14 +106,14 @@ public abstract class FloatView {
 	}
 	
 	public void closePanel(){
-		if(mWinManager != null && mContentView != null){
+		if(mWinManager != null && mContentView != null && isShow()){
 			try {
 				mWinManager.removeView(mContentView);
+				isPanelShow = false;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		isPanelShow = false;
 	}
 	
 	public boolean isShow(){

@@ -60,7 +60,7 @@
             android:value="ba428a14" />
         
         <activity
-            android:name=".SettingsActivity"
+            android:name=".floatpanel.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -82,11 +82,6 @@
 
         <service android:name="cn.kli.controlpanel.MainService" 
             android:exported="false">
-            <intent-filter>
-                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </service>
 
         <receiver android:name="AppBroadCastReceiver"
@@ -138,9 +133,22 @@
         <activity android:name=".module.deviceinfo.DeviceInfoActivity"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
         </activity>
-        <service android:name=".floatpanel.FloatPanelService"></service>
+        
+        
+        <service android:name=".floatpanel.FloatPanelService"
+            android:exported="false">
+        </service>
+        
+        
         <activity android:name=".floatpanel.FloatPanelLauncher"
-            android:theme="@android:style/Theme.NoDisplay"></activity>
+            android:label="@string/module_float_panel"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
