@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 public class DeviceUtils {
@@ -111,5 +113,25 @@ public class DeviceUtils {
 		am.getMemoryInfo(mi);
 		MEM_UNUSED = mi.availMem / 1024;
 		return MEM_UNUSED;
+	}
+	
+	/**  
+	* 移动数据网络开关
+	* @param true 为可用 false为 不可用  
+	* @return 0为 成功 -1为失败  
+	*/   
+	public static int setMobileDataEnabled(Context context, boolean flag) {
+		ConnectivityManager cm = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		Method setMobileDataEnabl;
+		try {
+			setMobileDataEnabl = cm.getClass().getDeclaredMethod(
+					"setMobileDataEnabled", boolean.class);
+			setMobileDataEnabl.invoke(cm, flag);
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }

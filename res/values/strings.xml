@@ -92,4 +92,5 @@
 	
 	<!-- 悬浮窗 -->
     <string name="module_float_panel">快捷面板</string>
+    <string name="mobile_data">数据</string>
 </resources>

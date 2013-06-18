@@ -3,12 +3,15 @@ package cn.kli.controlpanel.floatpanel;
 import cn.kli.controlpanel.ControlActivity;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.ThemeSetting;
+import cn.kli.controlpanel.launcher.BaseTagView;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
 import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,7 +19,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class FloatPanel extends FloatView implements OnClickListener {
 
@@ -46,14 +53,44 @@ public class FloatPanel extends FloatView implements OnClickListener {
 	}
 	
     private void loadWidgets(){
+    	int[] switchList = {10};
+    	final SwitchAdapter switchAdapter = new SwitchAdapter(mContext, switchList);
+    	GridView switchContainer = (GridView)(getContentView().findViewById(R.id.gv_switch_container));
+//    	switchContainer.setSelector(new ColorDrawable(Color.TRANSPARENT));
+    	switchContainer.setAdapter(switchAdapter);
+    	switchContainer.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				klilog.i("switch item onclick: position = "+position);
+				switchAdapter.getItem(position).onClick();
+			}
+			
+		});
+    	switchContainer.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				klilog.i("switch item on selected: position = "+position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				
+			}
+    		
+    	});
+    	
     	int[] wigetList = {1,2,3};
-    	LinearLayout container = (LinearLayout)(getContentView().findViewById(R.id.container));
-    	container.removeAllViews();
+    	LinearLayout barsContainer = (LinearLayout)(getContentView().findViewById(R.id.ll_bars_container));
+    	barsContainer.removeAllViews();
     	IWidget widget;
     	for(int i: wigetList){
     		widget = WidgetFactory.createControlbar(mContext, i);
     		if(widget != null){
-        		container.addView((View) widget);
+    			barsContainer.addView((View) widget);
     		}else{
     			
     		}

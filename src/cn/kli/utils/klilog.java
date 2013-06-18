@@ -3,7 +3,7 @@ package cn.kli.utils;
 import android.util.Log;
 
 public class klilog {
-	private final static String TAG = "weather";
+	private final static String TAG = "Control Panel";
 	
 	public static void i(String msg){
 		Log.i(TAG, msg);

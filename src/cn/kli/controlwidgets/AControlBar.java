@@ -11,26 +11,23 @@ import android.widget.TextView;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 
-public abstract class AControlBar extends LinearLayout{
-	protected Context mContext;
+public abstract class AControlBar extends LinearLayout implements IWidget{
 	private ImageView mIcon;
 	private SeekBar mBar;
 	private TextView mDescription;
 	
 	public AControlBar(Context context){
 		super(context);
-		mContext = context;
 		initViews();
 	}
 	
 	public AControlBar(Context context, AttributeSet attrs){
 		super(context,attrs);
-		mContext = context;
 		initViews();
 	}
 	
 	private void initViews(){
-		LayoutInflater inflater = LayoutInflater.from(mContext);
+		LayoutInflater inflater = LayoutInflater.from(getContext());
 		inflater.inflate(R.layout.control_bar,this, true);
 		mIcon = (ImageView)findViewById(R.id.icon);
 		mBar = (SeekBar)findViewById(R.id.bar);
