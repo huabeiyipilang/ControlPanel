@@ -4,6 +4,7 @@ import cn.kli.controlpanel.ControlActivity;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.ThemeSetting;
 import cn.kli.controlpanel.launcher.BaseTagView;
+import cn.kli.controlwidgets.ASwitch;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
 import cn.kli.utils.klilog;
@@ -20,12 +21,14 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FloatPanel extends FloatView implements OnClickListener {
+public class FloatPanel extends FloatView implements OnClickListener,
+	OnItemClickListener, OnItemLongClickListener{
 
 	private Context mContext;
 
@@ -58,30 +61,8 @@ public class FloatPanel extends FloatView implements OnClickListener {
     	GridView switchContainer = (GridView)(getContentView().findViewById(R.id.gv_switch_container));
 //    	switchContainer.setSelector(new ColorDrawable(Color.TRANSPARENT));
     	switchContainer.setAdapter(switchAdapter);
-    	switchContainer.setOnItemClickListener(new OnItemClickListener(){
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				klilog.i("switch item onclick: position = "+position);
-				switchAdapter.getItem(position).onClick();
-			}
-			
-		});
-    	switchContainer.setOnItemSelectedListener(new OnItemSelectedListener(){
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
-				klilog.i("switch item on selected: position = "+position);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				
-			}
-    		
-    	});
+    	switchContainer.setOnItemClickListener(this);
+    	switchContainer.setOnItemLongClickListener(this);
     	
     	int[] wigetList = {1,2,3};
     	LinearLayout barsContainer = (LinearLayout)(getContentView().findViewById(R.id.ll_bars_container));
@@ -133,5 +114,19 @@ public class FloatPanel extends FloatView implements OnClickListener {
 		case R.id.close:
 			closePanel();
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		klilog.i("switch item onclick: position = "+position);
+		((ASwitch)view).onClick();
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> arg0, View view, int position,
+			long id) {
+		klilog.i("switch item onlongclick: position = "+position);
+		return false;
 	}
 }

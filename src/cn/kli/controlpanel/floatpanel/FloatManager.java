@@ -6,11 +6,13 @@ import android.view.WindowManager;
 public class FloatManager {
 	private Context mContext;
 	private FloatPanel mFloatPanel;
+	private FloatIndicator mIndicator;
 	private WindowManager mWinManager;
 	
 	public FloatManager(Context context){
 		mContext = context;
 		mWinManager = (WindowManager) mContext.getSystemService("window");
+		mIndicator = new FloatIndicator(context, mWinManager);
 		mFloatPanel = new FloatPanel(context, mWinManager);
 	}
 	
@@ -20,5 +22,13 @@ public class FloatManager {
 	
 	public void hidePanel(){
 		mFloatPanel.closePanel();
+	}
+	
+	public void showIndicator(){
+		mIndicator.openPanel();
+	}
+	
+	public void hideIndicator(){
+		mIndicator.closePanel();
 	}
 }

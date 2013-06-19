@@ -41,9 +41,9 @@ public abstract class FloatView {
 	private void initDragView(){
 		View dragView = mContentView.findViewById(onInitDragView());
 		if(dragView == null){
-			return;
+			dragView = mContentView;
 		}
-		mContentView.setOnTouchListener(new OnTouchListener(){
+		dragView.setOnTouchListener(new OnTouchListener(){
 			float startX;
 			float startY;
 			int originX, originY;
@@ -60,21 +60,28 @@ public abstract class FloatView {
 					originY = mParams.y;
 					break;
 				case MotionEvent.ACTION_MOVE:
+					updateLocation(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
+					break;
 				case MotionEvent.ACTION_UP:
-					updateLocation(event.getRawX() - startX,event.getRawY() - startY);
+					onActionUp(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
 					break;
 				}
 				return true;
 			}
-			
-			private void updateLocation(float x, float y){
-				//新坐标 = 位移 + 初始坐标
-				mParams.x = (int)x + originX;
-				mParams.y = (int)y + originY;
-				mWinManager.updateViewLayout(mContentView, mParams);
-			}
+
 			
 		});
+	}
+	
+	protected void onActionUp(float x, float y, int originX, int originY){
+		updateLocation(x, y, originX, originY);
+	}
+	
+	private void updateLocation(float x, float y, int originX, int originY){
+		//新坐标 = 位移 + 初始坐标
+		mParams.x = (int)x + originX;
+		mParams.y = (int)y + originY;
+		mWinManager.updateViewLayout(mContentView, mParams);
 	}
 	
 	private void initParams() {

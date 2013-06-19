@@ -35,12 +35,12 @@ public class SwitchAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int arg0) {
-		return 0;
+		return arg0;
 	}
 
 	@Override
 	public View getView(int location, View arg1, ViewGroup arg2) {
-		return getItem(location);
+		return mSwitchList.get(location);
 	}
 
 }

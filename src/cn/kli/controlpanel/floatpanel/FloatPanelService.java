@@ -13,6 +13,8 @@ public class FloatPanelService extends Service {
 	
 	public static final int CMD_SHOW_PANEL 	= 1;
 	public static final int CMD_HIDE_PANEL 	= 2;
+	public static final int CMD_SHOW_INDICATOR 	= 3;
+	public static final int CMD_HIDE_INDICATOR 	= 4;
 	private FloatManager mManager;
 	private Handler mHandler = new Handler(){
 
@@ -25,6 +27,12 @@ public class FloatPanelService extends Service {
 				break;
 			case CMD_HIDE_PANEL:
 				getFloatManager().hidePanel();
+				break;
+			case CMD_SHOW_INDICATOR:
+				getFloatManager().showIndicator();
+				break;
+			case CMD_HIDE_INDICATOR:
+				getFloatManager().hideIndicator();
 				break;
 			}
 		}

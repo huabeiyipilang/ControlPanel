@@ -51,7 +51,8 @@
             android:id="@+id/gv_switch_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:numColumns="3" >
+        	android:cacheColorHint="@android:color/transparent"
+            android:numColumns="3">
         </GridView>
 
         <LinearLayout
