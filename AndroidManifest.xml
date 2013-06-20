@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <!-- for baidu api -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -73,7 +74,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ThemeSetting" >
+        <activity android:name=".floatpanel.ThemeSetting" >
         </activity>
 
         <service

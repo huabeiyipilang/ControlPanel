@@ -1,7 +1,14 @@
 package cn.kli.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 public class UIUtils {
     
@@ -24,6 +31,23 @@ public class UIUtils {
         shortcutIntent.putExtra("duplicate", false);
         // ´´½¨
         context.sendBroadcast(shortcutIntent);
-
 	}
+	
+	
+	public static boolean isHome(Context context){ 
+		List<String> homes = new ArrayList<String>();  
+		PackageManager packageManager = context.getPackageManager();  
+		Intent intent = new Intent(Intent.ACTION_MAIN);  
+		intent.addCategory(Intent.CATEGORY_HOME);  
+		List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,  
+				PackageManager.MATCH_DEFAULT_ONLY);  
+		for(ResolveInfo info : resolveInfo){  
+			homes.add(info.activityInfo.packageName);  
+			System.out.println(info.activityInfo.packageName);  
+		}  
+		
+		ActivityManager mActivityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);  
+		List<RunningTaskInfo> rti = mActivityManager.getRunningTasks(1);  
+		return homes.contains(rti.get(0).topActivity.getPackageName());  
+	} 
 }

@@ -7,10 +7,30 @@
         android:summaryOff="@string/setting_off"
         android:summaryOn="@string/setting_on"
         android:title="@string/setting_display_in_notification" />
-
+    
     <Preference
         android:key="key_theme"
         android:summary="@string/setting_theme_summary"
         android:title="@string/setting_theme" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_indicator_switch"
+        android:summaryOff="@string/setting_off"
+        android:summaryOn="@string/setting_on"
+        android:title="@string/setting_display_indicator" />
+    
+    <ListPreference
+        android:key="key_indicator_types"
+        android:entries="@array/indicator_types"
+        android:entryValues="@array/indicator_type_values"
+        android:title="@string/setting_indicator_type" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_indicator_only_launcher_switch"
+        android:summaryOff="@string/setting_off"
+        android:summaryOn="@string/setting_on"
+        android:title="@string/setting_indicator_only_in_launcher" />
 
 </PreferenceScreen>

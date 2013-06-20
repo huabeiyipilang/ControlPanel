@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 
@@ -43,38 +44,58 @@ public abstract class FloatView {
 		if(dragView == null){
 			dragView = mContentView;
 		}
-		dragView.setOnTouchListener(new OnTouchListener(){
-			float startX;
-			float startY;
-			int originX, originY;
-			
+		//此处设置空的OnClickListener，是为了消费掉ACTION_DOWN事件，
+		//否则OnDragListener中ACTION_DOWN返回false的话，ACTION_MOVE和ACTION_UP
+		//就不会被触发，现象就是无法拖动。
+		dragView.setOnClickListener(new OnClickListener(){
 			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				switch(event.getAction()){
-				case MotionEvent.ACTION_DOWN:
-					//位移起点
-					startX = event.getRawX();
-					startY = event.getRawY();
-					//FloatPanel初始坐标
-					originX = mParams.x;
-					originY = mParams.y;
-					break;
-				case MotionEvent.ACTION_MOVE:
-					updateLocation(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
-					break;
-				case MotionEvent.ACTION_UP:
-					onActionUp(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
-					break;
-				}
-				return true;
+			public void onClick(View arg0) {
 			}
-
-			
 		});
+		dragView.setOnTouchListener(new OnDragListener());
+	}
+	
+	private class OnDragListener implements OnTouchListener{
+		float startX;
+		float startY;
+		int originX, originY;
+		float downTime;
+		
+		@Override
+		public boolean onTouch(View view, MotionEvent event) {
+			switch(event.getAction()){
+			case MotionEvent.ACTION_DOWN:
+				//位移起点
+				startX = event.getRawX();
+				startY = event.getRawY();
+				//FloatPanel初始坐标
+				originX = mParams.x;
+				originY = mParams.y;
+				downTime = System.currentTimeMillis();
+				//此处返回false，如果ACTION_UP返回false的话，就可以触发onClick
+				return false;
+			case MotionEvent.ACTION_MOVE:
+				updateLocation(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
+				break;
+			case MotionEvent.ACTION_UP:
+				float moveX = event.getRawX() - startX;
+				float moveY = event.getRawY() - startY;
+				if(Math.abs(moveX) < 15 && Math.abs(moveY) < 15 && System.currentTimeMillis() - downTime < 500){
+					return false;
+				}
+				onActionUp(moveX, moveY, originX, originY);
+				break;
+			}
+			return true;
+		}
 	}
 	
 	protected void onActionUp(float x, float y, int originX, int originY){
 		updateLocation(x, y, originX, originY);
+	}
+	
+	protected void setLocation(float x, float y){
+		updateLocation(x, y, 0, 0);
 	}
 	
 	private void updateLocation(float x, float y, int originX, int originY){

@@ -5,10 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
@@ -133,5 +135,65 @@ public class DeviceUtils {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+
+	/**
+	 * 可用内存
+	 * 
+	 * @param mContext
+	 * @return
+	 */
+	public static double getAvailMemory(Context mContext) {
+		ActivityManager am = (ActivityManager) mContext
+				.getSystemService(Context.ACTIVITY_SERVICE);
+		MemoryInfo mi = new MemoryInfo();
+		am.getMemoryInfo(mi);
+		// mi.availMem; 当前系统的可用内
+//		DecimalFormat df = new DecimalFormat("0.00");// 保留2位小数
+		return mi.availMem / 1024;// 转化为KB
+	}
+
+	/**
+	 * 总内存
+	 * 
+	 * @return
+	 */
+	public static double getTotalMemory() {
+		double mTotal;
+		// 系统内存
+		String path = "/proc/meminfo";
+		// 存储器内
+		String content = null;
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(path), 8);
+			String line;
+			if ((line = br.readLine()) != null) {
+				// 采集内存信息
+				content = line;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// beginIndex
+		int begin = content.indexOf(':');
+		// endIndex
+		int end = content.indexOf('k');
+		// 采集数量的内
+		content = content.substring(begin + 1, end).trim();
+		// 转换为Int
+		mTotal = Double.parseDouble(content);// 单位为KB
+//		DecimalFormat df = new DecimalFormat("0.00");// 保留2位小数
+		return mTotal;
 	}
 }

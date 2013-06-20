@@ -2,8 +2,6 @@ package cn.kli.controlpanel.floatpanel;
 
 import cn.kli.controlpanel.ControlActivity;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.ThemeSetting;
-import cn.kli.controlpanel.launcher.BaseTagView;
 import cn.kli.controlwidgets.ASwitch;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
@@ -11,18 +9,11 @@ import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
@@ -129,4 +120,12 @@ public class FloatPanel extends FloatView implements OnClickListener,
 		klilog.i("switch item onlongclick: position = "+position);
 		return false;
 	}
+
+	@Override
+	public void closePanel() {
+		super.closePanel();
+		FloatPanelService.showIndicator(mContext);
+	}
+	
+	
 }

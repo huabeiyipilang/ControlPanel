@@ -1,15 +1,26 @@
 package cn.kli.controlpanel.floatpanel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.WindowManager;
 
 public class FloatManager {
+	private static FloatManager sInstance;
+	
 	private Context mContext;
 	private FloatPanel mFloatPanel;
 	private FloatIndicator mIndicator;
 	private WindowManager mWinManager;
 	
-	public FloatManager(Context context){
+	public static FloatManager getInstance(Context context){
+		if(sInstance == null){
+			sInstance = new FloatManager(context);
+		}
+		return sInstance;
+	}
+	
+	private FloatManager(Context context){
 		mContext = context;
 		mWinManager = (WindowManager) mContext.getSystemService("window");
 		mIndicator = new FloatIndicator(context, mWinManager);
@@ -25,7 +36,11 @@ public class FloatManager {
 	}
 	
 	public void showIndicator(){
-		mIndicator.openPanel();
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		boolean enable = pref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_SWITCH, false);
+		if(enable){
+			mIndicator.openPanel();
+		}
 	}
 	
 	public void hideIndicator(){

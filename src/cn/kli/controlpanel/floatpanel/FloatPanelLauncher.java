@@ -11,8 +11,7 @@ public class FloatPanelLauncher extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    Intent intent = new Intent(this,FloatPanelService.class);
-//	    intent.putExtra(FloatPanelService.SERVICE_CMD, FloatPanelService.CMD_SHOW_PANEL);
-	    intent.putExtra(FloatPanelService.SERVICE_CMD, FloatPanelService.CMD_SHOW_INDICATOR);
+	    intent.putExtra(FloatPanelService.SERVICE_CMD, FloatPanelService.CMD_SHOW_PANEL);
 	    startService(intent);
 	    finish();
 	}

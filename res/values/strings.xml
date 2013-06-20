@@ -8,24 +8,8 @@
     <string name="description_alarm">闹钟</string>
     <string name="description_screen_brightness">屏幕亮度</string>
     <string name="description_screen_brightness_check">自动</string>
-    <string name="setting_display_in_notification">在通知栏中显示快捷方式</string>
-    <string name="notification_summary">点击打开快捷面板</string>
     
     <!--  settings -->
-    <string name="setting_on">开启</string>
-    <string name="setting_off">关闭</string>
-    <string name="setting_theme">主题设置</string>
-    <string name="setting_theme_summary">设置背景颜色、透明度</string>
-    <string name="setting_theme_save">保存</string>
-    <string name="setting_theme_default">还原默认值</string>
-    <string name="setting_theme_swap">切换配色区</string>
-    <string name="setting_theme_alpha">透明度</string>
-    <string name="setting_theme_red">红</string>
-    <string name="setting_theme_green">绿</string>
-    <string name="setting_theme_blue">蓝</string>
-    <string name="setting_theme_select_area">当前配色区域：%s</string>
-    <string name="setting_theme_area_title">标题栏</string>
-    <string name="setting_theme_area_container">正文</string>
     <string name="setting_about">关于</string>
     <string name="setting_lockscreen">锁屏</string>
     <string name="setting_add_lockscreen_icon">添加一键锁屏图标</string>
@@ -93,4 +77,33 @@
 	<!-- 悬浮窗 -->
     <string name="module_float_panel">快捷面板</string>
     <string name="mobile_data">数据</string>
+    <string name="setting_on">开启</string>
+    <string name="setting_off">关闭</string>
+    <string name="setting_display_in_notification">在通知栏中显示快捷方式</string>
+    <string name="setting_display_indicator">显示指示器</string>
+    <string name="setting_indicator_type">指示器显示内容</string>
+    <string name="setting_indicator_only_in_launcher">仅在桌面显示指示器</string>
+    <string-array name="indicator_types">
+        <item>内存使用率</item>
+        <item>当前网速</item>
+        <item>自定义文字</item>
+    </string-array>
+    <string-array name="indicator_type_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string name="setting_theme">主题设置</string>
+    <string name="setting_theme_summary">设置背景颜色、透明度</string>
+    <string name="setting_theme_save">保存</string>
+    <string name="setting_theme_default">还原默认值</string>
+    <string name="setting_theme_swap">切换配色区</string>
+    <string name="setting_theme_alpha">透明度</string>
+    <string name="setting_theme_red">红</string>
+    <string name="setting_theme_green">绿</string>
+    <string name="setting_theme_blue">蓝</string>
+    <string name="setting_theme_select_area">当前配色区域：%s</string>
+    <string name="setting_theme_area_title">标题栏</string>
+    <string name="setting_theme_area_container">正文</string>
+    <string name="notification_summary">点击打开快捷面板</string>
 </resources>
