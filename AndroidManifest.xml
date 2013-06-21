@@ -34,7 +34,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:name="App" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
             android:value="dev" />
@@ -86,7 +87,7 @@
             android:name="AppBroadCastReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="cn.kli.controlpanel.action.SHOW_PANEL" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
@@ -118,7 +119,8 @@
             android:configChanges="keyboard|keyboardHidden|orientation" />
         <activity
             android:name="ControlActivity"
-            android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
+            android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="cn.kli.controlpanel.LightControlActivity"

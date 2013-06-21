@@ -103,7 +103,6 @@ public class FloatIndicator extends FloatView{
 			DecimalFormat df = new DecimalFormat("0");
 			String display = df.format((1 - availMem / totalMem)*100);
 			display += "%";
-			klilog.i("display:"+display);
 			return display;
 		}
 		

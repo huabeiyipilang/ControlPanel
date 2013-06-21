@@ -1,30 +1,16 @@
 package cn.kli.controlpanel.floatpanel;
 
-import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.webkit.WebView;
-import android.widget.Toast;
-
-import cn.kli.controlpanel.Baidu;
-import cn.kli.controlpanel.LightControlActivity;
 import cn.kli.controlpanel.MainService;
-import cn.kli.controlpanel.OneKeyLockScreen;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.R.drawable;
-import cn.kli.controlpanel.R.string;
-import cn.kli.controlpanel.R.xml;
 import cn.kli.utils.klilog;
 
 import com.baidu.mobstat.StatService;

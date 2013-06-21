@@ -31,6 +31,8 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 		initUI();
+		translateToFragment(Config.getGroupList().get(0).cls
+				.getName());
 	}
 	
 	private void initUI() {
@@ -58,14 +60,6 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 	}
 	
 	
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		translateToFragment(Config.getGroupList().get(0).cls
-				.getName());
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){

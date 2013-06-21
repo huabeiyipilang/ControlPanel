@@ -36,7 +36,6 @@ import com.baidu.mobstat.StatService;
 public class MainService extends Service{
 	
 	public static final String SERVICE_CMD = "cmd";
-	public static final int CMD_OPEN_CONTROL_PANEL 	= 1;
 	public static final int CMD_BOOT_COMPLETED 		= 2;
 	public static final int CMD_UPDATE_NOTIFICATION = 3;
 	public static final int CMD_LIGHT_SWITCH 		= 4;
