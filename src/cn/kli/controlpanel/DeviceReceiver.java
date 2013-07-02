@@ -14,7 +14,7 @@ public class DeviceReceiver extends DeviceAdminReceiver {
 	@Override
 	public void onEnabled(Context context, Intent intent) {
 		super.onEnabled(context, intent);
-		SettingPrefs prefs = SettingPrefs.getInstance(context);
+		Prefs prefs = Prefs.getInstance(context);
 		prefs.setDeviceAdminEnable(true);
 	}
 
@@ -22,7 +22,7 @@ public class DeviceReceiver extends DeviceAdminReceiver {
 	public void onDisabled(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		super.onDisabled(context, intent);
-		SettingPrefs prefs = SettingPrefs.getInstance(context);
+		Prefs prefs = Prefs.getInstance(context);
 		prefs.setDeviceAdminEnable(false);
 	}
 

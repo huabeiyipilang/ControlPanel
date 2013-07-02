@@ -20,7 +20,7 @@ public class OneKeyLockScreen extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    boolean enable = SettingPrefs.getInstance(this).getDeviceAdminEnable();
+	    boolean enable = Prefs.getInstance(this).getDeviceAdminEnable();
 	    if(enable){
 			devicePloicyManager = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 			powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);

@@ -46,4 +46,8 @@ public class FloatManager {
 	public void hideIndicator(){
 		mIndicator.closePanel();
 	}
+	
+	public void setIndicatorType(String type){
+		mIndicator.setStrategy(type);
+	}
 }

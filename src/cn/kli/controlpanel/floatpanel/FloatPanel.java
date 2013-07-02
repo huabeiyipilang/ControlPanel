@@ -9,6 +9,8 @@ import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
@@ -47,10 +49,10 @@ public class FloatPanel extends FloatView implements OnClickListener,
 	}
 	
     private void loadWidgets(){
-    	int[] switchList = {10};
+    	int[] switchList = {};
     	final SwitchAdapter switchAdapter = new SwitchAdapter(mContext, switchList);
     	GridView switchContainer = (GridView)(getContentView().findViewById(R.id.gv_switch_container));
-//    	switchContainer.setSelector(new ColorDrawable(Color.TRANSPARENT));
+    	switchContainer.setSelector(new ColorDrawable(Color.TRANSPARENT));
     	switchContainer.setAdapter(switchAdapter);
     	switchContainer.setOnItemClickListener(this);
     	switchContainer.setOnItemLongClickListener(this);

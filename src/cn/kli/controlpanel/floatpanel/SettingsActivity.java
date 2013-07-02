@@ -21,7 +21,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	public final static String KEY_PREF_NOTIFICATION = "key_notification";
 	private final static String KEY_PREF_THEME = "key_theme";
 	public final static String KEY_PREF_INDICATOR_SWITCH = "key_indicator_switch";
-	private final static String KEY_PREF_INDICATOR_TYPES = "key_indicator_types";
+	public final static String KEY_PREF_INDICATOR_TYPES = "key_indicator_types";
 	public final static String KEY_PREF_INDICATOR_LAUNCHER_SWITCH = "key_indicator_only_launcher_switch";
 	
     /** Called when the activity is first created. */
@@ -56,15 +56,16 @@ public class SettingsActivity extends PreferenceActivity implements
 			}else{
 				FloatPanelService.stopLauncherCheck(this);
 			}
+		}else if(key.equals(KEY_PREF_INDICATOR_TYPES)){
+			String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
+			FloatManager.getInstance(this).setIndicatorType(type);
 		}
 	}
 	
 	private void updateIndicatorSettings(){
-		CheckBoxPreference pre;
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean enable = pref.getBoolean(KEY_PREF_INDICATOR_SWITCH, false);
 		findPreference(KEY_PREF_INDICATOR_TYPES).setEnabled(enable);
-		((CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH)).setChecked(false);
 		findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH).setEnabled(enable);
 		if(enable){
 			FloatManager.getInstance(this).showIndicator();
