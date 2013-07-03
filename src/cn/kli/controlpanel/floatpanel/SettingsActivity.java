@@ -23,6 +23,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	public final static String KEY_PREF_INDICATOR_SWITCH = "key_indicator_switch";
 	public final static String KEY_PREF_INDICATOR_TYPES = "key_indicator_types";
 	public final static String KEY_PREF_INDICATOR_LAUNCHER_SWITCH = "key_indicator_only_launcher_switch";
+	public final static String KEY_PREF_INDICATOR_AUTO_EDGE = "key_indicator_auto_edge";
 	
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		boolean enable = pref.getBoolean(KEY_PREF_INDICATOR_SWITCH, false);
 		findPreference(KEY_PREF_INDICATOR_TYPES).setEnabled(enable);
 		findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH).setEnabled(enable);
+		findPreference(KEY_PREF_INDICATOR_AUTO_EDGE).setEnabled(enable);
 		if(enable){
 			FloatManager.getInstance(this).showIndicator();
 		}else{

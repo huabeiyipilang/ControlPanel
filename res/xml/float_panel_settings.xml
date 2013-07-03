@@ -28,6 +28,13 @@
 
     <CheckBoxPreference
         android:defaultValue="false"
+        android:key="key_indicator_auto_edge"
+        android:summaryOff="@string/setting_off"
+        android:summaryOn="@string/setting_on"
+        android:title="@string/setting_indicator_auto_edge" />
+    
+    <CheckBoxPreference
+        android:defaultValue="false"
         android:key="key_indicator_only_launcher_switch"
         android:summaryOff="@string/setting_off"
         android:summaryOn="@string/setting_on"

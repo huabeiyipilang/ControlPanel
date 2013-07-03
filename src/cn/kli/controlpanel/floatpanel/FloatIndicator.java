@@ -35,6 +35,7 @@ public class FloatIndicator extends FloatView{
 	private boolean isFirstOpen = true;
 	private Strategy mStrategy;
 	private TextView mIndicatorDisplay;
+	private SharedPreferences mPref;
 	
 	private Handler mHandler = new Handler(){
 
@@ -53,8 +54,8 @@ public class FloatIndicator extends FloatView{
 	
 	public FloatIndicator(Context context, WindowManager winManager) {
 		super(context, winManager);
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		String type = pref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
+		mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		String type = mPref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
 		setStrategy(type);
 		mIndicatorDisplay = (TextView)mContentView.findViewById(R.id.tv_indicator);
 		mContentView.setOnClickListener(new OnClickListener(){
@@ -76,8 +77,7 @@ public class FloatIndicator extends FloatView{
 	@Override
 	public void openPanel() {
 		super.openPanel();
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		mScreenWidth = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
+		mScreenWidth = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
 		if(isFirstOpen){
 			//ÉèÖÃ³õÊ¼Î»ÖÃ
 			setLocation(mScreenWidth / 2, 0);
@@ -94,8 +94,10 @@ public class FloatIndicator extends FloatView{
 
 	@Override
 	protected void onActionUp(float x, float y, int originX, int originY) {
-		x = x + originX > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
-		originX = 0;
+		if(mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_AUTO_EDGE, true)){
+			x = x + originX > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
+			originX = 0;
+		}
 		super.onActionUp(x, y, originX, originY);
 	}
 

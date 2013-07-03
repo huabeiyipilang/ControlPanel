@@ -110,12 +110,15 @@ public abstract class FloatView {
 
 		//init params
 		mParams = new WindowManager.LayoutParams();
-		mParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+		mParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+//		mParams.type = WindowManager.LayoutParams.TYPE_PHONE;
 		mParams.format = 1;
-		mParams.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+		mParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+						WindowManager.LayoutParams.FLAG_FULLSCREEN | 
+						WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 		mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		mParams.gravity = Gravity.CENTER; // Gravity.TOP | Gravity.LEFT;
+		mParams.gravity = Gravity.CENTER;
 		
 		klilog.i("mFloatPanel.getWidth() = "+mContentView.getWidth());
 		klilog.i("mFloatPanel.getHeight() = "+mContentView.getHeight());

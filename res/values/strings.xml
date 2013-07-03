@@ -93,6 +93,7 @@
         <item>networkspeed</item>
         <item>text</item>
     </string-array>
+    <string name="setting_indicator_auto_edge">边缘吸附</string>
     <string name="setting_theme">主题设置</string>
     <string name="setting_theme_summary">设置背景颜色、透明度</string>
     <string name="setting_theme_save">保存</string>
