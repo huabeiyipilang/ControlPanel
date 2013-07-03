@@ -10,6 +10,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import cn.kli.controlpanel.MainService;
+import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 
@@ -60,6 +61,12 @@ public class SettingsActivity extends PreferenceActivity implements
 		}else if(key.equals(KEY_PREF_INDICATOR_TYPES)){
 			String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
 			FloatManager.getInstance(this).setIndicatorType(type);
+		}else if(key.equals(KEY_PREF_INDICATOR_AUTO_EDGE)){
+			if(pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true)){
+				int x = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0)/2;
+				FloatIndicator indicator = FloatManager.getInstance(this).getIndicator();
+				indicator.setLocation(x, indicator.getPositionY());
+			}
 		}
 	}
 	

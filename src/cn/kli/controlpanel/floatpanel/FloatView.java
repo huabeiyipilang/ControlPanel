@@ -125,6 +125,14 @@ public abstract class FloatView {
     	klilog.i("2initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 	}
 	
+	public int getPositionX(){
+		return mParams.x;
+	}
+
+	public int getPositionY(){
+		return mParams.y;
+	}
+	
 	public void openPanel(){
 		if(mWinManager != null && mContentView != null && mParams != null && !isShow()){
 			try {

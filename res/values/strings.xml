@@ -80,6 +80,7 @@
     <string name="setting_on">开启</string>
     <string name="setting_off">关闭</string>
     <string name="setting_display_in_notification">在通知栏中显示快捷方式</string>
+    <string name="setting_indicator">指示器</string>
     <string name="setting_display_indicator">显示指示器</string>
     <string name="setting_indicator_type">指示器显示内容</string>
     <string name="setting_indicator_only_in_launcher">仅在桌面显示指示器</string>

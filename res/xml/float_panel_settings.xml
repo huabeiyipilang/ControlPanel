@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_notification"
-        android:summaryOff="@string/setting_off"
-        android:summaryOn="@string/setting_on"
-        android:title="@string/setting_display_in_notification" />
-    
-    <Preference
-        android:key="key_theme"
-        android:summary="@string/setting_theme_summary"
-        android:title="@string/setting_theme" />
+    <PreferenceCategory android:title="@string/module_float_panel" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_notification"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_display_in_notification" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_indicator_switch"
-        android:summaryOff="@string/setting_off"
-        android:summaryOn="@string/setting_on"
-        android:title="@string/setting_display_indicator" />
+        <Preference
+            android:key="key_theme"
+            android:summary="@string/setting_theme_summary"
+            android:title="@string/setting_theme" />
+    </PreferenceCategory>
     
-    <ListPreference
-        android:key="key_indicator_types"
-        android:entries="@array/indicator_types"
-        android:entryValues="@array/indicator_type_values"
-        android:title="@string/setting_indicator_type" />
+    <PreferenceCategory android:title="@string/setting_indicator" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_switch"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_display_indicator" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_indicator_auto_edge"
-        android:summaryOff="@string/setting_off"
-        android:summaryOn="@string/setting_on"
-        android:title="@string/setting_indicator_auto_edge" />
-    
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_indicator_only_launcher_switch"
-        android:summaryOff="@string/setting_off"
-        android:summaryOn="@string/setting_on"
-        android:title="@string/setting_indicator_only_in_launcher" />
+        <ListPreference
+            android:entries="@array/indicator_types"
+            android:entryValues="@array/indicator_type_values"
+            android:key="key_indicator_types"
+            android:title="@string/setting_indicator_type" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_auto_edge"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_auto_edge" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_only_launcher_switch"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_only_in_launcher" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

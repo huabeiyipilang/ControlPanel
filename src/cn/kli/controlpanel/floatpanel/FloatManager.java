@@ -50,4 +50,8 @@ public class FloatManager {
 	public void setIndicatorType(String type){
 		mIndicator.setStrategy(type);
 	}
+	
+	public FloatIndicator getIndicator(){
+		return mIndicator;
+	}
 }
