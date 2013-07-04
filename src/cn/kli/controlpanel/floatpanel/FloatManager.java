@@ -1,11 +1,14 @@
 package cn.kli.controlpanel.floatpanel;
 
+import cn.kli.controlpanel.App;
+import cn.kli.controlpanel.App.ConfigurationListener;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.view.WindowManager;
 
-public class FloatManager {
+public class FloatManager implements ConfigurationListener{
 	private static FloatManager sInstance;
 	
 	private Context mContext;
@@ -25,6 +28,7 @@ public class FloatManager {
 		mWinManager = (WindowManager) mContext.getSystemService("window");
 		mIndicator = new FloatIndicator(context, mWinManager);
 		mFloatPanel = new FloatPanel(context, mWinManager);
+		App.registerConfigListener(this);
 	}
 	
 	public void showPanel(){
@@ -38,7 +42,7 @@ public class FloatManager {
 	public void showIndicator(){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
 		boolean enable = pref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_SWITCH, false);
-		if(enable){
+		if(enable && !mFloatPanel.isShow()){
 			mIndicator.openPanel();
 		}
 	}
@@ -53,5 +57,14 @@ public class FloatManager {
 	
 	public FloatIndicator getIndicator(){
 		return mIndicator;
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
+			
+        }else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        	
+        }  		
 	}
 }

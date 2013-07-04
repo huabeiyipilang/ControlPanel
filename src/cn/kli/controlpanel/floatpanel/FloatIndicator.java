@@ -9,6 +9,7 @@ import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.TrafficStats;
@@ -32,7 +33,6 @@ public class FloatIndicator extends FloatView{
 	private final static int MSG_FRESH = 1;
 	
 	private int mScreenWidth;
-	private boolean isFirstOpen = true;
 	private Strategy mStrategy;
 	private TextView mIndicatorDisplay;
 	private SharedPreferences mPref;
@@ -44,7 +44,9 @@ public class FloatIndicator extends FloatView{
 			super.handleMessage(msg);
 			switch(msg.what){
 			case MSG_FRESH:
-				mIndicatorDisplay.setText(mStrategy.getDisplay());
+				if(mIndicatorDisplay != null && mStrategy != null){
+					mIndicatorDisplay.setText(mStrategy.getDisplay());
+				}
 				this.sendEmptyMessageDelayed(MSG_FRESH, FRESH_DURING);
 				break;
 			}
@@ -78,11 +80,15 @@ public class FloatIndicator extends FloatView{
 	public void openPanel() {
 		super.openPanel();
 		mScreenWidth = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
-		if(isFirstOpen){
+		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
+		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
+		if(x == -1 && y == -1){
 			//…Ë÷√≥ı ºŒª÷√
 			setLocation(mScreenWidth / 2, 0);
-			isFirstOpen = false;
+		}else{
+			setLocation(x, y);
 		}
+		mHandler.removeMessages(MSG_FRESH);
 		mHandler.sendEmptyMessage(MSG_FRESH);
 	}
 	
@@ -99,6 +105,18 @@ public class FloatIndicator extends FloatView{
 			originX = 0;
 		}
 		super.onActionUp(x, y, originX, originY);
+	}
+	
+
+	@Override
+	protected void setLocation(float x, float y, boolean stable) {
+		super.setLocation(x, y, stable);
+		if(stable){
+			Editor editor = Prefs.getPrefs(mContext).edit();
+			editor.putInt(Prefs.PREF_INDICATOR_X, (int) x);
+			editor.putInt(Prefs.PREF_INDICATOR_Y, (int) y);
+			editor.commit();
+		}
 	}
 
 	public void setStrategy(String value){

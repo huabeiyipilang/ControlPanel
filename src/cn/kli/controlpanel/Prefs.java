@@ -6,10 +6,16 @@ import com.baidu.mobstat.StatService;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class Prefs {
+	//屏幕宽高
 	public static final String PREF_SCREEN_WIDTH = "screen_width";
 	public static final String PREF_SCREEN_HEIGHT = "screen_height";
+
+	//指示器位置记录
+	public static final String PREF_INDICATOR_X= "indicator_x";
+	public static final String PREF_INDICATOR_Y = "indicator_y";
 	
 	private final static String SETTING_PREFS = "setting_prefs";
 	private static Prefs sInstance;
@@ -34,6 +40,10 @@ public class Prefs {
 			init(context);
 		}
 		return sInstance;
+	}
+	
+	public static SharedPreferences getPrefs(Context context){
+		return PreferenceManager.getDefaultSharedPreferences(context);
 	}
 	
 	public boolean getDeviceAdminEnable(){

@@ -91,18 +91,22 @@ public abstract class FloatView {
 	}
 	
 	protected void onActionUp(float x, float y, int originX, int originY){
-		updateLocation(x, y, originX, originY);
+		setLocation((int)x + originX, (int)y + originY, true);
 	}
 	
 	protected void setLocation(float x, float y){
-		updateLocation(x, y, 0, 0);
+		setLocation(x, y, true);
+	}
+	
+	protected void setLocation(float x, float y, boolean stable){
+		mParams.x = (int)x;
+		mParams.y = (int)y;
+		mWinManager.updateViewLayout(mContentView, mParams);
 	}
 	
 	private void updateLocation(float x, float y, int originX, int originY){
 		//新坐标 = 位移 + 初始坐标
-		mParams.x = (int)x + originX;
-		mParams.y = (int)y + originY;
-		mWinManager.updateViewLayout(mContentView, mParams);
+		setLocation((int)x + originX, (int)y + originY, false);
 	}
 	
 	private void initParams() {
