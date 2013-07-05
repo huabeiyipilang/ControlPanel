@@ -1,7 +1,9 @@
 package cn.kli.controlpanel.floatpanel;
 
 import cn.kli.controlpanel.App;
+import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.App.ConfigurationListener;
+import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -61,10 +63,6 @@ public class FloatManager implements ConfigurationListener{
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
-			
-        }else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-        	
-        }  		
+		mIndicator.onConfigurationChanged(newConfig);
 	}
 }

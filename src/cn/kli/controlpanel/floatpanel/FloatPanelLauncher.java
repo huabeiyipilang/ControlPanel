@@ -19,9 +19,17 @@ public class FloatPanelLauncher extends Activity {
 		if(pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0) == 0){
 			DisplayMetrics metrics = new DisplayMetrics();
 			this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+			int h,w;
+			if(metrics.heightPixels > metrics.widthPixels){
+				w = metrics.widthPixels;
+				h = metrics.heightPixels;
+			}else{
+				h = metrics.widthPixels;
+				w = metrics.heightPixels;
+			}
 			Editor editor = pref.edit();
-			editor.putInt(Prefs.PREF_SCREEN_WIDTH, metrics.widthPixels);
-			editor.putInt(Prefs.PREF_SCREEN_HEIGHT, metrics.heightPixels);
+			editor.putInt(Prefs.PREF_SCREEN_WIDTH, w);
+			editor.putInt(Prefs.PREF_SCREEN_HEIGHT, h);
 			editor.commit();
 		}
 	    Intent intent = new Intent(this,FloatPanelService.class);

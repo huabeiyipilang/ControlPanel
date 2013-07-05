@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Message;
@@ -79,7 +80,7 @@ public class FloatIndicator extends FloatView{
 	@Override
 	public void openPanel() {
 		super.openPanel();
-		mScreenWidth = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
+		mScreenWidth = getScreenWidth();
 		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
 		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
 		if(x == -1 && y == -1){
@@ -97,26 +98,28 @@ public class FloatIndicator extends FloatView{
 		super.closePanel();
 		mHandler.removeMessages(MSG_FRESH);
 	}
-
-	@Override
-	protected void onActionUp(float x, float y, int originX, int originY) {
-		if(mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_AUTO_EDGE, true)){
-			x = x + originX > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
-			originX = 0;
-		}
-		super.onActionUp(x, y, originX, originY);
-	}
 	
+	private int getScreenWidth(){
+		int width = 0;
+		Configuration config = mContext.getResources().getConfiguration();
+		if(config.orientation == Configuration.ORIENTATION_PORTRAIT){
+			width = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
+		}else if(config.orientation ==Configuration.ORIENTATION_LANDSCAPE){
+			width = mPref.getInt(Prefs.PREF_SCREEN_HEIGHT, 0);
+		}
+		return width;
+	}
 
 	@Override
-	protected void setLocation(float x, float y, boolean stable) {
-		super.setLocation(x, y, stable);
-		if(stable){
-			Editor editor = Prefs.getPrefs(mContext).edit();
-			editor.putInt(Prefs.PREF_INDICATOR_X, (int) x);
-			editor.putInt(Prefs.PREF_INDICATOR_Y, (int) y);
-			editor.commit();
+	protected void setLocation(float x, float y) {
+		if(mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_AUTO_EDGE, true)){
+			x = x > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
 		}
+		super.setLocation(x, y);
+		Editor editor = Prefs.getPrefs(mContext).edit();
+		editor.putInt(Prefs.PREF_INDICATOR_X, (int) x);
+		editor.putInt(Prefs.PREF_INDICATOR_Y, (int) y);
+		editor.commit();
 	}
 
 	public void setStrategy(String value){
@@ -132,6 +135,33 @@ public class FloatIndicator extends FloatView{
 		}
 	}
 	
+	
+	@Override
+	protected void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mScreenWidth = getScreenWidth();
+		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
+		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
+		int screenWidth = 0, screenHeight = 0;
+		if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
+			screenWidth = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+        }else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+			screenHeight= Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenWidth = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+        }
+		setLocation(getMax(x, screenWidth/2), getMax(y, screenHeight/2));
+	}
+
+	private int getMax(int value, int max){
+		if(value > max){
+			value = max;
+		}else if(value < -max){
+			value = -max;
+		}
+		return value;
+	}
+
 	private interface Strategy{
 		String getDisplay();
 	}

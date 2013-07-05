@@ -2,6 +2,7 @@ package cn.kli.controlpanel.floatpanel;
 
 import cn.kli.utils.klilog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -91,14 +92,10 @@ public abstract class FloatView {
 	}
 	
 	protected void onActionUp(float x, float y, int originX, int originY){
-		setLocation((int)x + originX, (int)y + originY, true);
+		setLocation((int)x + originX, (int)y + originY);
 	}
 	
 	protected void setLocation(float x, float y){
-		setLocation(x, y, true);
-	}
-	
-	protected void setLocation(float x, float y, boolean stable){
 		mParams.x = (int)x;
 		mParams.y = (int)y;
 		mWinManager.updateViewLayout(mContentView, mParams);
@@ -106,7 +103,9 @@ public abstract class FloatView {
 	
 	private void updateLocation(float x, float y, int originX, int originY){
 		//新坐标 = 位移 + 初始坐标
-		setLocation((int)x + originX, (int)y + originY, false);
+		mParams.x = (int)x + originX;
+		mParams.y = (int)y + originY;
+		mWinManager.updateViewLayout(mContentView, mParams);
 	}
 	
 	private void initParams() {
@@ -161,5 +160,9 @@ public abstract class FloatView {
 	
 	public boolean isShow(){
 		return isPanelShow;
+	}
+	
+	protected void onConfigurationChanged(Configuration newConfig) {
+		
 	}
 }
