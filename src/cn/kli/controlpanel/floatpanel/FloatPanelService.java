@@ -57,6 +57,19 @@ public class FloatPanelService extends Service {
 		return null;
 	}
 
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		if(pref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
+			FloatPanelService.startLauncherCheck(this);
+		}else{
+			FloatPanelService.stopLauncherCheck(this);
+		}
+	}
+
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null){

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -53,33 +54,46 @@ public class SettingsActivity extends PreferenceActivity implements
 		}else if(key.equals(KEY_PREF_INDICATOR_SWITCH)){
 			updateIndicatorSettings();
 		}else if(key.equals(KEY_PREF_INDICATOR_LAUNCHER_SWITCH)){
-			if(pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
-				FloatPanelService.startLauncherCheck(this);
-			}else{
-				FloatPanelService.stopLauncherCheck(this);
-			}
+			updateIndicatorSettings();
 		}else if(key.equals(KEY_PREF_INDICATOR_TYPES)){
-			String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
-			FloatManager.getInstance(this).setIndicatorType(type);
+			updateIndicatorSettings();
 		}else if(key.equals(KEY_PREF_INDICATOR_AUTO_EDGE)){
-			if(pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true)){
-				int x = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0)/2;
-				FloatIndicator indicator = FloatManager.getInstance(this).getIndicator();
-				indicator.setLocation(x, indicator.getPositionY());
-			}
+			updateIndicatorSettings();
 		}
 	}
 	
 	private void updateIndicatorSettings(){
+		FloatManager manager = FloatManager.getInstance(this);
+		//浮动窗开关
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean enable = pref.getBoolean(KEY_PREF_INDICATOR_SWITCH, false);
+		
+		//浮动窗显示类型
 		findPreference(KEY_PREF_INDICATOR_TYPES).setEnabled(enable);
+		String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
+		manager.setIndicatorType(type);
+		((ListPreference)findPreference(KEY_PREF_INDICATOR_TYPES)).setSummary(((ListPreference)findPreference(KEY_PREF_INDICATOR_TYPES)).getEntry());
+		
+		//仅在桌面显示
 		findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH).setEnabled(enable);
-		findPreference(KEY_PREF_INDICATOR_AUTO_EDGE).setEnabled(enable);
-		if(enable){
-			FloatManager.getInstance(this).showIndicator();
+		if(pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
+			FloatPanelService.startLauncherCheck(this);
 		}else{
-			FloatManager.getInstance(this).hideIndicator();
+			FloatPanelService.stopLauncherCheck(this);
+		}
+		
+		//边缘吸附
+		findPreference(KEY_PREF_INDICATOR_AUTO_EDGE).setEnabled(enable);
+		if(pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true)){
+			int x = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0)/2;
+			manager.updateIndicatorLocation(x, manager.getIndicator().getPositionY());
+		}
+		
+		//悬浮窗
+		if(enable){
+			manager.showIndicator();
+		}else{
+			manager.hideIndicator();
 		}
 	}
 	
