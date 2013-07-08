@@ -17,6 +17,7 @@ public abstract class FloatView {
 	private WindowManager mWinManager;
 	private WindowManager.LayoutParams mParams;
 	private boolean isPanelShow = false;
+	private boolean isLock = false;
 	
 	public FloatView(Context context, WindowManager winManager){
 		mContext = context;
@@ -38,6 +39,11 @@ public abstract class FloatView {
 	
 	protected View getContentView(){
 		return mContentView;
+	}
+	
+	protected void lock(boolean enable){
+		klilog.i("lock enable:"+enable);
+		isLock = enable;
 	}
 	
 	private void initDragView(){
@@ -92,6 +98,9 @@ public abstract class FloatView {
 	}
 	
 	protected void onActionUp(float x, float y, int originX, int originY){
+		if(isLock){
+			return;
+		}
 		setLocation((int)x + originX, (int)y + originY);
 	}
 	
@@ -102,6 +111,9 @@ public abstract class FloatView {
 	}
 	
 	private void updateLocation(float x, float y, int originX, int originY){
+		if(isLock){
+			return;
+		}
 		//新坐标 = 位移 + 初始坐标
 		mParams.x = (int)x + originX;
 		mParams.y = (int)y + originY;

@@ -37,6 +37,7 @@ public class FloatIndicator extends FloatView{
 	private Strategy mStrategy;
 	private TextView mIndicatorDisplay;
 	private SharedPreferences mPref;
+	private boolean mIsStatusbarMode = false;
 	
 	private Handler mHandler = new Handler(){
 
@@ -61,15 +62,29 @@ public class FloatIndicator extends FloatView{
 		String type = mPref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
 		setStrategy(type);
 		mIndicatorDisplay = (TextView)mContentView.findViewById(R.id.tv_indicator);
+		mIsStatusbarMode = mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_STATUSBAR_MODE, false);
+		setStatusbarMode(mIsStatusbarMode);
 		mContentView.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
-				closePanel();
+				if(!mIsStatusbarMode){
+					closePanel();
+				}
 				FloatPanelService.showPanel(mContext);
 			}
 			
 		});
+	}
+	
+	public void setStatusbarMode(boolean enable){
+		mIsStatusbarMode = enable;
+		if(mIsStatusbarMode){
+			UIUtils.isOrentationPortrait(mContext);
+			int statusbarHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
+			klilog.i("statusbarHeight = "+statusbarHeight);
+			setLocation(0, -getScreenHeight()/2 + statusbarHeight/2);
+		}
 	}
 
 	@Override
@@ -108,10 +123,24 @@ public class FloatIndicator extends FloatView{
 			width = mPref.getInt(Prefs.PREF_SCREEN_HEIGHT, 0);
 		}
 		return width;
+	}	
+	
+	private int getScreenHeight(){
+		int height = 0;
+		Configuration config = mContext.getResources().getConfiguration();
+		if(config.orientation == Configuration.ORIENTATION_PORTRAIT){
+			height = mPref.getInt(Prefs.PREF_SCREEN_HEIGHT, 0);
+		}else if(config.orientation ==Configuration.ORIENTATION_LANDSCAPE){
+			height = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
+		}
+		return height;
 	}
 
 	@Override
 	protected void setLocation(float x, float y) {
+		if(!isShow()){
+			return;
+		}
 		if(mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_AUTO_EDGE, true)){
 			x = x > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
 		}
@@ -139,6 +168,10 @@ public class FloatIndicator extends FloatView{
 	@Override
 	protected void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+		if(mIsStatusbarMode){
+			setStatusbarMode(mIsStatusbarMode);
+			return;
+		}
 		mScreenWidth = getScreenWidth();
 		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
 		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);

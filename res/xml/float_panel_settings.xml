@@ -41,6 +41,17 @@
             android:summaryOff="@string/setting_off"
             android:summaryOn="@string/setting_on"
             android:title="@string/setting_indicator_only_in_launcher" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_lock"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_lock" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_statusbar_mode"
+            android:summary="@string/setting_statusbar_mode_summary"
+            android:title="@string/setting_statusbar_mode" />
     </PreferenceCategory>
 
 </PreferenceScreen>

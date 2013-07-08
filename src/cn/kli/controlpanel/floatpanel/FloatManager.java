@@ -65,10 +65,8 @@ public class FloatManager implements ConfigurationListener{
 	public void onConfigurationChanged(Configuration newConfig) {
 		mIndicator.onConfigurationChanged(newConfig);
 	}
-	
-	public void updateIndicatorLocation(float x, float y){
-		if(mIndicator.isShow()){
-			mIndicator.setLocation(x, y);
-		}
+
+	public void updateIndicatorLocation(float x, float y) {
+		mIndicator.setLocation(x, y);
 	}
 }

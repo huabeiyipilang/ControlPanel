@@ -108,4 +108,7 @@
     <string name="setting_theme_area_title">标题栏</string>
     <string name="setting_theme_area_container">正文</string>
     <string name="notification_summary">点击打开快捷面板</string>
+    <string name="setting_indicator_lock">锁定位置</string>
+    <string name="setting_statusbar_mode">状态栏模式</string>
+    <string name="setting_statusbar_mode_summary">将指示器锁定在状态栏</string>
 </resources>

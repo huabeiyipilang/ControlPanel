@@ -17,6 +17,9 @@ public class Prefs {
 	public static final String PREF_INDICATOR_X= "indicator_x";
 	public static final String PREF_INDICATOR_Y = "indicator_y";
 	
+	//×´Ì¬À¸¸ß¶È
+	public static final String PREF_STATUSBAR_HEIGHT = "statusbar_height";
+	
 	private final static String SETTING_PREFS = "setting_prefs";
 	private static Prefs sInstance;
 	private SharedPreferences mPrefs;

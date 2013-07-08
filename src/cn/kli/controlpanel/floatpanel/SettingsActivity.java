@@ -2,6 +2,7 @@ package cn.kli.controlpanel.floatpanel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -26,6 +27,15 @@ public class SettingsActivity extends PreferenceActivity implements
 	public final static String KEY_PREF_INDICATOR_TYPES = "key_indicator_types";
 	public final static String KEY_PREF_INDICATOR_LAUNCHER_SWITCH = "key_indicator_only_launcher_switch";
 	public final static String KEY_PREF_INDICATOR_AUTO_EDGE = "key_indicator_auto_edge";
+	public final static String KEY_PREF_INDICATOR_LOCK = "key_indicator_lock";
+	public final static String KEY_PREF_INDICATOR_STATUSBAR_MODE = "key_indicator_statusbar_mode";
+	
+	private CheckBoxPreference mIndicatorSwitch;
+	private ListPreference mIndicatorTypes;
+	private CheckBoxPreference mIndicatorLauncherSwitch;
+	private CheckBoxPreference mIndicatorAutoEdge;
+	private CheckBoxPreference mIndicatorStatusbarMode;
+	private CheckBoxPreference mIndicatorLock;
 	
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -33,9 +43,19 @@ public class SettingsActivity extends PreferenceActivity implements
         addPreferencesFromResource(R.xml.float_panel_settings);
         PreferenceManager.getDefaultSharedPreferences(this)
         	.registerOnSharedPreferenceChangeListener(this);
+        initUI();
         findPreference(KEY_PREF_THEME).setOnPreferenceClickListener(this);
         updateNotification();
         updateIndicatorSettings();
+    }
+    
+    private void initUI(){
+    	mIndicatorSwitch = (CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_SWITCH);
+    	mIndicatorTypes = (ListPreference)findPreference(KEY_PREF_INDICATOR_TYPES);
+    	mIndicatorLauncherSwitch = (CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH);
+    	mIndicatorAutoEdge = (CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_AUTO_EDGE);
+    	mIndicatorStatusbarMode = (CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_STATUSBAR_MODE);
+    	mIndicatorLock = (CheckBoxPreference)findPreference(KEY_PREF_INDICATOR_LOCK);
     }
 
 	public boolean onPreferenceClick(Preference pref) {
@@ -59,23 +79,45 @@ public class SettingsActivity extends PreferenceActivity implements
 			updateIndicatorSettings();
 		}else if(key.equals(KEY_PREF_INDICATOR_AUTO_EDGE)){
 			updateIndicatorSettings();
+		}else if(key.equals(KEY_PREF_INDICATOR_STATUSBAR_MODE)){
+			updateIndicatorSettings();
+		}else if(key.equals(KEY_PREF_INDICATOR_LOCK)){
+			updateIndicatorSettings();
 		}
 	}
 	
 	private void updateIndicatorSettings(){
 		FloatManager manager = FloatManager.getInstance(this);
-		//浮动窗开关
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		//浮动窗开关
 		boolean enable = pref.getBoolean(KEY_PREF_INDICATOR_SWITCH, false);
 		
 		//浮动窗显示类型
-		findPreference(KEY_PREF_INDICATOR_TYPES).setEnabled(enable);
+		mIndicatorTypes.setEnabled(enable);
 		String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
 		manager.setIndicatorType(type);
-		((ListPreference)findPreference(KEY_PREF_INDICATOR_TYPES)).setSummary(((ListPreference)findPreference(KEY_PREF_INDICATOR_TYPES)).getEntry());
+		mIndicatorTypes.setSummary(mIndicatorTypes.getEntry());
+
+		//状态栏模式
+		mIndicatorStatusbarMode.setEnabled(enable);
+		boolean statusbarMode = pref.getBoolean(KEY_PREF_INDICATOR_STATUSBAR_MODE, false);
+		if(statusbarMode){
+			Editor editor = pref.edit();
+			editor.putBoolean(KEY_PREF_INDICATOR_LOCK, true);
+			editor.putBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false);
+			editor.putBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, false);
+			editor.commit();
+		}
+		manager.getIndicator().setStatusbarMode(statusbarMode);
+		
+		//锁定位置
+		mIndicatorLock.setEnabled(enable && !statusbarMode);
+		boolean lock = pref.getBoolean(KEY_PREF_INDICATOR_LOCK, false);
+		manager.getIndicator().lock(lock);
 		
 		//仅在桌面显示
-		findPreference(KEY_PREF_INDICATOR_LAUNCHER_SWITCH).setEnabled(enable);
+		mIndicatorLauncherSwitch.setEnabled(enable && !statusbarMode);
 		if(pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
 			FloatPanelService.startLauncherCheck(this);
 		}else{
@@ -83,11 +125,12 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 		
 		//边缘吸附
-		findPreference(KEY_PREF_INDICATOR_AUTO_EDGE).setEnabled(enable);
+		mIndicatorAutoEdge.setEnabled(enable && !statusbarMode);
 		if(pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true)){
 			int x = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0)/2;
 			manager.updateIndicatorLocation(x, manager.getIndicator().getPositionY());
 		}
+		
 		
 		//悬浮窗
 		if(enable){

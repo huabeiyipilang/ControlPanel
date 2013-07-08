@@ -2,14 +2,20 @@ package cn.kli.controlpanel;
 
 import java.util.List;
 
+import cn.kli.utils.UIUtils;
+import cn.kli.utils.klilog;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.content.SharedPreferences.Editor;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +37,20 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 		initUI();
+		initData();
 		translateToFragment(Config.getGroupList().get(0).cls
 				.getName());
+	}
+	
+	private void initData(){
+//		if(Prefs.getPrefs(this).getInt(Prefs.PREF_STATUSBAR_HEIGHT, -1) != -1){
+//			return;
+//		}
+		int statusbarHeight = UIUtils.getStatusHeight(this);
+		klilog.i("statusbarHeight:"+statusbarHeight);
+		Editor editor = Prefs.getPrefs(this).edit();
+		editor.putInt(Prefs.PREF_STATUSBAR_HEIGHT, statusbarHeight);
+		editor.commit();
 	}
 	
 	private void initUI() {
