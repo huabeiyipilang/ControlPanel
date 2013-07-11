@@ -59,9 +59,15 @@ public class FloatIndicator extends FloatView{
 	public FloatIndicator(Context context, WindowManager winManager) {
 		super(context, winManager);
 		mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		
+		//init type
 		String type = mPref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
 		setStrategy(type);
+		
+		//init view
 		mIndicatorDisplay = (TextView)mContentView.findViewById(R.id.tv_indicator);
+		
+		//init statusbar mode
 		mIsStatusbarMode = mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_STATUSBAR_MODE, false);
 		setStatusbarMode(mIsStatusbarMode);
 		mContentView.setOnClickListener(new OnClickListener(){
@@ -75,6 +81,10 @@ public class FloatIndicator extends FloatView{
 			}
 			
 		});
+		
+		//init lock
+		boolean lock = mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_LOCK, false);
+		lock(lock);
 	}
 	
 	public void setStatusbarMode(boolean enable){
@@ -95,14 +105,18 @@ public class FloatIndicator extends FloatView{
 	@Override
 	public void openPanel() {
 		super.openPanel();
-		mScreenWidth = getScreenWidth();
-		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
-		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
-		if(x == -1 && y == -1){
-			//设置初始位置
-			setLocation(mScreenWidth / 2, 0);
+		if(mIsStatusbarMode){
+			setStatusbarMode(mIsStatusbarMode);
 		}else{
-			setLocation(x, y);
+			mScreenWidth = getScreenWidth();
+			int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
+			int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
+			if(x == -1 && y == -1){
+				//设置初始位置
+				setLocation(mScreenWidth / 2, 0);
+			}else{
+				setLocation(x, y);
+			}
 		}
 		mHandler.removeMessages(MSG_FRESH);
 		mHandler.sendEmptyMessage(MSG_FRESH);
