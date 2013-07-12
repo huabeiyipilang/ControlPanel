@@ -13,6 +13,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Message;
@@ -94,7 +95,15 @@ public class FloatIndicator extends FloatView{
 			int statusbarHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
 			klilog.i("statusbarHeight = "+statusbarHeight);
 			setLocation(0, -getScreenHeight()/2 + statusbarHeight/2);
+			setBgColor(Color.TRANSPARENT);
+		}else{
+			setBgColor(mContext.getResources().getColor(R.color.translucent_background));
 		}
+	}
+	
+	private void setBgColor(int color){
+		View view = mContentView.findViewById(R.id.ll_indicator_container);
+		view.setBackgroundColor(color);
 	}
 
 	@Override

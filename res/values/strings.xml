@@ -9,6 +9,12 @@
     <string name="description_screen_brightness">屏幕亮度</string>
     <string name="description_screen_brightness_check">自动</string>
     
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    
+    <!-- launcher -->
+    <string name="create_icon_on_launcher">是否要在桌面创建快捷方式？</string>
+    
     <!--  settings -->
     <string name="setting_about">关于</string>
     <string name="setting_lockscreen">锁屏</string>

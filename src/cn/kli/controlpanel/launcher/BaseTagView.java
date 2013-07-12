@@ -37,4 +37,7 @@ public abstract class BaseTagView extends LinearLayout {
 	
 	public abstract void onClick();
 
+	protected void onLongClick(){
+		
+	}
 }

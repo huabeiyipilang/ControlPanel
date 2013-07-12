@@ -1,7 +1,5 @@
 package cn.kli.controlpanel.launcher;
 
-import cn.kli.controlpanel.Group;
-import cn.kli.controlpanel.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import cn.kli.controlpanel.Group;
+import cn.kli.controlpanel.R;
 
 public class TagGridView extends LinearLayout {
 	private Context mContext;
@@ -51,6 +52,16 @@ public class TagGridView extends LinearLayout {
 					int position, long id) {
 				position = 0;
 				((BaseTagView)view).onClick();
+			}
+			
+		});
+		mGridView.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View view,
+					int arg2, long arg3) {
+				((BaseTagView)view).onLongClick();
+				return true;
 			}
 			
 		});

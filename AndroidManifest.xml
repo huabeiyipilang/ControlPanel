@@ -94,11 +94,10 @@
 
         <activity
             android:name="OneKeyLockScreen"
-            android:exported="false"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
 
@@ -125,15 +124,18 @@
         </activity>
         <activity
             android:name="cn.kli.controlpanel.LightControlActivity"
-            android:exported="false"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
             android:name=".module.deviceinfo.DeviceInfoActivity"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
         </activity>
 
         <service
