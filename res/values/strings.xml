@@ -80,6 +80,9 @@
 	<string name="info_device_compile_time">编译日期</string>
 	<string name="info_device_version">版本号</string>
 	
+	<!-- 显示控制模块 -->
+	<string name="display">显示</string>
+	
 	<!-- 悬浮窗 -->
     <string name="module_float_panel">快捷面板</string>
     <string name="mobile_data">数据</string>

@@ -23,11 +23,19 @@ public class Config {
 		}
 		return null;
 	}
+	/*
+	 * <string name="action_wifi">android.settings.WIFI_SETTINGS</string>
+    <string name="action_bt">android.settings.BLUETOOTH_SETTINGS</string>
+    <string name="action_sound">android.settings.SOUND_SETTINGS</string>
+    <string name="action_app">android.settings.APPLICATION_SETTINGS</string>
+    <string name="action_date">android.settings.DATE_SETTINGS</string>
+	 */
 	
 	private static void initGroupList(){
 		if(sGroupList == null){
 			sGroupList = new ArrayList<Group>();
 
+			//*********************************************
 			//Control panel group
 			Group controlGroup = new Group();
 			controlGroup.name = R.string.group_control_panel;
@@ -39,7 +47,15 @@ public class Config {
 			deviceInfoModule.icon = R.drawable.light_on;
 			deviceInfoModule.cls = DeviceInfoActivity.class;
 			deviceInfoModule.setParentGroup(controlGroup);
+
+			//device info module
+			Module displayModule = new Module();
+			displayModule.name = R.string.display;
+			displayModule.icon = R.drawable.light_on;
+			displayModule.cls = DisplayControl.class;
+			displayModule.setParentGroup(controlGroup);
 			
+			//*********************************************
 			//Tools group
 			Group toolsGroup = new Group();
 			toolsGroup.name = R.string.group_tools;
@@ -62,11 +78,13 @@ public class Config {
 				loclScreenModule.setParentGroup(toolsGroup);
 			}
 
+			//*********************************************
 			//Settings group
 			Group settingsGroup = new Group();
 			settingsGroup.name = R.string.group_settings;
 			settingsGroup.cls = GroupSettingsFragment.class;
 
+			//*********************************************
 			//About group
 			Group aboutGroup = new Group();
 			aboutGroup.name = R.string.group_about;
