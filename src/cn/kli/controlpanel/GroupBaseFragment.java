@@ -1,7 +1,5 @@
 package cn.kli.controlpanel;
 
-import cn.kli.controlpanel.launcher.TagGridView;
-
 import com.actionbarsherlock.app.SherlockActivity;
 
 import android.os.Bundle;

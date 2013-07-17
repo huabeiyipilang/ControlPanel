@@ -2,31 +2,25 @@ package cn.kli.controlpanel;
 
 import java.util.List;
 
-import cn.kli.utils.UIUtils;
-import cn.kli.utils.klilog;
-
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.SharedPreferences.Editor;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.DisplayMetrics;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.kli.utils.UIUtils;
+import cn.kli.utils.klilog;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 public class ControlActivity extends SherlockActivity  implements OnClickListener, OnItemClickListener {
 	private ListView mMenuView;

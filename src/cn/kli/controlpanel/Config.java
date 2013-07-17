@@ -3,7 +3,15 @@ package cn.kli.controlpanel;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.controlpanel.floatpanel.FloatPanelLauncher;
+import cn.kli.controlpanel.module.devicecontrol.AppControl;
+import cn.kli.controlpanel.module.devicecontrol.BluetoothControl;
+import cn.kli.controlpanel.module.devicecontrol.DateControl;
+import cn.kli.controlpanel.module.devicecontrol.DisplayControl;
+import cn.kli.controlpanel.module.devicecontrol.SoundControl;
+import cn.kli.controlpanel.module.devicecontrol.WifiControl;
 import cn.kli.controlpanel.module.deviceinfo.DeviceInfoActivity;
+import cn.kli.controlpanel.module.t9search.T9MainActivity;
 
 import android.os.Build;
 
@@ -23,13 +31,6 @@ public class Config {
 		}
 		return null;
 	}
-	/*
-	 * <string name="action_wifi">android.settings.WIFI_SETTINGS</string>
-    <string name="action_bt">android.settings.BLUETOOTH_SETTINGS</string>
-    <string name="action_sound">android.settings.SOUND_SETTINGS</string>
-    <string name="action_app">android.settings.APPLICATION_SETTINGS</string>
-    <string name="action_date">android.settings.DATE_SETTINGS</string>
-	 */
 	
 	private static void initGroupList(){
 		if(sGroupList == null){
@@ -48,18 +49,67 @@ public class Config {
 			deviceInfoModule.cls = DeviceInfoActivity.class;
 			deviceInfoModule.setParentGroup(controlGroup);
 
-			//device info module
+			//display module
 			Module displayModule = new Module();
 			displayModule.name = R.string.display;
 			displayModule.icon = R.drawable.light_on;
 			displayModule.cls = DisplayControl.class;
 			displayModule.setParentGroup(controlGroup);
+
+			//app module
+			Module appModule = new Module();
+			appModule.name = R.string.display;
+			appModule.icon = R.drawable.light_on;
+			appModule.cls = AppControl.class;
+			appModule.setParentGroup(controlGroup);
+
+			//bt module
+			Module btModule = new Module();
+			btModule.name = R.string.display;
+			btModule.icon = R.drawable.light_on;
+			btModule.cls = BluetoothControl.class;
+			btModule.setParentGroup(controlGroup);
+
+			//date module
+			Module dateModule = new Module();
+			dateModule.name = R.string.display;
+			dateModule.icon = R.drawable.light_on;
+			dateModule.cls = DateControl.class;
+			dateModule.setParentGroup(controlGroup);
+
+			//sound module
+			Module soundModule = new Module();
+			soundModule.name = R.string.display;
+			soundModule.icon = R.drawable.light_on;
+			soundModule.cls = SoundControl.class;
+			soundModule.setParentGroup(controlGroup);
+
+			//wifi module
+			Module wifiModule = new Module();
+			wifiModule.name = R.string.display;
+			wifiModule.icon = R.drawable.light_on;
+			wifiModule.cls = WifiControl.class;
+			wifiModule.setParentGroup(controlGroup);
 			
 			//*********************************************
 			//Tools group
 			Group toolsGroup = new Group();
 			toolsGroup.name = R.string.group_tools;
 			toolsGroup.cls = GroupToolsFragment.class;
+
+			//float module
+			Module floatModule = new Module();
+			floatModule.name = R.string.module_float_panel;
+			floatModule.icon = R.drawable.float_launcher;
+			floatModule.cls = FloatPanelLauncher.class;
+			floatModule.setParentGroup(toolsGroup);
+
+			//t9 module
+			Module t9Module = new Module();
+			t9Module.name = R.string.quick_app_list;
+			t9Module.icon = R.drawable.t9_launcher;
+			t9Module.cls = T9MainActivity.class;
+			t9Module.setParentGroup(toolsGroup);
 			
 			//light module
 			Module lightModule = new Module();
@@ -90,7 +140,7 @@ public class Config {
 			aboutGroup.name = R.string.group_about;
 			aboutGroup.cls = GroupAboutFragment.class;
 			
-			sGroupList.add(controlGroup);
+//			sGroupList.add(controlGroup);
 			sGroupList.add(toolsGroup);
 			sGroupList.add(settingsGroup);
 			sGroupList.add(aboutGroup);

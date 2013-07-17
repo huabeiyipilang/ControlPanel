@@ -148,17 +148,62 @@
             android:label="@string/module_float_panel"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         
-        <activity android:name="DisplayControl"
-            android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
+        <activity android:name=".module.devicecontrol.DisplayControl">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
+        </activity>
+        <activity android:name=".module.devicecontrol.AppControl">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.devicecontrol.BluetoothControl">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.devicecontrol.DateControl">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.devicecontrol.SoundControl">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.devicecontrol.WifiControl">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="cn.kli.controlpanel.module.t9search.T9MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:icon="@drawable/t9_launcher" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="cn.kli.controlpanel.module.t9search.AppsReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="cn.kli.controlpanel.module.t9search.Settings" >
         </activity>
     </application>
 

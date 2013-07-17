@@ -4,15 +4,69 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <GridView
-        android:id="@+id/gridview"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:horizontalSpacing="15dp"
-        android:verticalSpacing="15dp"
-        android:cacheColorHint="@android:color/transparent"
-        android:numColumns="2" >
-    </GridView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+                </LinearLayout>
+
+                <cn.kli.controlpanel.launcher.DragGridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:horizontalSpacing="15dp"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="15dp" >
+                </cn.kli.controlpanel.launcher.DragGridView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_add_shortcut"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="@string/create_icon_on_launcher"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="invisible" />
+    </FrameLayout>
 
 </LinearLayout>

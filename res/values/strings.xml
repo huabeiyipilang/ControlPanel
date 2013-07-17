@@ -13,7 +13,7 @@
     <string name="no">否</string>
     
     <!-- launcher -->
-    <string name="create_icon_on_launcher">是否要在桌面创建快捷方式？</string>
+    <string name="create_icon_on_launcher">在桌面创建快捷方式</string>
     
     <!--  settings -->
     <string name="setting_about">关于</string>
@@ -44,7 +44,7 @@
 	<string name="group_control_panel">控制面板</string>
 	
 	<!-- Tools Group -->
-	<string name="group_tools">小工具</string>
+	<string name="group_tools">工具箱</string>
 	<string name="module_light">手电筒</string>
 	<string name="module_lock_screen">锁屏</string>
 	
@@ -120,4 +120,14 @@
     <string name="setting_indicator_lock">锁定位置</string>
     <string name="setting_statusbar_mode">状态栏模式</string>
     <string name="setting_statusbar_mode_summary">将指示器锁定在状态栏</string>
+    
+    <!-- T9 搜索模块  -->
+    <string name="quick_app_list">快捷抽屉</string>
+    <string name="one">1</string>
+    <string name="list_title_star">收藏(%s)</string>
+    <string name="list_title_result">结果(%s)</string>
+    <string name="no_star">没有收藏夹</string>
+    <string name="no_result">无匹配</string>
+    <string name="has_key_tone">开启按键音</string>
+    <string name="open_up">OPEN</string>
 </resources>
