@@ -5,6 +5,9 @@
 	<classpathentry exported="true" kind="lib" path="libs/android_api.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/Baidu_MobAds_SDK_3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="/actionbarsherlock/libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="libs/activation.jar"/>
+	<classpathentry kind="lib" path="libs/additionnal.jar"/>
+	<classpathentry kind="lib" path="libs/mail.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>

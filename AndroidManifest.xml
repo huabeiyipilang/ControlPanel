@@ -120,6 +120,7 @@
         <activity
             android:name="ControlActivity"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -205,6 +206,25 @@
 
         <activity android:name="cn.kli.controlpanel.module.t9search.Settings" >
         </activity>
+        
+        <activity android:name=".module.feedback.ComposeMessageActivity">
+            
+        </activity>
+        
+        <activity-alias
+            android:name="FeedbackActivity1"
+            android:targetActivity=".module.feedback.ComposeMessageActivity">
+        </activity-alias>
+        
+        <activity-alias
+            android:name="FeedbackActivity2"
+            android:targetActivity=".module.feedback.ComposeMessageActivity">
+        </activity-alias>
+        
+        <activity-alias
+            android:name="FeedbackActivity3"
+            android:targetActivity=".module.feedback.ComposeMessageActivity">
+        </activity-alias>
     </application>
 
 </manifest>

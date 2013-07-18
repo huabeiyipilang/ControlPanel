@@ -13,7 +13,7 @@
     <string name="no">否</string>
     
     <!-- launcher -->
-    <string name="create_icon_on_launcher">在桌面创建快捷方式</string>
+    <string name="create_icon_on_launcher">拖动至桌面</string>
     
     <!--  settings -->
     <string name="setting_about">关于</string>
@@ -130,4 +130,11 @@
     <string name="no_result">无匹配</string>
     <string name="has_key_tone">开启按键音</string>
     <string name="open_up">OPEN</string>
+    
+    <!-- 反馈模块  -->
+    <string name="module_feedback">反馈</string>
+    <string name="feedback1">投诉</string>
+    <string name="feedback2">建议</string>
+    <string name="feedback3">有话说</string>
+    <string name="thx_for_feedback">非常感谢您的反馈！</string>
 </resources>

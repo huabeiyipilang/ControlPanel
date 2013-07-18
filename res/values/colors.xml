@@ -2,4 +2,5 @@
 <resources>
     <color name="translucent_background_dark">#E0000000</color>
     <color name="translucent_background">#C0000000</color>
+    <color name="translucent_blue">#C0ABCDEF</color>
 </resources>

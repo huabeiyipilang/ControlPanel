@@ -9,6 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +25,6 @@ import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 public class TagGridView extends LinearLayout {
-	private Context mContext;
 	
 	//views
 	private DragGridView mGridView; 
@@ -30,14 +32,15 @@ public class TagGridView extends LinearLayout {
 	
 	private TagViewAdapter mAdapter;
 
+	private Animation mSlideInAnim;
+	private Animation mSlideOutAnim;
+
 	public TagGridView(Context context) {
 		super(context);
-		mContext = context;
 	}
 	
 	public TagGridView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		mContext = context;
 	}
 
 	public void setGroup(Group group){
@@ -47,10 +50,50 @@ public class TagGridView extends LinearLayout {
 	}
 
 	private void init(Group group) {
-		mAdapter = new TagViewAdapter(mContext, group);
-		LayoutInflater inflater = LayoutInflater.from(mContext);
+		mAdapter = new TagViewAdapter(getContext(), group);
+		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View root = inflater.inflate(R.layout.launcher_tag_gridview, this);
 		mAddShortcut = (TextView)findViewById(R.id.tv_add_shortcut);
+		mSlideInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_up);
+		mSlideInAnim.setAnimationListener(new AnimationListener(){
+
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				klilog.i("Animation end");
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation arg0) {
+				klilog.i("Animation start");
+				mAddShortcut.setVisibility(View.VISIBLE);
+			}
+			
+		});
+		
+		mSlideOutAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_down);
+		mSlideOutAnim.setAnimationListener(new AnimationListener(){
+
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				mAddShortcut.setVisibility(View.INVISIBLE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation arg0) {
+			}
+			
+		});
+		
 		mGridView = (DragGridView)root.findViewById(R.id.gridview);
 		mGridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		mGridView.setAdapter(mAdapter);
@@ -60,6 +103,7 @@ public class TagGridView extends LinearLayout {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				position = 0;
+				klilog.i("onItemClick");
 				((BaseTagView)view).onClick();
 			}
 			
@@ -75,12 +119,14 @@ public class TagGridView extends LinearLayout {
 			
 		});
 		mGridView.setDropListener(new DropListener());
+		
 	}
 	
 	private class DropListener implements DragGridView.DropListener{
 		private int dragViewHeight;
 		private Rect rect;
-		private Drawable bkg;
+		private Drawable bkg_black;
+		private Drawable bkg_blue;
 		
 		@Override
 		public void onItemExchange(int from, int to) {
@@ -91,15 +137,17 @@ public class TagGridView extends LinearLayout {
 
 		@Override
 		public void onDrag(View dragView) {
-			mAddShortcut.setVisibility(View.VISIBLE);
+			klilog.i("startAnimation");
+			mAddShortcut.startAnimation(mSlideInAnim);
 			dragViewHeight = dragView.getBottom() - dragView.getTop();
 			rect = new Rect(mAddShortcut.getLeft(), mAddShortcut.getTop(), mAddShortcut.getRight(), mAddShortcut.getBottom());
-			bkg = getContext().getResources().getDrawable(R.color.translucent_background);
+			bkg_black = getContext().getResources().getDrawable(R.color.translucent_background);
+			bkg_blue = getContext().getResources().getDrawable(R.color.translucent_blue);
 		}
 
 		@Override
 		public void onDrop(int item, int x, int y) {
-			mAddShortcut.setVisibility(View.INVISIBLE);
+			mAddShortcut.startAnimation(mSlideOutAnim);
 			if(isDragIn(x, y)){
 				Module module = (Module)mAdapter.getItem(item);
 				UIUtils.addShortcut(getContext(), new Intent(getContext(),module.cls), module.name, module.icon);
@@ -110,11 +158,11 @@ public class TagGridView extends LinearLayout {
 		@Override
 		public void onDragOver(int item, int x, int y) {
 			if(isDragIn(x, y)){
-				mAddShortcut.setBackground(bkg);
-				mAddShortcut.setTextColor(Color.WHITE);
+				mAddShortcut.setBackground(bkg_black);
+//				mAddShortcut.setTextColor(Color.WHITE);
 			}else{
-				mAddShortcut.setBackground(null);
-				mAddShortcut.setTextColor(Color.BLACK);
+				mAddShortcut.setBackground(bkg_blue);
+//				mAddShortcut.setTextColor(Color.BLACK);
 			}
 		}
 		

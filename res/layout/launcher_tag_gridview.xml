@@ -66,6 +66,7 @@
             android:gravity="center"
             android:text="@string/create_icon_on_launcher"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
             android:visibility="invisible" />
     </FrameLayout>
 

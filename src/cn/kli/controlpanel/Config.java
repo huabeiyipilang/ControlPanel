@@ -11,6 +11,7 @@ import cn.kli.controlpanel.module.devicecontrol.DisplayControl;
 import cn.kli.controlpanel.module.devicecontrol.SoundControl;
 import cn.kli.controlpanel.module.devicecontrol.WifiControl;
 import cn.kli.controlpanel.module.deviceinfo.DeviceInfoActivity;
+import cn.kli.controlpanel.module.feedback.ComposeMessageActivity;
 import cn.kli.controlpanel.module.t9search.T9MainActivity;
 
 import android.os.Build;
@@ -135,6 +136,33 @@ public class Config {
 			settingsGroup.cls = GroupSettingsFragment.class;
 
 			//*********************************************
+			//Feedback group
+			Group feedbackGroup = new Group();
+			feedbackGroup.name = R.string.module_feedback;
+			feedbackGroup.cls = GroupFeedbackFragment.class;
+
+			//feedback1 module
+			Module feedback1Module = new Module();
+			feedback1Module.name = R.string.feedback1;
+			feedback1Module.icon = R.drawable.light_on;
+			feedback1Module.cls = ComposeMessageActivity.class;
+			feedback1Module.setParentGroup(feedbackGroup);
+
+			//feedback2 module
+			Module feedback2Module = new Module();
+			feedback2Module.name = R.string.feedback2;
+			feedback2Module.icon = R.drawable.light_on;
+			feedback2Module.cls = ComposeMessageActivity.class;
+			feedback2Module.setParentGroup(feedbackGroup);
+
+			//feedback1 module
+			Module feedback3Module = new Module();
+			feedback3Module.name = R.string.feedback3;
+			feedback3Module.icon = R.drawable.light_on;
+			feedback3Module.cls = ComposeMessageActivity.class;
+			feedback3Module.setParentGroup(feedbackGroup);
+			
+			//*********************************************
 			//About group
 			Group aboutGroup = new Group();
 			aboutGroup.name = R.string.group_about;
@@ -143,6 +171,7 @@ public class Config {
 //			sGroupList.add(controlGroup);
 			sGroupList.add(toolsGroup);
 			sGroupList.add(settingsGroup);
+			sGroupList.add(feedbackGroup);
 			sGroupList.add(aboutGroup);
 		}
 	}

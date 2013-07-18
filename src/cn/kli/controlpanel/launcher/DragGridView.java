@@ -219,10 +219,10 @@ public class DragGridView extends GridView {
 	public void onDrag(){
 		// 如果mDragItem不为空的话这个if是肯定满足的
 		if ((mTempRect.left < mTouchX) && (mTouchX < mTempRect.right)) {
+			mDropListener.onDrag(mDragItem);
 			mCacheTouchView.setDrawingCacheEnabled(true);
 			mCacheTouchView.setVisibility(View.INVISIBLE);
 			Bitmap bitmap = Bitmap.createBitmap(mCacheTouchView.getDrawingCache());
-			mDropListener.onDrag(mDragItem);
 			startDragging(bitmap, mTouchX, mTouchY);
 		}
 	}

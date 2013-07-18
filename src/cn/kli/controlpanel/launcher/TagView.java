@@ -45,6 +45,7 @@ public class TagView extends BaseTagView {
 	
 	private void launchApp(Module module){
 		Intent intent = new Intent(getContext(), module.cls);
+		intent.putExtra("module_name", module.name);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getContext().startActivity(intent);
 	}
