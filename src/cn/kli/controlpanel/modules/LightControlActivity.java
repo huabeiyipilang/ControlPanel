@@ -1,7 +1,12 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.modules;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.R.drawable;
+import cn.kli.controlpanel.R.id;
+import cn.kli.controlpanel.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

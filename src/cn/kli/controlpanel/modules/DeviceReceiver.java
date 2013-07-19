@@ -1,5 +1,6 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.modules;
 
+import cn.kli.controlpanel.Prefs;
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;

@@ -1,8 +1,11 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.R.drawable;
+import cn.kli.controlpanel.R.string;
 import cn.kli.controlpanel.floatpanel.FloatPanelLauncher;
 import cn.kli.controlpanel.module.devicecontrol.AppControl;
 import cn.kli.controlpanel.module.devicecontrol.BluetoothControl;
@@ -13,6 +16,8 @@ import cn.kli.controlpanel.module.devicecontrol.WifiControl;
 import cn.kli.controlpanel.module.deviceinfo.DeviceInfoActivity;
 import cn.kli.controlpanel.module.feedback.ComposeMessageActivity;
 import cn.kli.controlpanel.module.t9search.T9MainActivity;
+import cn.kli.controlpanel.modules.LightControlActivity;
+import cn.kli.controlpanel.modules.OneKeyLockScreen;
 
 import android.os.Build;
 
@@ -144,21 +149,21 @@ public class Config {
 			//feedback1 module
 			Module feedback1Module = new Module();
 			feedback1Module.name = R.string.feedback1;
-			feedback1Module.icon = R.drawable.light_on;
+			feedback1Module.icon = R.drawable.ic_paper;
 			feedback1Module.cls = ComposeMessageActivity.class;
 			feedback1Module.setParentGroup(feedbackGroup);
 
 			//feedback2 module
 			Module feedback2Module = new Module();
 			feedback2Module.name = R.string.feedback2;
-			feedback2Module.icon = R.drawable.light_on;
+			feedback2Module.icon = R.drawable.ic_paper;
 			feedback2Module.cls = ComposeMessageActivity.class;
 			feedback2Module.setParentGroup(feedbackGroup);
 
 			//feedback1 module
 			Module feedback3Module = new Module();
 			feedback3Module.name = R.string.feedback3;
-			feedback3Module.icon = R.drawable.light_on;
+			feedback3Module.icon = R.drawable.ic_paper;
 			feedback3Module.cls = ComposeMessageActivity.class;
 			feedback3Module.setParentGroup(feedbackGroup);
 			

@@ -1,4 +1,4 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.launcher;
 
 import java.util.List;
 
@@ -16,6 +16,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.kli.controlpanel.Prefs;
+import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.R.id;
+import cn.kli.controlpanel.R.layout;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 

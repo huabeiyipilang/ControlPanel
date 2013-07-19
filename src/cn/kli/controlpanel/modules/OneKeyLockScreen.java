@@ -1,4 +1,8 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.modules;
+
+import cn.kli.controlpanel.Baidu;
+import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.R.string;
 
 import com.baidu.mobstat.StatService;
 

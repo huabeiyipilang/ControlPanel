@@ -6,4 +6,10 @@
     <string name="email_account_username">kkmlbw@163.com</string>
     <string name="email_account_password">love@2011</string>
     <bool name="email_account_auth">true</bool>
+    <string-array name="guide_tips">
+        <item>apple</item>
+        <item>bed</item>
+        <item>cat</item>
+        <item>dead</item>
+    </string-array>
 </resources>

@@ -1,4 +1,5 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.launcher;
+
 
 import com.actionbarsherlock.app.SherlockActivity;
 

@@ -6,8 +6,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import cn.kli.controlpanel.Group;
-import cn.kli.controlpanel.Module;
 
 public class TagViewAdapter extends BaseAdapter {
 	private Context mContext;

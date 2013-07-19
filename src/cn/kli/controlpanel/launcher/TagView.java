@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.View;
-import cn.kli.controlpanel.Module;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.UIUtils;
 

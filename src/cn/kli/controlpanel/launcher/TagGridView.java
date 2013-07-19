@@ -18,8 +18,6 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.LinearLayout;
-import cn.kli.controlpanel.Group;
-import cn.kli.controlpanel.Module;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;

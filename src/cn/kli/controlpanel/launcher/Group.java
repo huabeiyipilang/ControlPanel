@@ -1,7 +1,8 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Group {
 	public int name;

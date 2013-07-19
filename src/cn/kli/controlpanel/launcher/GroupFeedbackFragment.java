@@ -1,10 +1,9 @@
-package cn.kli.controlpanel;
+package cn.kli.controlpanel.launcher;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import cn.kli.controlpanel.launcher.TagGridView;
 
 public class GroupFeedbackFragment extends GroupBaseFragment{
 

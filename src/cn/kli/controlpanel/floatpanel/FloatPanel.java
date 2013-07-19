@@ -1,7 +1,7 @@
 package cn.kli.controlpanel.floatpanel;
 
-import cn.kli.controlpanel.ControlActivity;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.launcher.ControlActivity;
 import cn.kli.controlwidgets.ASwitch;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;

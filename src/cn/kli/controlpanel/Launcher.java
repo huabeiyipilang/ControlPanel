@@ -1,9 +1,6 @@
 package cn.kli.controlpanel;
 
-import cn.kli.controlpanel.floatpanel.FloatPanelLauncher;
-
-import com.baidu.mobstat.StatService;
-
+import cn.kli.controlpanel.launcher.ControlActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
