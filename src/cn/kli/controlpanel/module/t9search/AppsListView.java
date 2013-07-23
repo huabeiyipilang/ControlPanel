@@ -204,7 +204,6 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 		if(intent == null){
 			return;
 		}
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		try {
 			mContext.startActivity(intent);
 		} catch (Exception e) {
