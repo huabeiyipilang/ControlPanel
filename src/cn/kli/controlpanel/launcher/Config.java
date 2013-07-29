@@ -6,7 +6,6 @@ import java.util.List;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.R.drawable;
 import cn.kli.controlpanel.R.string;
-import cn.kli.controlpanel.floatpanel.FloatPanelLauncher;
 import cn.kli.controlpanel.module.devicecontrol.AppControl;
 import cn.kli.controlpanel.module.devicecontrol.BluetoothControl;
 import cn.kli.controlpanel.module.devicecontrol.DateControl;
@@ -15,6 +14,7 @@ import cn.kli.controlpanel.module.devicecontrol.SoundControl;
 import cn.kli.controlpanel.module.devicecontrol.WifiControl;
 import cn.kli.controlpanel.module.deviceinfo.DeviceInfoActivity;
 import cn.kli.controlpanel.module.feedback.ComposeMessageActivity;
+import cn.kli.controlpanel.module.floatpanel.FloatPanelLauncher;
 import cn.kli.controlpanel.module.t9search.T9MainActivity;
 import cn.kli.controlpanel.modules.LightControlActivity;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
@@ -118,11 +118,13 @@ public class Config {
 			t9Module.setParentGroup(toolsGroup);
 			
 			//light module
+			/*
 			Module lightModule = new Module();
 			lightModule.name = R.string.module_light;
 			lightModule.icon = R.drawable.light_on;
 			lightModule.cls = LightControlActivity.class;
 			lightModule.setParentGroup(toolsGroup);
+			*/
 
 			//lock screen module
 			//support above version 9

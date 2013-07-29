@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.LinearLayout;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.guide.TipsView;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
@@ -27,6 +28,7 @@ public class TagGridView extends LinearLayout {
 	//views
 	private DragGridView mGridView; 
 	private TextView mAddShortcut;
+	private TipsView mTips;
 	
 	private TagViewAdapter mAdapter;
 
@@ -46,12 +48,19 @@ public class TagGridView extends LinearLayout {
 			init(group);
 		}
 	}
+	
+	public void showTips(){
+		if(mTips != null){
+			mTips.setVisibility(View.VISIBLE);
+		}
+	}
 
 	private void init(Group group) {
 		mAdapter = new TagViewAdapter(getContext(), group);
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View root = inflater.inflate(R.layout.launcher_tag_gridview, this);
 		mAddShortcut = (TextView)findViewById(R.id.tv_add_shortcut);
+		mTips = (TipsView)findViewById(R.id.tv_tips);
 		mSlideInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_up);
 		mSlideInAnim.setAnimationListener(new AnimationListener(){
 

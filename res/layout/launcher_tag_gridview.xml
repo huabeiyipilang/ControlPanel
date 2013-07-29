@@ -19,7 +19,8 @@
                 <cn.kli.controlpanel.guide.TipsView
                     android:id="@+id/tv_tips"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout

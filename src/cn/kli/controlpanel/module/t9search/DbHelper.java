@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.utils.klilog;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;

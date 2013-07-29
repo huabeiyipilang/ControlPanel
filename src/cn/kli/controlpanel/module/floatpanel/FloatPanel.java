@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.floatpanel;
+package cn.kli.controlpanel.module.floatpanel;
 
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.launcher.ControlActivity;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.t9search.AppsManager.State;
+import cn.kli.utils.klilog;
 
 import android.content.Context;
 import android.content.Intent;

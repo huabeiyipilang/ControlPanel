@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/module_float_panel" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_notification"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_display_in_notification" />
+
+        <Preference
+            android:key="key_theme"
+            android:summary="@string/setting_theme_summary"
+            android:title="@string/setting_theme" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/setting_indicator" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_switch"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_display_indicator" />
+
+        <ListPreference
+            android:entries="@array/indicator_types"
+            android:entryValues="@array/indicator_type_values"
+            android:key="key_indicator_types"
+            android:title="@string/setting_indicator_type" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_auto_edge"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_auto_edge" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_only_launcher_switch"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_only_in_launcher" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_lock"
+            android:summaryOff="@string/setting_off"
+            android:summaryOn="@string/setting_on"
+            android:title="@string/setting_indicator_lock" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_indicator_statusbar_mode"
+            android:summary="@string/setting_statusbar_mode_summary"
+            android:title="@string/setting_statusbar_mode" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

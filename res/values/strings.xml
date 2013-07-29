@@ -9,6 +9,8 @@
     <string name="description_screen_brightness">屏幕亮度</string>
     <string name="description_screen_brightness_check">自动</string>
     
+    <!-- 通用 -->
+    <string name="commit">提交</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     

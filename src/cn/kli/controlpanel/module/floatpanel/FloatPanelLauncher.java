@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.floatpanel;
+package cn.kli.controlpanel.module.floatpanel;
 
 import android.app.Activity;
 import android.content.Intent;

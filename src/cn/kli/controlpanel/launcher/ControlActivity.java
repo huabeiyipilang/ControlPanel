@@ -2,6 +2,7 @@ package cn.kli.controlpanel.launcher;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -151,5 +152,12 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 			TextView title;
 		}
 	}
+
+	@Override
+	public void startActivity(Intent intent) {
+		super.startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+	}
+	
 	
 }

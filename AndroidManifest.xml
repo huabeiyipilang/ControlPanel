@@ -63,7 +63,7 @@
             android:value="ba428a14" />
 
         <activity
-            android:name=".floatpanel.SettingsActivity"
+            android:name="cn.kli.controlpanel.module.floatpanel.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -76,7 +76,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".floatpanel.ThemeSetting" >
+        <activity android:name="cn.kli.controlpanel.module.floatpanel.ThemeSetting" >
         </activity>
 
         <service
@@ -140,12 +140,12 @@
         </activity>
 
         <service
-            android:name=".floatpanel.FloatPanelService"
+            android:name="cn.kli.controlpanel.module.floatpanel.FloatPanelService"
             android:exported="false" >
         </service>
 
         <activity
-            android:name=".floatpanel.FloatPanelLauncher"
+            android:name="cn.kli.controlpanel.module.floatpanel.FloatPanelLauncher"
             android:label="@string/module_float_panel"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
@@ -207,7 +207,8 @@
         <activity android:name="cn.kli.controlpanel.module.t9search.Settings" >
         </activity>
         
-        <activity android:name=".module.feedback.ComposeMessageActivity">
+        <activity android:name=".module.feedback.ComposeMessageActivity"
+            android:windowSoftInputMode="adjustResize">
             
         </activity>
         

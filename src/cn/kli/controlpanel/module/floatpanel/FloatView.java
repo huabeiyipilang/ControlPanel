@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.floatpanel;
+package cn.kli.controlpanel.module.floatpanel;
 
 import cn.kli.utils.klilog;
 import android.content.Context;

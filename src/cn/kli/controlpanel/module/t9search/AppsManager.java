@@ -3,6 +3,8 @@ package cn.kli.controlpanel.module.t9search;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.kli.utils.klilog;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
