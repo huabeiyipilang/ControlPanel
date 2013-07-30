@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +15,18 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.guide.TipsView;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 public class TagGridView extends LinearLayout {
-	
+	private static final int MSG_MOVE_TO_BG = 1;
 	//views
 	private DragGridView mGridView; 
 	private TextView mAddShortcut;
@@ -34,6 +36,21 @@ public class TagGridView extends LinearLayout {
 
 	private Animation mSlideInAnim;
 	private Animation mSlideOutAnim;
+	
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch(msg.what){
+			case MSG_MOVE_TO_BG:
+				Context context = TagGridView.this.getContext();
+				((ControlActivity) context).moveTaskToBack(true);
+				break;
+			}
+		}
+		
+	};
 
 	public TagGridView(Context context) {
 		super(context);
@@ -159,6 +176,7 @@ public class TagGridView extends LinearLayout {
 				Module module = (Module)mAdapter.getItem(item);
 				UIUtils.addShortcut(getContext(), new Intent(getContext(),module.cls), module.name, module.icon);
 				Toast.makeText(getContext(), R.string.lockscreen_added_toast, Toast.LENGTH_SHORT).show();
+				mHandler.sendEmptyMessage(MSG_MOVE_TO_BG);
 			}
 		}
 
@@ -166,10 +184,8 @@ public class TagGridView extends LinearLayout {
 		public void onDragOver(int item, int x, int y) {
 			if(isDragIn(x, y)){
 				mAddShortcut.setBackground(bkg_black);
-//				mAddShortcut.setTextColor(Color.WHITE);
 			}else{
 				mAddShortcut.setBackground(bkg_blue);
-//				mAddShortcut.setTextColor(Color.BLACK);
 			}
 		}
 		
