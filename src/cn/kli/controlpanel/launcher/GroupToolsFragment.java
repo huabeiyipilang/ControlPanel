@@ -13,7 +13,6 @@ public class GroupToolsFragment extends GroupBaseFragment {
 			Bundle savedInstanceState) {
 		TagGridView root = new TagGridView(getActivity());
 		root.setGroup(Config.getGroupByClassName(this.getClass().getName()));
-		root.showTips();
 		return root;
 	}
 

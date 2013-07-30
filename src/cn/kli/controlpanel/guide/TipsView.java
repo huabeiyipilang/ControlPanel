@@ -1,26 +1,29 @@
 package cn.kli.controlpanel.guide;
 
-import cn.kli.controlpanel.R;
-import cn.kli.utils.klilog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.kli.controlpanel.Prefs;
+import cn.kli.controlpanel.R;
+import cn.kli.utils.klilog;
 
-public class TipsView extends LinearLayout {
+public class TipsView extends LinearLayout implements View.OnClickListener {
 	private final static int MSG_NEXT = 1;
 	private String[] mStrings = null;
 	private int index = 0;
 	private TextView mDisplay;
 	private String mCurrentTips;
+	private ImageView mClose;
 	private Animation mSlideInAnim;
 	private Animation mSlideOutAnim;
 	private Handler mHandler = new Handler(){
@@ -63,6 +66,8 @@ public class TipsView extends LinearLayout {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		inflater.inflate(R.layout.tips_view, this);
 		mDisplay = (TextView)findViewById(R.id.tv_tips_show);
+		mClose = (ImageView)findViewById(R.id.iv_tips_close);
+		mClose.setOnClickListener(this);
 		mStrings = getContext().getResources().getStringArray(R.array.guide_tips);
 		mSlideInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_up);
 		mSlideInAnim.setAnimationListener(new AnimationListener(){
@@ -103,6 +108,9 @@ public class TipsView extends LinearLayout {
 			}
 			
 		});
+		SharedPreferences prefs = Prefs.getPrefs(getContext());
+		boolean show = prefs.getBoolean(Prefs.PREF_GUIDE_SHOW, true);
+		this.setVisibility(show ? View.VISIBLE : View.GONE);
 	}
 	
 	public void start(){
@@ -123,6 +131,19 @@ public class TipsView extends LinearLayout {
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
 		stop();
+	}
+
+	@Override
+	public void onClick(View view) {
+		switch(view.getId()){
+		case R.id.iv_tips_close:
+			this.setVisibility(View.GONE);
+			SharedPreferences prefs = Prefs.getPrefs(getContext());
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putBoolean(Prefs.PREF_GUIDE_SHOW, false);
+			editor.commit();
+			break;
+		}
 	}
 	
 	

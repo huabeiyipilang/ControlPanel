@@ -14,8 +14,10 @@ public class Prefs {
 	public static final String PREF_SCREEN_HEIGHT = "screen_height";
 
 	//指示器位置记录
-	public static final String PREF_INDICATOR_X= "indicator_x";
+	public static final String PREF_INDICATOR_X = "indicator_x";
 	public static final String PREF_INDICATOR_Y = "indicator_y";
+	
+	public static final String PREF_GUIDE_SHOW = "guide_show";
 	
 	//状态栏高度
 	public static final String PREF_STATUSBAR_HEIGHT = "statusbar_height";
