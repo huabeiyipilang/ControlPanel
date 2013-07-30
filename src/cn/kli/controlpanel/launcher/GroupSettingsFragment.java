@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.module.floatpanel.SettingsActivity;
 
 public class GroupSettingsFragment extends GroupBaseFragment {
 	private ListView mListView;
@@ -43,6 +44,10 @@ public class GroupSettingsFragment extends GroupBaseFragment {
 			super();
 			SettingItem item = new SettingItemToggle(getActivity(), Prefs.PREF_GUIDE_SHOW, null);
 			item.setTitle(R.string.show_tips);
+			mItemList.add(item);
+			
+			item = new SettingItemEntry(getActivity(), SettingsActivity.class);
+			item.setTitle(R.string.module_float_panel);
 			mItemList.add(item);
 		}
 
