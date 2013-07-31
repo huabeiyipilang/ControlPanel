@@ -1,5 +1,7 @@
 package cn.kli.controlpanel.launcher;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,7 +28,7 @@ import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 public class TagGridView extends LinearLayout {
-	private static final int MSG_MOVE_TO_BG = 1;
+	private static final int MSG_SHOW_LAUNCHER = 1;
 	//views
 	private DragGridView mGridView; 
 	private TextView mAddShortcut;
@@ -42,9 +44,8 @@ public class TagGridView extends LinearLayout {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch(msg.what){
-			case MSG_MOVE_TO_BG:
-				Context context = TagGridView.this.getContext();
-				((ControlActivity) context).moveTaskToBack(true);
+			case MSG_SHOW_LAUNCHER:
+				//TODO:show launcher
 				break;
 			}
 		}
@@ -168,7 +169,7 @@ public class TagGridView extends LinearLayout {
 				Module module = (Module)mAdapter.getItem(item);
 				UIUtils.addShortcut(getContext(), new Intent(getContext(),module.cls), module.name, module.icon);
 				Toast.makeText(getContext(), R.string.lockscreen_added_toast, Toast.LENGTH_SHORT).show();
-				mHandler.sendEmptyMessage(MSG_MOVE_TO_BG);
+				mHandler.sendEmptyMessage(MSG_SHOW_LAUNCHER);
 			}
 		}
 

@@ -2,6 +2,7 @@ package cn.kli.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CollectionUtils {
 	
@@ -37,5 +38,17 @@ public class CollectionUtils {
 			}
 		}
 		return integerListToIntArray(newList);
+	}
+	
+	public static String[] randomSort(String[] array){
+		Random random = new Random();
+		String tmp;
+		for(int i = 0; i < array.length; i++){
+			int p = random.nextInt(array.length);
+			tmp = array[i];
+			array[i] = array[p];
+			array[p] = tmp;
+		}
+		return array;
 	}
 }

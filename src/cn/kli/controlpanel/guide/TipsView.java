@@ -1,5 +1,7 @@
 package cn.kli.controlpanel.guide;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -15,17 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
+import cn.kli.utils.CollectionUtils;
 import cn.kli.utils.klilog;
 
 public class TipsView extends LinearLayout implements View.OnClickListener {
 	private final static int MSG_NEXT = 1;
 	private String[] mStrings = null;
-	private int index = 0;
 	private TextView mDisplay;
 	private String mCurrentTips;
 	private ImageView mClose;
 	private Animation mSlideInAnim;
 	private Animation mSlideOutAnim;
+	private Random random = new Random();
+	private int index = 0;
 	private Handler mHandler = new Handler(){
 
 		@Override
@@ -37,7 +41,8 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 					if(index >= mStrings.length){
 						index = 0;
 					}
-					mCurrentTips = mStrings[index++];
+					mCurrentTips = mStrings[index];
+					index++;
 					klilog.i("show tips:"+mCurrentTips);
 					changeTipsWithAnim();
 					sendEmptyMessageDelayed(MSG_NEXT, 10000);
@@ -69,12 +74,14 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 		mClose = (ImageView)findViewById(R.id.iv_tips_close);
 		mClose.setOnClickListener(this);
 		mStrings = getContext().getResources().getStringArray(R.array.guide_tips);
+		mStrings = CollectionUtils.randomSort(mStrings);
 		mSlideInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_up);
 		mSlideInAnim.setAnimationListener(new AnimationListener(){
 
 			@Override
 			public void onAnimationEnd(Animation arg0) {
 				klilog.i("Animation end");
+				mDisplay.requestFocus();
 			}
 
 			@Override
@@ -114,10 +121,12 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 	}
 	
 	public void start(){
+		klilog.i("start tips");
 		mHandler.sendEmptyMessage(MSG_NEXT);
 	}
 	
 	public void stop(){
+		klilog.i("stop tips");
 		mHandler.removeMessages(MSG_NEXT);
 	}
 

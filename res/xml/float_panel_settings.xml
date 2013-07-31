@@ -17,7 +17,7 @@
     
     <PreferenceCategory android:title="@string/setting_indicator" >
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="key_indicator_switch"
             android:summaryOff="@string/setting_off"
             android:summaryOn="@string/setting_on"
@@ -27,16 +27,17 @@
             android:entries="@array/indicator_types"
             android:entryValues="@array/indicator_type_values"
             android:key="key_indicator_types"
-            android:title="@string/setting_indicator_type" />
+            android:title="@string/setting_indicator_type"
+            android:defaultValue="memoryused" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
             android:key="key_indicator_auto_edge"
             android:summaryOff="@string/setting_off"
             android:summaryOn="@string/setting_on"
+            android:defaultValue="true"
             android:title="@string/setting_indicator_auto_edge" />
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="key_indicator_only_launcher_switch"
             android:summaryOff="@string/setting_off"
             android:summaryOn="@string/setting_on"

@@ -6,10 +6,19 @@
     <string name="email_account_username">kkmlbw@163.com</string>
     <string name="email_account_password">love@2011</string>
     <bool name="email_account_auth">true</bool>
+    
     <string-array name="guide_tips">
-        <item>apple</item>
-        <item>bed</item>
-        <item>cat</item>
-        <item>dead</item>
+        <item>长按图标，可将小工具拖拽至桌面</item>
+        <item>指示器可显示当前网速、内存使用等</item>
+        <item>指示器的状态栏模式可在快捷面板设置中打开</item>
+        <item>快捷抽屉可瞬间找到并打开您想要的应用</item>
+        <item>点击指示器可打开快捷面板</item>
+        <item>如果您有宝贵的意见或者建议，可在反馈菜单中提出</item>
+        <item>使用锁屏功能前，请先激活设备管理权限</item>
+        <item>若无法卸载本应用，到设备管理器中，取消本应用的权限</item>
     </string-array>
+    
+    <bool name="def_indicator_enable">true</bool>
+    <bool name="def_indicator_launcher_only">true</bool>
+    <bool name="def_indicator_auto_edge">true</bool>
 </resources>

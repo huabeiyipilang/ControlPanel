@@ -48,16 +48,10 @@ public class UIUtils {
 				PackageManager.MATCH_DEFAULT_ONLY);  
 		for(ResolveInfo info : resolveInfo){  
 			homes.add(info.activityInfo.packageName);  
-			System.out.println(info.activityInfo.packageName);  
 		}  
 		
 		ActivityManager mActivityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);  
 		List<RunningTaskInfo> rti = mActivityManager.getRunningTasks(1);  
-		try {
-			klilog.i(rti.get(0).topActivity.getClassName()+" theme:"+packageManager.getActivityInfo(rti.get(0).topActivity, PackageManager.GET_ACTIVITIES).theme);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
 		return homes.contains(rti.get(0).topActivity.getPackageName());  
 	} 
 	

@@ -3,12 +3,16 @@ package cn.kli.controlpanel.module.floatpanel;
 import cn.kli.controlpanel.App;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.App.ConfigurationListener;
+import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.WindowManager;
+
 
 public class FloatManager implements ConfigurationListener{
 	private static FloatManager sInstance;
@@ -68,5 +72,20 @@ public class FloatManager implements ConfigurationListener{
 
 	public void updateIndicatorLocation(float x, float y) {
 		mIndicator.setLocation(x, y);
+	}
+	
+	public void loadDefaultConfig(){
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		String type = pref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
+		if(TextUtils.isEmpty(type)){
+			Editor editor = pref.edit();
+			editor.putBoolean(SettingsActivity.KEY_PREF_INDICATOR_SWITCH,
+					mContext.getResources().getBoolean(R.bool.def_indicator_enable));
+			editor.putBoolean(SettingsActivity.KEY_PREF_INDICATOR_LAUNCHER_SWITCH,
+					mContext.getResources().getBoolean(R.bool.def_indicator_launcher_only));
+			editor.putBoolean(SettingsActivity.KEY_PREF_INDICATOR_AUTO_EDGE,
+					mContext.getResources().getBoolean(R.bool.def_indicator_auto_edge));
+			editor.commit();
+		}
 	}
 }

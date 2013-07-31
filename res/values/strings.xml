@@ -99,12 +99,12 @@
     <string-array name="indicator_types">
         <item>内存使用率</item>
         <item>当前网速</item>
-        <item>自定义文字</item>
+        <!-- <item>自定义文字</item>  -->
     </string-array>
     <string-array name="indicator_type_values">
         <item>memoryused</item>
         <item>networkspeed</item>
-        <item>text</item>
+        <!-- <item>text</item>  -->
     </string-array>
     <string name="setting_indicator_auto_edge">边缘吸附</string>
     <string name="setting_theme">主题设置</string>

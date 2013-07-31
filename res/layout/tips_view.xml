@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:padding="2dp"
             android:background="@android:color/black"
             android:layout_marginRight="1dp" >
 
@@ -30,7 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+   				android:focusable="true"
+   				android:marqueeRepeatLimit="marquee_forever"
+   				android:focusableInTouchMode="true"/>
         </LinearLayout>
 
         <ImageView

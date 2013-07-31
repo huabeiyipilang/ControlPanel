@@ -61,12 +61,7 @@ public class FloatPanelService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-		if(pref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
-			FloatPanelService.startLauncherCheck(this);
-		}else{
-			FloatPanelService.stopLauncherCheck(this);
-		}
+		FloatManager.getInstance(this).loadDefaultConfig();
 	}
 
 
@@ -74,6 +69,7 @@ public class FloatPanelService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null){
 			int cmd = intent.getIntExtra(SERVICE_CMD, CMD_SHOW_INDICATOR);
+			klilog.i("start cmd:"+cmd);
 			Message msg = mHandler.obtainMessage(cmd);
 			msg.setData(intent.getExtras());
 			msg.sendToTarget();
@@ -85,11 +81,10 @@ public class FloatPanelService extends Service {
 	
 	private void checkHome() {
 		boolean isHome = UIUtils.isHome(this);
-		klilog.i("isHome:"+isHome);
 		if (isHome) {
-			mManager.showIndicator();
+			getFloatManager().showIndicator();
 		} else {
-			mManager.hideIndicator();
+			getFloatManager().hideIndicator();
 		}
 	}
 	
