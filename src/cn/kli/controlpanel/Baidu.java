@@ -14,4 +14,7 @@ public class Baidu {
 	public static final String SET_THEME = "Set theme: ";
 	
 	public static final String SETTINGS = "Settings";
+
+	public static final String EVENT_DRAG_TO_LAUNCHER = "Drag to launcher";
+	public static final String EVENT_ABOUT = "Open About";
 }

@@ -2,6 +2,8 @@ package cn.kli.controlpanel.module.t9search;
 
 import java.util.List;
 
+import com.baidu.mobstat.StatService;
+
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.t9search.AppsManager.State;
 import cn.kli.utils.klilog;
@@ -198,6 +200,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 	private void selectItem(AppItem item){
 		mAppsManager.onAppOpen(item);
 		Mediator.getInstance().keyboardClear();
+		StatService.onEvent(mContext, "t9 open app", item.name);
 		launchApp(item.intent);
 	}
 	

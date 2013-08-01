@@ -2,6 +2,8 @@ package cn.kli.controlpanel.launcher;
 
 import java.io.IOException;
 
+import com.baidu.mobstat.StatService;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.guide.TipsView;
 import cn.kli.utils.UIUtils;
@@ -168,6 +171,7 @@ public class TagGridView extends LinearLayout {
 			if(isDragIn(x, y)){
 				Module module = (Module)mAdapter.getItem(item);
 				UIUtils.addShortcut(getContext(), new Intent(getContext(),module.cls), module.name, module.icon);
+				StatService.onEvent(getContext(), Baidu.EVENT_DRAG_TO_LAUNCHER, getContext().getString(module.name));
 				Toast.makeText(getContext(), R.string.lockscreen_added_toast, Toast.LENGTH_SHORT).show();
 				mHandler.sendEmptyMessage(MSG_SHOW_LAUNCHER);
 			}

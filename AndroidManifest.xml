@@ -39,7 +39,7 @@
         android:name="App" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="baidu market" />
+            android:value="360 market" />
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="3c625eeff3" />  <!-- 3c625eeff3 -->

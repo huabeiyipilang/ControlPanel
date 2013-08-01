@@ -1,5 +1,7 @@
 package cn.kli.controlpanel.module.feedback;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -75,6 +77,7 @@ public class ComposeMessageActivity extends Activity implements OnClickListener 
 		msg.tag = mType;
 		msg.title = "version:"+version;
 		msg.content = editor.getText().toString();
+		StatService.onEvent(this, "feedback message", msg.content);
 		return msg;
 	}
 	

@@ -69,6 +69,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 	
 	public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
+		//TODO: reconstruct
 		if(key.equals(KEY_PREF_NOTIFICATION)){
 			updateNotification();
 		}else if(key.equals(KEY_PREF_INDICATOR_SWITCH)){
@@ -118,7 +119,8 @@ public class SettingsActivity extends PreferenceActivity implements
 		
 		//½öÔÚ×ÀÃæÏÔÊ¾
 		mIndicatorLauncherSwitch.setEnabled(enable && !statusbarMode);
-		if(pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false)){
+		boolean onlyLaucher = pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false);
+		if(onlyLaucher){
 			FloatPanelService.startLauncherCheck(this);
 		}else{
 			FloatPanelService.stopLauncherCheck(this);
@@ -126,11 +128,15 @@ public class SettingsActivity extends PreferenceActivity implements
 		
 		//±ßÔµÎü¸½
 		mIndicatorAutoEdge.setEnabled(enable && !statusbarMode);
-		if(pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true)){
+		boolean autoEdge = pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true);
+		if(autoEdge){
 			int x = pref.getInt(Prefs.PREF_SCREEN_WIDTH, 0)/2;
 			manager.updateIndicatorLocation(x, manager.getIndicator().getPositionY());
 		}
-		
+
+		StatService.onEvent(this, "indicator", "enable:"+enable+";type:"+type
+				+";sbmode:"+statusbarMode+";lock:"+lock+";onlyLauncher:"+onlyLaucher
+				+";autoEdge:"+autoEdge);
 		
 		//Ðü¸¡´°
 		if(enable){
