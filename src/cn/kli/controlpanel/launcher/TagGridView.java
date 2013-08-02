@@ -180,9 +180,9 @@ public class TagGridView extends LinearLayout {
 		@Override
 		public void onDragOver(int item, int x, int y) {
 			if(isDragIn(x, y)){
-				mAddShortcut.setBackground(bkg_black);
+				mAddShortcut.setBackgroundDrawable(bkg_black);
 			}else{
-				mAddShortcut.setBackground(bkg_blue);
+				mAddShortcut.setBackgroundDrawable(bkg_blue);
 			}
 		}
 		

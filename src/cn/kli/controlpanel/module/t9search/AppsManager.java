@@ -81,7 +81,7 @@ public class AppsManager {
 	}
 	
 	public void onAppInstalled(String pkg){
-		new BuildDataTask().execute(pkg);
+		new BuildDataTask().execute(mDbHelper.isTableEmpty() ? "" : pkg);
 	}
 	
 	public void onAppUninstalled(String pkg){

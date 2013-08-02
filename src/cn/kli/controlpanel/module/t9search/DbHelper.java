@@ -139,4 +139,12 @@ public class DbHelper extends SQLiteOpenHelper {
 			return null;
 		}
 	}
+	
+	public boolean isTableEmpty(){
+		SQLiteDatabase db = getWritableDatabase();
+		Cursor c = db.query(TABLE_APPS, null, null, null, null, null, null);
+		boolean res = c.getCount() <= 0;
+		c.close();
+		return res;
+	}
 }
