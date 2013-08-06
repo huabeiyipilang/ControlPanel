@@ -51,7 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 	}
 
-	public void addAppItems(List<AppItem> items){
+	synchronized public void addAppItems(List<AppItem> items){
 		SQLiteDatabase db = getWritableDatabase();
 		db.beginTransaction();
 		for(AppItem item : items){
@@ -103,14 +103,14 @@ public class DbHelper extends SQLiteOpenHelper {
 		return appList;
 	}
 	
-	public void removeByPackage(String pkg){
+	synchronized public void removeByPackage(String pkg){
 		SQLiteDatabase db = getWritableDatabase();
 		klilog.i("dbhelper remove package:"+pkg);
 		db.delete(TABLE_APPS, APPS_PACKAGE+"='"+pkg+"'", null);
 		db.close();
 	}
 	
-	public void appOpen(AppItem item){
+	synchronized public void appOpen(AppItem item){
 		SQLiteDatabase db = getWritableDatabase();
 		klilog.i("item count +1, intent:"+item.intent.toUri(0));
 		db.execSQL("update "+TABLE_APPS+" set "+APPS_COUNT+"="+APPS_COUNT+"+1 where "+APPS_INTENT+"="+item.intent.toUri(0));
@@ -140,7 +140,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-	public boolean isTableEmpty(){
+	synchronized public boolean isTableEmpty(){
 		SQLiteDatabase db = getWritableDatabase();
 		Cursor c = db.query(TABLE_APPS, null, null, null, null, null, null);
 		boolean res = c.getCount() <= 0;
