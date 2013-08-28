@@ -39,10 +39,10 @@
         android:name="App" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="dev" />
+            android:value="360 market" />
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
-            android:value="debug" />  <!-- 3c625eeff3 -->
+            android:value="3c625eeff3" />  <!-- 3c625eeff3 -->
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"
             android:value="true" />
