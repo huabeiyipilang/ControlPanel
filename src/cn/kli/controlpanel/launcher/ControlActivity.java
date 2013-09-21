@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -158,6 +159,18 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 		super.startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			if(!mDrawLayout.isDrawerOpen(mMenuView)){
+				mDrawLayout.openDrawer(mMenuView);
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	
 	
 }
