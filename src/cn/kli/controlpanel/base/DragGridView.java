@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.launcher;
+package cn.kli.controlpanel.base;
 
 import cn.kli.utils.klilog;
 import android.content.Context;
@@ -91,6 +91,8 @@ public class DragGridView extends GridView {
 	 */
 	private ListMoveHandler mListMoveHandler;
 	
+	private boolean mAutoMove = true;
+	
 	private View mCacheTouchView;
 	
 	private int mTouchX, mTouchY;
@@ -140,7 +142,7 @@ public class DragGridView extends GridView {
 				int x = (int) ev.getX();
 				int y = (int) ev.getY();
 
-				{
+				if(mAutoMove){
 					// 到最顶端了,设置往上滑动
 					if (y - mDragPointY < 0) {
 						// 使用handler来更新drag画面
@@ -172,6 +174,10 @@ public class DragGridView extends GridView {
 			return true;
 		}
 		return super.onTouchEvent(ev);
+	}
+	
+	public void setAutoMove(boolean auto){
+		mAutoMove = auto;
 	}
 
 	/**
