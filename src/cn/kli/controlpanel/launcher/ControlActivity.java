@@ -161,7 +161,7 @@ public class ControlActivity extends SherlockFragmentActivity  implements OnClic
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK){
+		if(keyCode == KeyEvent.KEYCODE_MENU){
 			if(!mDrawLayout.isDrawerOpen(mMenuView)){
 				mDrawLayout.openDrawer(mMenuView);
 				return true;
@@ -169,7 +169,15 @@ public class ControlActivity extends SherlockFragmentActivity  implements OnClic
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
+
+	/*
+	@Override
+	public void onBackPressed() {
+		if (!mDrawLayout.isDrawerOpen(mMenuView)) {
+			mDrawLayout.openDrawer(mMenuView);
+		}
+	}
+	*/
 	
 	
 }
