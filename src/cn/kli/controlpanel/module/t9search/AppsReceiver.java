@@ -15,13 +15,13 @@ public class AppsReceiver extends BroadcastReceiver {
 		if(Intent.ACTION_PACKAGE_ADDED.equals(action)){
 			String packageName = intent.getDataString().split(":")[1]; 
 			if(!context.getPackageName().equals(packageName)){
-				klilog.i("package add:"+packageName);
+				klilog.info("package add:"+packageName);
 				AppsManager.getInstance(context).onAppInstalled(packageName);
 			}
 		}else if(Intent.ACTION_PACKAGE_REMOVED.equals(action)){
 			String packageName = intent.getDataString().split(":")[1]; 
 			if(!context.getPackageName().equals(packageName)){
-				klilog.i("package remove:"+packageName);
+				klilog.info("package remove:"+packageName);
 				AppsManager.getInstance(context).onAppUninstalled(packageName);
 			}
 		}

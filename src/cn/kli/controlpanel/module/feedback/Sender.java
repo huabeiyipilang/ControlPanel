@@ -27,7 +27,7 @@ public abstract class Sender {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				klilog.i(msgToString(msg.what));
+				klilog.info(msgToString(msg.what));
 				switch(msg.what){
 				case MSG_SEND:
 					Message send_msg = obtainMessage(MSG_SENT);

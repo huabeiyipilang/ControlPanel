@@ -36,7 +36,7 @@ public class WidgetSwitchMobileNetwork extends ASwitch {
 
 	private int setNetWorkEnable(boolean enable) {
 		int res = DeviceUtils.setMobileDataEnabled(getContext(), enable);
-		klilog.i("switch mobile network to "+enable+", result:"+res);
+		klilog.info("switch mobile network to "+enable+", result:"+res);
 		return res;
 	}
 }

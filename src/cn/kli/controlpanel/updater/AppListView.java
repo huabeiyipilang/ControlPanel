@@ -303,7 +303,7 @@ public class AppListView extends LinearLayout {
         dwreq.setTitle(mContext.getString(R.string.download_title, info.updateInfo.app_name));
 
         String filename = url.substring(url.lastIndexOf("/") + 1);
-        klilog.i("download  file name = "+filename);
+        klilog.info("download  file name = "+filename);
         dwreq.setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
                 filename);

@@ -79,7 +79,7 @@ public class TagGridView extends LinearLayout {
 
 			@Override
 			public void onAnimationEnd(Animation arg0) {
-				klilog.i("Animation end");
+				klilog.info("Animation end");
 			}
 
 			@Override
@@ -89,7 +89,7 @@ public class TagGridView extends LinearLayout {
 
 			@Override
 			public void onAnimationStart(Animation arg0) {
-				klilog.i("Animation start");
+				klilog.info("Animation start");
 				mAddShortcut.setVisibility(View.VISIBLE);
 			}
 			
@@ -123,7 +123,7 @@ public class TagGridView extends LinearLayout {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				position = 0;
-				klilog.i("onItemClick");
+				klilog.info("onItemClick");
 				((BaseTagView)view).onClick();
 			}
 			
@@ -157,7 +157,7 @@ public class TagGridView extends LinearLayout {
 
 		@Override
 		public void onDrag(View dragView) {
-			klilog.i("startAnimation");
+			klilog.info("startAnimation");
 			mAddShortcut.startAnimation(mSlideInAnim);
 			dragViewHeight = dragView.getBottom() - dragView.getTop();
 			rect = new Rect(mAddShortcut.getLeft(), mAddShortcut.getTop(), mAddShortcut.getRight(), mAddShortcut.getBottom());
@@ -187,7 +187,7 @@ public class TagGridView extends LinearLayout {
 		}
 		
 		private boolean isDragIn(int x, int y){
-			klilog.i("rect:"+rect+", x:"+x+", y:"+y);
+			klilog.info("rect:"+rect+", x:"+x+", y:"+y);
 			return x > rect.left && x < rect.right && y + dragViewHeight/2 > rect.top;
 		}
 		

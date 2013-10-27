@@ -86,7 +86,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 
 			@Override
 			public void onAdClick(JSONObject arg0) {
-				klilog.i("onAdClick");
+				klilog.info("onAdClick");
 				adContainer.setVisibility(View.GONE);
 			}
 
@@ -99,17 +99,17 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 			@Override
 			public void onAdReady(AdView arg0) {
 				adContainer.setVisibility(View.VISIBLE);
-				klilog.i("onAdReady");
+				klilog.info("onAdReady");
 			}
 
 			@Override
 			public void onAdShow(JSONObject arg0) {
-				klilog.i("onAdShow");
+				klilog.info("onAdShow");
 			}
 
 			@Override
 			public void onAdSwitch() {
-				klilog.i("onAdSwitch");
+				klilog.info("onAdSwitch");
 			}
 
 			@Override
@@ -229,7 +229,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 	}
 	
 	private boolean save(){
-		klilog.i("save");
+		klilog.info("save");
 		SharedPreferences share = getSharedPreferences(SETTING_PREFERENCES, MODE_PRIVATE);
 		SharedPreferences.Editor editor = share.edit();
 		editor.putInt(THEME_HEADER_COLOR, mColorHeader);
@@ -244,7 +244,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 				+Color.red(color)+","
 				+Color.green(color)+","
 				+Color.blue(color);
-		klilog.i(log);
+		klilog.info(log);
 		return log;
 	}
 

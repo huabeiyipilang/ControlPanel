@@ -60,7 +60,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 	public boolean onPreferenceClick(Preference pref) {
 		String key = pref.getKey();
-		klilog.i("key = "+key);
+		klilog.info("key = "+key);
 		if(key.equals(KEY_PREF_THEME)){
 			startActivity(new Intent(this, ThemeSetting.class));
 			return true;
@@ -91,16 +91,16 @@ public class SettingsActivity extends PreferenceActivity implements
 		FloatManager manager = FloatManager.getInstance(this);
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		//¸¡¶¯´°¿ª¹Ø
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		boolean enable = pref.getBoolean(KEY_PREF_INDICATOR_SWITCH, false);
 		
-		//¸¡¶¯´°ÏÔÊ¾ÀàÐÍ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 		mIndicatorTypes.setEnabled(enable);
 		String type = pref.getString(KEY_PREF_INDICATOR_TYPES, null);
 		manager.setIndicatorType(type);
 		mIndicatorTypes.setSummary(mIndicatorTypes.getEntry());
 
-		//×´Ì¬À¸Ä£Ê½
+		//×´Ì¬ï¿½ï¿½Ä£Ê½
 		mIndicatorStatusbarMode.setEnabled(enable);
 		boolean statusbarMode = pref.getBoolean(KEY_PREF_INDICATOR_STATUSBAR_MODE, false);
 		if(statusbarMode){
@@ -112,12 +112,12 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 		manager.getIndicator().setStatusbarMode(statusbarMode);
 		
-		//Ëø¶¨Î»ÖÃ
+		//ï¿½ï¿½Î»ï¿½ï¿½
 		mIndicatorLock.setEnabled(enable && !statusbarMode);
 		boolean lock = pref.getBoolean(KEY_PREF_INDICATOR_LOCK, false);
 		manager.getIndicator().lock(lock);
 		
-		//½öÔÚ×ÀÃæÏÔÊ¾
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 		mIndicatorLauncherSwitch.setEnabled(enable && !statusbarMode);
 		boolean onlyLaucher = pref.getBoolean(KEY_PREF_INDICATOR_LAUNCHER_SWITCH, false);
 		if(onlyLaucher){
@@ -126,7 +126,7 @@ public class SettingsActivity extends PreferenceActivity implements
 			FloatPanelService.stopLauncherCheck(this);
 		}
 		
-		//±ßÔµÎü¸½
+		//ï¿½ï¿½Ôµï¿½ï¿½
 		mIndicatorAutoEdge.setEnabled(enable && !statusbarMode);
 		boolean autoEdge = pref.getBoolean(KEY_PREF_INDICATOR_AUTO_EDGE, true);
 		if(autoEdge){
@@ -138,7 +138,7 @@ public class SettingsActivity extends PreferenceActivity implements
 				+";sbmode:"+statusbarMode+";lock:"+lock+";onlyLauncher:"+onlyLaucher
 				+";autoEdge:"+autoEdge);
 		
-		//Ðü¸¡´°
+		//ï¿½ï¿½
 		if(enable){
 			manager.showIndicator();
 		}else{

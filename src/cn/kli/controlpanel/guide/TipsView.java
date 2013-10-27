@@ -43,7 +43,7 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 					}
 					mCurrentTips = mStrings[index];
 					index++;
-					klilog.i("show tips:"+mCurrentTips);
+					klilog.info("show tips:"+mCurrentTips);
 					changeTipsWithAnim();
 					sendEmptyMessageDelayed(MSG_NEXT, 10000);
 				}
@@ -80,7 +80,7 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 
 			@Override
 			public void onAnimationEnd(Animation arg0) {
-				klilog.i("Animation end");
+				klilog.info("Animation end");
 				mDisplay.requestFocus();
 			}
 
@@ -91,7 +91,7 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 
 			@Override
 			public void onAnimationStart(Animation arg0) {
-				klilog.i("Animation start");
+				klilog.info("Animation start");
 			}
 			
 		});
@@ -121,12 +121,12 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 	}
 	
 	public void start(){
-		klilog.i("start tips");
+		klilog.info("start tips");
 		mHandler.sendEmptyMessage(MSG_NEXT);
 	}
 	
 	public void stop(){
-		klilog.i("stop tips");
+		klilog.info("stop tips");
 		mHandler.removeMessages(MSG_NEXT);
 	}
 

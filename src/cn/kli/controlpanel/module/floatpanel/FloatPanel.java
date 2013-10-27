@@ -112,14 +112,14 @@ public class FloatPanel extends FloatView implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		klilog.i("switch item onclick: position = "+position);
+		klilog.info("switch item onclick: position = "+position);
 		((ASwitch)view).onClick();
 	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> arg0, View view, int position,
 			long id) {
-		klilog.i("switch item onlongclick: position = "+position);
+		klilog.info("switch item onlongclick: position = "+position);
 		return false;
 	}
 

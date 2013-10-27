@@ -1256,8 +1256,8 @@ public class HanziToPinyin {
                 sb.append(character);
             } else {
                 Token t = null;
-            	if(character == 'µØ'){
-            		t = getToken('µÛ');
+            	if(character == 'äº²'){
+            		t = getToken('ç§¦');
             	}else{
             		t = getToken(character);
             	}

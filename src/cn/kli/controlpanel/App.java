@@ -14,7 +14,7 @@ public class App extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		klilog.i("App onCreate");
+		klilog.info("App onCreate");
 	}
 
 	@Override

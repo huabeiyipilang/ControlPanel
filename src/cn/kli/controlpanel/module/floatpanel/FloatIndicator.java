@@ -95,7 +95,7 @@ public class FloatIndicator extends FloatView{
 		if(mIsStatusbarMode){
 			UIUtils.isOrentationPortrait(mContext);
 			int statusbarHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
-			klilog.i("statusbarHeight = "+statusbarHeight);
+			klilog.info("statusbarHeight = "+statusbarHeight);
 			setLocation(0, -getScreenHeight()/2 + statusbarHeight/2);
 			setBgColor(Color.TRANSPARENT);
 		}else{
@@ -123,7 +123,7 @@ public class FloatIndicator extends FloatView{
 			int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
 			int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
 			if(x == -1 && y == -1){
-				//ÉèÖÃ³õÊ¼Î»ÖÃ
+				//ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Î»ï¿½ï¿½
 				setLocation(mScreenWidth / 2, 0);
 			}else{
 				setLocation(x, y);
@@ -177,7 +177,7 @@ public class FloatIndicator extends FloatView{
 	}
 
 	public void setStrategy(String value){
-		klilog.i("switch indicator type:"+value);
+		klilog.info("switch indicator type:"+value);
 		if("memoryused".equals(value)){
 			mStrategy = new FreeMemoryStrategy();
 		}else if("networkspeed".equals(value)){

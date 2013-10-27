@@ -49,7 +49,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 
 		@Override
 		public void onStateChanged(State state) {
-			klilog.i("State changed:"+state);
+			klilog.info("State changed:"+state);
 			switch(state){
 			case IDLE:
 				mContainer.removeAllViews();
@@ -64,7 +64,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 
 		@Override
 		public void onProgressUpdate(int progress) {
-			klilog.i("Progress changed:"+progress);
+			klilog.info("Progress changed:"+progress);
 			Message msg = mHandler.obtainMessage(MSG_UPDATE_BUILD_PROGRESS);
 			msg.obj = progress;
 			msg.sendToTarget();

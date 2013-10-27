@@ -20,15 +20,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.R.id;
-import cn.kli.controlpanel.R.layout;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-public class ControlActivity extends SherlockActivity  implements OnClickListener, OnItemClickListener {
+public class ControlActivity extends SherlockFragmentActivity  implements OnClickListener, OnItemClickListener {
 	private ListView mMenuView;
 	private DrawerLayout mDrawLayout;
 	
@@ -47,7 +46,7 @@ public class ControlActivity extends SherlockActivity  implements OnClickListene
 //			return;
 //		}
 		int statusbarHeight = UIUtils.getStatusHeight(this);
-		klilog.i("statusbarHeight:"+statusbarHeight);
+		klilog.info("statusbarHeight:"+statusbarHeight);
 		Editor editor = Prefs.getPrefs(this).edit();
 		editor.putInt(Prefs.PREF_STATUSBAR_HEIGHT, statusbarHeight);
 		editor.commit();

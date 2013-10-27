@@ -153,7 +153,7 @@ public class AppsManager {
 				item.pkg = info.activityInfo.packageName;
 				item.key = translate.convert(item.name);
 				itemList.add(item);
-				klilog.i(item.name+"has been added");
+				klilog.info(item.name+"has been added");
 				publishProgress(i*80/length);
 				i++;
 			}
@@ -171,11 +171,6 @@ public class AppsManager {
 			super.onCancelled();
 		}
 
-		@Override
-		protected void onCancelled(Integer result) {
-			// TODO Auto-generated method stub
-			super.onCancelled(result);
-		}
 
 		@Override
 		protected void onPostExecute(Integer result) {
@@ -214,19 +209,19 @@ public class AppsManager {
 	}
 	
 	public static Bitmap drawableToBitmap(Drawable drawable) {  
-        // È¡ drawable µÄ³¤¿í  
+        // È¡ drawable ï¿½Ä³ï¿½ï¿½ï¿½  
         int w = drawable.getIntrinsicWidth();  
         int h = drawable.getIntrinsicHeight();  
   
-        // È¡ drawable µÄÑÕÉ«¸ñÊ½  
+        // È¡ drawable ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Ê½  
         Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888  
                 : Bitmap.Config.RGB_565;  
-        // ½¨Á¢¶ÔÓ¦ bitmap  
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ bitmap  
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);  
-        // ½¨Á¢¶ÔÓ¦ bitmap µÄ»­²¼  
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ bitmap ï¿½Ä»ï¿½ï¿½ï¿½  
         Canvas canvas = new Canvas(bitmap);  
         drawable.setBounds(0, 0, w, h);  
-        // °Ñ drawable ÄÚÈÝ»­µ½»­²¼ÖÐ  
+        // ï¿½ï¿½ drawable ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
         drawable.draw(canvas);  
         return bitmap;  
     } 

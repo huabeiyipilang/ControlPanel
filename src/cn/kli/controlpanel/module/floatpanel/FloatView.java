@@ -42,7 +42,7 @@ public abstract class FloatView {
 	}
 	
 	protected void lock(boolean enable){
-		klilog.i("lock enable:"+enable);
+		klilog.info("lock enable:"+enable);
 		isLock = enable;
 	}
 	
@@ -51,9 +51,9 @@ public abstract class FloatView {
 		if(dragView == null){
 			dragView = mContentView;
 		}
-		//´Ë´¦ÉèÖÃ¿ÕµÄOnClickListener£¬ÊÇÎªÁËÏû·ÑµôACTION_DOWNÊÂ¼þ£¬
-		//·ñÔòOnDragListenerÖÐACTION_DOWN·µ»ØfalseµÄ»°£¬ACTION_MOVEºÍACTION_UP
-		//¾Í²»»á±»´¥·¢£¬ÏÖÏó¾ÍÊÇÎÞ·¨ÍÏ¶¯¡£
+		//ï¿½Ë´ï¿½ï¿½ï¿½ï¿½Ã¿Õµï¿½OnClickListenerï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ñµï¿½ACTION_DOWNï¿½Â¼ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½OnDragListenerï¿½ï¿½ACTION_DOWNï¿½ï¿½ï¿½ï¿½falseï¿½Ä»ï¿½ï¿½ï¿½ACTION_MOVEï¿½ï¿½ACTION_UP
+		//ï¿½Í²ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
 		dragView.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
@@ -72,14 +72,14 @@ public abstract class FloatView {
 		public boolean onTouch(View view, MotionEvent event) {
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
-				//Î»ÒÆÆðµã
+				//Î»ï¿½ï¿½ï¿½ï¿½ï¿½
 				startX = event.getRawX();
 				startY = event.getRawY();
-				//FloatPanel³õÊ¼×ø±ê
+				//FloatPanelï¿½ï¿½Ê¼ï¿½ï¿½ï¿½
 				originX = mParams.x;
 				originY = mParams.y;
 				downTime = System.currentTimeMillis();
-				//´Ë´¦·µ»Øfalse£¬Èç¹ûACTION_UP·µ»ØfalseµÄ»°£¬¾Í¿ÉÒÔ´¥·¢onClick
+				//ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½falseï¿½ï¿½ï¿½ï¿½ï¿½ACTION_UPï¿½ï¿½ï¿½ï¿½falseï¿½Ä»ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½Ô´ï¿½ï¿½ï¿½onClick
 				return false;
 			case MotionEvent.ACTION_MOVE:
 				updateLocation(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
@@ -114,14 +114,14 @@ public abstract class FloatView {
 		if(isLock){
 			return;
 		}
-		//ÐÂ×ø±ê = Î»ÒÆ + ³õÊ¼×ø±ê
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ = Î»ï¿½ï¿½ + ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½
 		mParams.x = (int)x + originX;
 		mParams.y = (int)y + originY;
 		mWinManager.updateViewLayout(mContentView, mParams);
 	}
 	
 	private void initParams() {
-    	klilog.i("1initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
+    	klilog.info("1initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 
 		//init params
 		mParams = new WindowManager.LayoutParams();
@@ -135,9 +135,9 @@ public abstract class FloatView {
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.gravity = Gravity.CENTER;
 		
-		klilog.i("mFloatPanel.getWidth() = "+mContentView.getWidth());
-		klilog.i("mFloatPanel.getHeight() = "+mContentView.getHeight());
-    	klilog.i("2initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
+		klilog.info("mFloatPanel.getWidth() = "+mContentView.getWidth());
+		klilog.info("mFloatPanel.getHeight() = "+mContentView.getHeight());
+    	klilog.info("2initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 	}
 	
 	public int getPositionX(){

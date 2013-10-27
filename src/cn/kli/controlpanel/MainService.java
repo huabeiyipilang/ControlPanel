@@ -67,7 +67,7 @@ public class MainService extends Service{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		klilog.i("MainService onCreate(");
+		klilog.info("MainService onCreate(");
 	}
 	
 	@Override
@@ -102,10 +102,10 @@ public class MainService extends Service{
     	isNotifShow = inNotifOn;
     	if(inNotifOn){
     		showNotification();
-    		klilog.i("notification on");
+    		klilog.info("notification on");
     	}else{
     		cancelNotification();
-    		klilog.i("notification off");
+    		klilog.info("notification off");
     	}
     }
     

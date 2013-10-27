@@ -69,7 +69,7 @@ public class FloatPanelService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null){
 			int cmd = intent.getIntExtra(SERVICE_CMD, CMD_SHOW_INDICATOR);
-			klilog.i("start cmd:"+cmd);
+			klilog.info("start cmd:"+cmd);
 			Message msg = mHandler.obtainMessage(cmd);
 			msg.setData(intent.getExtras());
 			msg.sendToTarget();

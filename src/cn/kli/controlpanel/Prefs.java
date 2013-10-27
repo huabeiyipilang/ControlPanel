@@ -9,17 +9,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class Prefs {
-	//ÆÁÄ»¿í¸ß
+	//ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
 	public static final String PREF_SCREEN_WIDTH = "screen_width";
 	public static final String PREF_SCREEN_HEIGHT = "screen_height";
 
-	//Ö¸Ê¾Æ÷Î»ÖÃ¼ÇÂ¼
+	//Ö¸Ê¾ï¿½ï¿½Î»ï¿½Ã¼ï¿½Â¼
 	public static final String PREF_INDICATOR_X = "indicator_x";
 	public static final String PREF_INDICATOR_Y = "indicator_y";
 	
 	public static final String PREF_GUIDE_SHOW = "guide_show";
 	
-	//×´Ì¬À¸¸ß¶È
+	//×´Ì¬ï¿½ï¿½ï¿½ß¶ï¿½
 	public static final String PREF_STATUSBAR_HEIGHT = "statusbar_height";
 	
 	private final static String SETTING_PREFS = "setting_prefs";
@@ -58,7 +58,7 @@ public class Prefs {
 	
 	public void setDeviceAdminEnable(boolean enable){
 		StatService.onEvent(mContext, Baidu.EVENT_LOCK_SCREEN, Baidu.DEVICE_ADMIN+enable);
-		klilog.i("device admin changed  value = "+enable);
+		klilog.info("device admin changed  value = "+enable);
 		SharedPreferences.Editor editor = mPrefs.edit();
 		editor.putBoolean("device_admin_enable", enable);
 		editor.commit();

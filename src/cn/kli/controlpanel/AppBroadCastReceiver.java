@@ -15,7 +15,7 @@ public class AppBroadCastReceiver extends BroadcastReceiver {
 		if(TextUtils.isEmpty(action)){
 			return;
 		}else{
-			klilog.i("broadcast received action is "+action);
+			klilog.info("broadcast received action is "+action);
 		} 
 		
 		if(action.equals(Intent.ACTION_BOOT_COMPLETED)){

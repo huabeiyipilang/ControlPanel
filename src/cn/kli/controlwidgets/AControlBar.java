@@ -41,7 +41,7 @@ public abstract class AControlBar extends LinearLayout implements IWidget{
 	
 	protected void setBar(int max, int current){
 		mBar.setMax(max);
-		klilog.i("current = "+current);
+		klilog.info("current = "+current);
 		mBar.setProgress(current);
 	}
 	
@@ -54,7 +54,7 @@ public abstract class AControlBar extends LinearLayout implements IWidget{
 		
 		public void onProgressChanged(SeekBar seekBar, int progress,
 				boolean fromUser) {
-			klilog.i("onProgressChanged  fromUser = "+fromUser);
+			klilog.info("onProgressChanged  fromUser = "+fromUser);
 			if(fromUser && lastProgress != progress){
 				updateValue(progress);
 				lastProgress = progress;

@@ -105,14 +105,14 @@ public class DbHelper extends SQLiteOpenHelper {
 	
 	synchronized public void removeByPackage(String pkg){
 		SQLiteDatabase db = getWritableDatabase();
-		klilog.i("dbhelper remove package:"+pkg);
+		klilog.info("dbhelper remove package:"+pkg);
 		db.delete(TABLE_APPS, APPS_PACKAGE+"='"+pkg+"'", null);
 		db.close();
 	}
 	
 	synchronized public void appOpen(AppItem item){
 		SQLiteDatabase db = getWritableDatabase();
-		klilog.i("item count +1, intent:"+item.intent.toUri(0));
+		klilog.info("item count +1, intent:"+item.intent.toUri(0));
 		db.execSQL("update "+TABLE_APPS+" set "+APPS_COUNT+"="+APPS_COUNT+"+1 where "+APPS_INTENT+"="+item.intent.toUri(0));
 		db.close();
 	}
