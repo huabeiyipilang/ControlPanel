@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.DragGridView;
 import cn.kli.controlpanel.guide.TipsView;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
@@ -142,7 +143,7 @@ public class TagGridView extends LinearLayout {
 		
 	}
 	
-	private class DropListener implements DragGridView.DropListener{
+	public class DropListener implements DragGridView.DropListener{
 		private int dragViewHeight;
 		private Rect rect;
 		private Drawable bkg_black;

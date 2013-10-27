@@ -4,12 +4,19 @@ import java.util.List;
 
 import com.baidu.mobstat.StatService;
 
+import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.DragGridView;
+import cn.kli.controlpanel.launcher.Module;
+import cn.kli.controlpanel.launcher.TagGridView.DropListener;
 import cn.kli.controlpanel.module.t9search.AppsManager.State;
+import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -20,11 +27,13 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AppsListView extends LinearLayout implements OnItemClickListener, IDataList {
 	
@@ -32,7 +41,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 	private final static int MSG_UPDATE_BUILD_PROGRESS = 2;
 	
 	private Context mContext;
-	private AbsListView mListView;
+	private DragGridView mGridView;
 	private ViewGroup mContainer;
 	private AppsManager mAppsManager;
 	private PackagesAdapter mAdapter;
@@ -53,7 +62,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 			switch(state){
 			case IDLE:
 				mContainer.removeAllViews();
-				mContainer.addView(mListView);
+				mContainer.addView(mGridView);
 				updateQueryString(null);
 				break;
 			case BUILDING:
@@ -86,7 +95,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 			case MSG_UPDATE_ADAPTER:
 				List<AppItem> items = (List<AppItem>)msg.obj;
 				mAdapter = new PackagesAdapter(mContext, items);
-				((GridView)mListView).setAdapter(mAdapter);
+				((GridView)mGridView).setAdapter(mAdapter);
 				break;
 			case MSG_UPDATE_BUILD_PROGRESS:
 			}
@@ -114,8 +123,9 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 		mAppsManager = AppsManager.getInstance(mContext);
 		mAppsManager.listen(mDataChangeListener);
 		
-		mListView = new GridView(mContext);
-		mListView.setOnScrollListener(new OnScrollListener(){
+		mGridView = new DragGridView(mContext);
+		mGridView.setAutoMove(false);
+		mGridView.setOnScrollListener(new OnScrollListener(){
 
 			@Override
 			public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
@@ -130,17 +140,82 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 			}
 			
 		});
-		((GridView)mListView).setNumColumns(4);
-		mListView.setOnItemClickListener(this);
-		mListView.setSelector(R.drawable.app_icon_bg);
+		((GridView)mGridView).setNumColumns(4);
+		mGridView.setOnItemClickListener(this);
+		mGridView.setSelector(R.drawable.app_icon_bg);
+		mGridView.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View view,
+					int arg2, long arg3) {
+				((DragGridView) mGridView).onDrag();
+				return true;
+			}
+			
+		});
+		mGridView.setDropListener(new DropListener());
 
 		if(mAppsManager.hasBuilt()){
 			mContainer.removeAllViews();
-			mContainer.addView(mListView);
+			mContainer.addView(mGridView);
 			updateQueryString("");
 		}else{
 			mAppsManager.build();
 		}
+	}
+	
+	private class DropListener implements DragGridView.DropListener{
+		private int dragViewHeight;
+		private Rect rect;
+		private Drawable bkg_black;
+		private Drawable bkg_blue;
+
+		@Override
+		public void onDrag(View dragView) {
+			klilog.info("startAnimation");
+			//收键盘，出选项
+//			mAddShortcut.startAnimation(mSlideInAnim);
+//			dragViewHeight = dragView.getBottom() - dragView.getTop();
+//			rect = new Rect(mAddShortcut.getLeft(), mAddShortcut.getTop(), mAddShortcut.getRight(), mAddShortcut.getBottom());
+//			bkg_black = getContext().getResources().getDrawable(R.color.translucent_background);
+//			bkg_blue = getContext().getResources().getDrawable(R.color.translucent_blue);
+		}
+
+		@Override
+		public void onDrop(int item, int x, int y) {
+			mGridView.setEnabled(true);
+			/*
+			mAddShortcut.startAnimation(mSlideOutAnim);
+			if(isDragIn(x, y)){
+				Module module = (Module)mAdapter.getItem(item);
+				UIUtils.addShortcut(getContext(), new Intent(getContext(),module.cls), module.name, module.icon);
+				StatService.onEvent(getContext(), Baidu.EVENT_DRAG_TO_LAUNCHER, getContext().getString(module.name));
+				Toast.makeText(getContext(), R.string.lockscreen_added_toast, Toast.LENGTH_SHORT).show();
+				mHandler.sendEmptyMessage(MSG_SHOW_LAUNCHER);
+			}*/
+		}
+
+		@Override
+		public void onDragOver(int item, int x, int y) {
+			/*
+			if(isDragIn(x, y)){
+				mAddShortcut.setBackgroundDrawable(bkg_black);
+			}else{
+				mAddShortcut.setBackgroundDrawable(bkg_blue);
+			}*/
+		}
+		
+		private boolean isDragIn(int x, int y){
+			klilog.info("rect:"+rect+", x:"+x+", y:"+y);
+			return x > rect.left && x < rect.right && y + dragViewHeight/2 > rect.top;
+		}
+
+		@Override
+		public void onItemExchange(int from, int to) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	
 	private class PackagesAdapter extends ArrayAdapter<AppItem>{
