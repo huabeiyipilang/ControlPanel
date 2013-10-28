@@ -1,7 +1,6 @@
 package cn.kli.controlpanel.module.floatpanel;
 
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.launcher.ControlActivity;
 import cn.kli.controlwidgets.ASwitch;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;
@@ -90,12 +89,14 @@ public class FloatPanel extends FloatView implements OnClickListener,
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
+		/*
 		case R.id.title:
 			closePanel();
 			Intent titleIntent = new Intent(mContext, ControlActivity.class);
 			titleIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			mContext.startActivity(titleIntent);
 			break;
+			*/
 		case R.id.setting:
 			closePanel();
 			Intent settingIntent = new Intent(mContext, SettingsActivity.class);

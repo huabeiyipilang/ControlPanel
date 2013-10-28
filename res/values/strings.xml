@@ -17,8 +17,10 @@
     <!-- launcher -->
     <string name="create_icon_on_launcher">拖动至桌面</string>
     
+    <!-- about -->
+    <string name="module_about">关于</string>
+    
     <!--  settings -->
-    <string name="setting_about">关于</string>
     <string name="setting_lockscreen">锁屏</string>
     <string name="setting_add_lockscreen_icon">添加一键锁屏图标</string>
     <string name="setting_lockscreen_summary">在桌面创建一键锁屏快捷方式</string>
@@ -124,8 +126,8 @@
     <string name="setting_statusbar_mode">状态栏模式</string>
     <string name="setting_statusbar_mode_summary">将指示器锁定在状态栏</string>
     
-    <!-- T9 搜索模块  -->
-    <string name="quick_app_list">快捷抽屉</string>
+    <!-- appmanager模块  -->
+    <string name="module_app_manager">应用管理</string>
     <string name="one">1</string>
     <string name="list_title_star">收藏(%s)</string>
     <string name="list_title_result">结果(%s)</string>

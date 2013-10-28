@@ -16,12 +16,12 @@
             android:orientation="vertical" >
         </LinearLayout>
 
-        <cn.kli.controlpanel.module.t9search.T9KeyBoard
+        <cn.kli.controlpanel.module.AppManager.T9KeyBoard
             android:id="@+id/keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" >
-        </cn.kli.controlpanel.module.t9search.T9KeyBoard>
+        </cn.kli.controlpanel.module.AppManager.T9KeyBoard>
     </FrameLayout>
 
 </LinearLayout>

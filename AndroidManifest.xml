@@ -118,12 +118,6 @@
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
         <activity
-            android:name=".launcher.ControlActivity"
-            android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="cn.kli.controlpanel.modules.LightControlActivity"
             android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
             <intent-filter>
@@ -185,7 +179,7 @@
         </activity>
         
         <activity
-            android:name="cn.kli.controlpanel.module.t9search.T9MainActivity"
+            android:name="cn.kli.controlpanel.module.AppManager.T9MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
@@ -195,7 +189,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="cn.kli.controlpanel.module.t9search.AppsReceiver" >
+        <receiver android:name="cn.kli.controlpanel.module.AppManager.AppsReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED" />
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
@@ -204,7 +198,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="cn.kli.controlpanel.module.t9search.Settings" >
+        <activity android:name="cn.kli.controlpanel.module.AppManager.Settings" >
         </activity>
         
         <activity android:name=".module.feedback.ComposeMessageActivity"
@@ -226,6 +220,8 @@
             android:name="FeedbackActivity3"
             android:targetActivity=".module.feedback.ComposeMessageActivity">
         </activity-alias>
+        
+        <activity android:name="cn.kli.menuui.MenuUIActivity"></activity>
     </application>
 
 </manifest>

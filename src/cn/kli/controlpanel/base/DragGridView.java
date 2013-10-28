@@ -1,6 +1,6 @@
 package cn.kli.controlpanel.base;
 
-import cn.kli.utils.view.FloatView;
+import cn.kli.controlpanel.module.floatpanel.FloatView;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -97,10 +97,6 @@ public class DragGridView extends GridView {
 	
 	private int mTouchX, mTouchY;
 
-	private int mOriginX, mOriginY;
-	private int mViewX, mViewY;
-	private FloatView mFloatView;
-	
 	public DragGridView(Context context) {
 		super(context);
 		mListMoveHandler = new ListMoveHandler();
@@ -142,8 +138,6 @@ public class DragGridView extends GridView {
 				break;
 
 			case MotionEvent.ACTION_DOWN:
-				mOriginX = (int) ev.getRawX();
-				mOriginY = (int) ev.getRawY();
 			case MotionEvent.ACTION_MOVE:
 				int x = (int) ev.getX();
 				int y = (int) ev.getY();
@@ -203,10 +197,6 @@ public class DragGridView extends GridView {
 					break;
 				}
 				mCacheTouchView = getChildAt(itemnum - getFirstVisiblePosition());
-				
-
-				mViewX = mCacheTouchView.getLeft();
-				mViewY = mCacheTouchView.getTop();
 				
 				// 鼠标相对item原点的坐标
 				mDragPointY = mTouchY - mCacheTouchView.getTop();
@@ -306,10 +296,6 @@ public class DragGridView extends GridView {
 		if (mDragBitmap != null) {
 			mDragBitmap.recycle();
 			mDragBitmap = null;
-		}
-
-		if(mFloatView != null && mFloatView.isShow()){
-			mFloatView.hide();
 		}
 	}
 

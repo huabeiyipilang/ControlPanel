@@ -3,18 +3,38 @@ package cn.kli.controlpanel;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.kli.utils.klilog;
 import android.app.Application;
 import android.content.res.Configuration;
+import cn.kli.controlpanel.about.AboutFragment;
+import cn.kli.controlpanel.module.AppManager.AppManagerFragment;
+import cn.kli.menuui.Config;
+import cn.kli.menuui.Module;
 
 public class App extends Application {
 
 	private static List<ConfigurationListener> sConfigListenerList = new ArrayList<ConfigurationListener>();
 	
+	private Config mModuleConfig;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		klilog.info("App onCreate");
+		mModuleConfig = Config.getInstance();
+		initModules();
+	}
+	
+	private void initModules(){
+		//app manager module
+		Module appModule = new Module();
+		appModule.name = getString(R.string.module_app_manager);
+		appModule.cls = AppManagerFragment.class;
+		mModuleConfig.addModule(appModule);
+		
+		//about module
+		Module aboutModule = new Module();
+		aboutModule.name = getString(R.string.module_about);
+		aboutModule.cls = AboutFragment.class;
+		mModuleConfig.addModule(aboutModule);
 	}
 
 	@Override
