@@ -1,6 +1,6 @@
 package cn.kli.controlpanel.base;
 
-import cn.kli.utils.klilog;
+import cn.kli.utils.view.FloatView;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -96,6 +96,10 @@ public class DragGridView extends GridView {
 	private View mCacheTouchView;
 	
 	private int mTouchX, mTouchY;
+
+	private int mOriginX, mOriginY;
+	private int mViewX, mViewY;
+	private FloatView mFloatView;
 	
 	public DragGridView(Context context) {
 		super(context);
@@ -138,6 +142,8 @@ public class DragGridView extends GridView {
 				break;
 
 			case MotionEvent.ACTION_DOWN:
+				mOriginX = (int) ev.getRawX();
+				mOriginY = (int) ev.getRawY();
 			case MotionEvent.ACTION_MOVE:
 				int x = (int) ev.getX();
 				int y = (int) ev.getY();
@@ -197,6 +203,11 @@ public class DragGridView extends GridView {
 					break;
 				}
 				mCacheTouchView = getChildAt(itemnum - getFirstVisiblePosition());
+				
+
+				mViewX = mCacheTouchView.getLeft();
+				mViewY = mCacheTouchView.getTop();
+				
 				// 鼠标相对item原点的坐标
 				mDragPointY = mTouchY - mCacheTouchView.getTop();
 				mDragPointX = mTouchX - mCacheTouchView.getLeft();
@@ -280,6 +291,7 @@ public class DragGridView extends GridView {
 				.getSystemService("window");
 		mWindowManager.addView(v, mWindowParams);
 		mDragView = v;
+		
 	}
 
 	private void stopDragging() {
@@ -295,6 +307,10 @@ public class DragGridView extends GridView {
 			mDragBitmap.recycle();
 			mDragBitmap = null;
 		}
+
+		if(mFloatView != null && mFloatView.isShow()){
+			mFloatView.hide();
+		}
 	}
 
 	/**
@@ -308,6 +324,7 @@ public class DragGridView extends GridView {
 		mWindowParams.alpha = alpha;
 		mWindowParams.y = y - mDragPointY + mCoordOffsetY;
 		mWindowParams.x = x - mDragPointX + mCoordOffsetX;
+		
 		mWindowManager.updateViewLayout(mDragView, mWindowParams);
 	}
 
@@ -329,7 +346,7 @@ public class DragGridView extends GridView {
 	public void setDropListener(DropListener onDrop) {
 		mDropListener = onDrop;
 	}
-
+	
 	private class ListMoveHandler extends Handler {
 
 		private final int SCROLLDISTANCE = 20;

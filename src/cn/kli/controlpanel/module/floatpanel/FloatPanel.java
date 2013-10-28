@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
@@ -25,17 +26,14 @@ public class FloatPanel extends FloatView implements OnClickListener,
 
 	private Context mContext;
 
-	public FloatPanel(Context context, WindowManager winManager) {
-		super(context, winManager);
+	public FloatPanel(Context context) {
+		super(context);
+		View contentView = LayoutInflater.from(mContext).inflate(R.layout.control_panel, null);
+		this.setContentView(contentView);
 		mContext = context;
 		loadWidgets();
 		loadTheme();
 		loadEvent();
-	}
-
-	@Override
-	int onInflaterContentView() {
-		return R.layout.control_panel;
 	}
 	
 	protected int onInitDragView(){

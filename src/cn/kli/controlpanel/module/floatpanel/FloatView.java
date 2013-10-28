@@ -1,17 +1,15 @@
 package cn.kli.controlpanel.module.floatpanel;
 
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.View.OnTouchListener;
+import android.widget.LinearLayout;
+import cn.kli.utils.klilog;
 
-public abstract class FloatView {
+public class FloatView extends LinearLayout {
 	protected Context mContext;
 	protected View mContentView;
 	private WindowManager mWinManager;
@@ -19,14 +17,17 @@ public abstract class FloatView {
 	private boolean isPanelShow = false;
 	private boolean isLock = false;
 	
-	public FloatView(Context context, WindowManager winManager){
+	public FloatView(Context context){
+		super(context);
 		mContext = context;
-		mWinManager = winManager;
-		mContentView = LayoutInflater.from(mContext).inflate(onInflaterContentView(), null);
+		mWinManager =  (WindowManager) mContext.getSystemService("window");
 		onFloatPrepare();
 	}
 	
-	abstract int onInflaterContentView();
+	public void setContentView(View view){
+		mContentView = view;
+		this.addView(mContentView);
+	}
 	
 	protected int onInitDragView(){
 		return 0;
@@ -104,7 +105,7 @@ public abstract class FloatView {
 		setLocation((int)x + originX, (int)y + originY);
 	}
 	
-	protected void setLocation(float x, float y){
+	public void setLocation(float x, float y){
 		mParams.x = (int)x;
 		mParams.y = (int)y;
 		mWinManager.updateViewLayout(mContentView, mParams);
@@ -121,7 +122,6 @@ public abstract class FloatView {
 	}
 	
 	private void initParams() {
-    	klilog.info("1initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 
 		//init params
 		mParams = new WindowManager.LayoutParams();
@@ -134,10 +134,6 @@ public abstract class FloatView {
 		mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		mParams.gravity = Gravity.CENTER;
-		
-		klilog.info("mFloatPanel.getWidth() = "+mContentView.getWidth());
-		klilog.info("mFloatPanel.getHeight() = "+mContentView.getHeight());
-    	klilog.info("2initFloat() mFloatPanel.getHeight() = "+mContentView.getHeight());
 	}
 	
 	public int getPositionX(){

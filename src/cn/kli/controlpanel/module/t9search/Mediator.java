@@ -59,4 +59,8 @@ public class Mediator {
 	public void keyboardClear(){
 		mKeyBoard.clear();
 	}
+	
+	public T9KeyBoard getKeyBoard(){
+		return mKeyBoard;
+	}
 }

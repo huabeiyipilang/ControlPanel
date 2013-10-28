@@ -20,6 +20,7 @@ import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -59,8 +60,10 @@ public class FloatIndicator extends FloatView{
 		
 	};
 	
-	public FloatIndicator(Context context, WindowManager winManager) {
-		super(context, winManager);
+	public FloatIndicator(Context context) {
+		super(context);
+		View contentView = LayoutInflater.from(mContext).inflate(R.layout.float_indicator, null);
+		this.setContentView(contentView);
 		mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
 		
 		//init type
@@ -106,11 +109,6 @@ public class FloatIndicator extends FloatView{
 	private void setBgColor(int color){
 		View view = mContentView.findViewById(R.id.ll_indicator_container);
 		view.setBackgroundColor(color);
-	}
-
-	@Override
-	int onInflaterContentView() {
-		return R.layout.float_indicator;
 	}
 
 	@Override
@@ -162,7 +160,7 @@ public class FloatIndicator extends FloatView{
 	}
 
 	@Override
-	protected void setLocation(float x, float y) {
+	public void setLocation(float x, float y) {
 		if(!isShow()){
 			return;
 		}

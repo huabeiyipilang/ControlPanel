@@ -20,7 +20,6 @@ public class FloatManager implements ConfigurationListener{
 	private Context mContext;
 	private FloatPanel mFloatPanel;
 	private FloatIndicator mIndicator;
-	private WindowManager mWinManager;
 	
 	public static FloatManager getInstance(Context context){
 		if(sInstance == null){
@@ -31,9 +30,8 @@ public class FloatManager implements ConfigurationListener{
 	
 	private FloatManager(Context context){
 		mContext = context;
-		mWinManager = (WindowManager) mContext.getSystemService("window");
-		mIndicator = new FloatIndicator(context, mWinManager);
-		mFloatPanel = new FloatPanel(context, mWinManager);
+		mIndicator = new FloatIndicator(context);
+		mFloatPanel = new FloatPanel(context);
 		App.registerConfigListener(this);
 	}
 	
