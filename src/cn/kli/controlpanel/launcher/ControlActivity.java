@@ -26,9 +26,10 @@ import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-public class ControlActivity extends SherlockActivity  implements OnClickListener, OnItemClickListener {
+public class ControlActivity extends SherlockFragmentActivity  implements OnClickListener, OnItemClickListener {
 	private ListView mMenuView;
 	private DrawerLayout mDrawLayout;
 	
