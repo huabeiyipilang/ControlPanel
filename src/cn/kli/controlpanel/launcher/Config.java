@@ -135,6 +135,12 @@ public class Config {
 				loclScreenModule.cls = OneKeyLockScreen.class;
 				loclScreenModule.setParentGroup(toolsGroup);
 			}
+			
+			//*********************************************
+			//ad
+			Group adGroup = new Group();
+			adGroup.name = R.string.app_recommend;
+			adGroup.cls = Object.class;
 
 			//*********************************************
 			//Settings group
@@ -177,6 +183,7 @@ public class Config {
 			
 //			sGroupList.add(controlGroup);
 			sGroupList.add(toolsGroup);
+			sGroupList.add(adGroup);
 			sGroupList.add(settingsGroup);
 			sGroupList.add(feedbackGroup);
 			sGroupList.add(aboutGroup);

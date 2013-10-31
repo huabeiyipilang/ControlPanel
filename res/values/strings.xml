@@ -140,4 +140,7 @@
     <string name="feedback2">建议</string>
     <string name="feedback3">有话说</string>
     <string name="thx_for_feedback">非常感谢您的反馈！</string>
+    
+    <!-- 广告 应用推荐 -->
+    <string name="app_recommend">推荐</string>
 </resources>

@@ -228,7 +228,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 	@Override
 	public void selectTheFirst() {
 
-		if(mAdapter != null){
+		if(mAdapter != null && mAdapter.items.size() > 0){
 			AppItem item = mAdapter.items.get(0);
 			selectItem(item);
 		}

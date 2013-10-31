@@ -18,16 +18,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.R.id;
-import cn.kli.controlpanel.R.layout;
 import cn.kli.utils.UIUtils;
 import cn.kli.utils.klilog;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.baidu.mobads.appoffers.OffersManager;
+import com.baidu.mobstat.StatService;
 
 public class ControlActivity extends SherlockFragmentActivity  implements OnClickListener, OnItemClickListener {
 	private ListView mMenuView;
@@ -104,6 +104,11 @@ public class ControlActivity extends SherlockFragmentActivity  implements OnClic
 	}
 
 	private void translateToFragment(final String to) {
+		if(Object.class.getName().equals(to)){
+			StatService.onEvent(this, Baidu.EVENT_OPEN_ADS_WALL, "");
+			OffersManager.showOffers(this);
+			return;
+		}
 		new Thread(){
 			@Override
 			public void run() {
