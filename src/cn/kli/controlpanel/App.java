@@ -30,6 +30,11 @@ public class App extends Application {
 		appModule.cls = AppManagerFragment.class;
 		mModuleConfig.addModule(appModule);
 		
+		Module adsModule = new Module();
+		adsModule.name = getString(R.string.app_recommend);
+		adsModule.cls = Object.class;
+		mModuleConfig.addModule(adsModule);
+		
 		//about module
 		Module aboutModule = new Module();
 		aboutModule.name = getString(R.string.module_about);

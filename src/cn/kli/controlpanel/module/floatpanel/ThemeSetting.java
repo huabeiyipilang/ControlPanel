@@ -18,8 +18,8 @@ import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 
-import com.baidu.mobads.AdView;
-import com.baidu.mobads.AdViewListener;
+//import com.baidu.mobads.AdView;
+//import com.baidu.mobads.AdViewListener;
 import com.baidu.mobstat.StatService;
 
 public class ThemeSetting extends Activity implements OnSeekBarChangeListener, OnClickListener{
@@ -81,6 +81,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 		
 		//init ad view
 		final LinearLayout adContainer = (LinearLayout)findViewById(R.id.ad_container);
+		/*
 		AdView adView = (AdView)findViewById(R.id.ad_view);
 		adView.setListener(new AdViewListener(){
 
@@ -124,7 +125,7 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 				
 			}
 			
-		});
+		});*/
 	}
 	
 	
