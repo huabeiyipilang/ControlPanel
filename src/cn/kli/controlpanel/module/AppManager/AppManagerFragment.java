@@ -26,7 +26,7 @@ public class AppManagerFragment extends BaseFragment implements TextWatcher, IVi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View root = inflater.inflate(R.layout.t9_main, null);
+		View root = inflater.inflate(R.layout.fragment_app_manager, null);
 		//views
 		mListContainer = (ViewGroup)root.findViewById(R.id.list_container);
 		input = (DigitsEditText)root.findViewById(R.id.input);

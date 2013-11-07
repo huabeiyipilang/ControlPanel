@@ -27,7 +27,7 @@ public class T9MainActivity extends Activity implements TextWatcher, IViewsConta
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.t9_main);
+		setContentView(R.layout.fragment_app_manager);
 		//views
 		mListContainer = (ViewGroup)findViewById(R.id.list_container);
 		input = (DigitsEditText)findViewById(R.id.input);

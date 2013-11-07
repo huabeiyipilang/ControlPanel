@@ -135,6 +135,7 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 			
 		});
 		((GridView)mGridView).setNumColumns(4);
+		mGridView.setDragViewId(R.id.p_icon);
 		mGridView.setOnItemClickListener(this);
 		mGridView.setSelector(R.drawable.app_icon_bg);
 		mGridView.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -166,8 +167,6 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 
 		@Override
 		public void onDrag(View dragView) {
-			klilog.info("startAnimation");
-			Mediator.getInstance().getKeyBoard().setVisibility(View.GONE);
 			//收键盘，出选项
 //			mAddShortcut.startAnimation(mSlideInAnim);
 //			dragViewHeight = dragView.getBottom() - dragView.getTop();
@@ -179,7 +178,6 @@ public class AppsListView extends LinearLayout implements OnItemClickListener, I
 		@Override
 		public void onDrop(int item, int x, int y) {
 			mGridView.setEnabled(true);
-			Mediator.getInstance().getKeyBoard().setVisibility(View.VISIBLE);
 			/*
 			mAddShortcut.startAnimation(mSlideOutAnim);
 			if(isDragIn(x, y)){

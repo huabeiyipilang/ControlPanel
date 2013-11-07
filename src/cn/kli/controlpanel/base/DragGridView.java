@@ -1,6 +1,7 @@
 package cn.kli.controlpanel.base;
 
 import cn.kli.controlpanel.module.floatpanel.FloatView;
+import cn.kli.utils.klilog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -94,6 +95,7 @@ public class DragGridView extends GridView {
 	private boolean mAutoMove = true;
 	
 	private View mCacheTouchView;
+	private int mDragViewId;
 	
 	private int mTouchX, mTouchY;
 
@@ -176,8 +178,26 @@ public class DragGridView extends GridView {
 		return super.onTouchEvent(ev);
 	}
 	
+	/**
+	 * 拖拽的时候，拖到底部或者上部是否自动滚动
+	 * @Title: setAutoMove
+	 * @param auto
+	 * @return void
+	 * @date 2013-11-7 下午10:40:34
+	 */
 	public void setAutoMove(boolean auto){
 		mAutoMove = auto;
+	}
+	
+	/**
+	 * 拖拽的时候，显示view的id，改view需要在item中，若找不到，则默认是整个item。
+	 * @Title: setDragViewId
+	 * @param id
+	 * @return void
+	 * @date 2013-11-7 下午10:41:15
+	 */
+	public void setDragViewId(int id){
+		mDragViewId = id;
 	}
 
 	/**
@@ -196,7 +216,10 @@ public class DragGridView extends GridView {
 				if (itemnum == AdapterView.INVALID_POSITION) {
 					break;
 				}
-				mCacheTouchView = getChildAt(itemnum - getFirstVisiblePosition());
+				mCacheTouchView = getChildAt(itemnum - getFirstVisiblePosition()).findViewById(mDragViewId);
+				if(mCacheTouchView == null){
+				    mCacheTouchView = getChildAt(itemnum - getFirstVisiblePosition());
+				}
 				
 				// 鼠标相对item原点的坐标
 				mDragPointY = mTouchY - mCacheTouchView.getTop();
@@ -229,9 +252,17 @@ public class DragGridView extends GridView {
 			mDropListener.onDrag(mDragItem);
 			mCacheTouchView.setDrawingCacheEnabled(true);
 			mCacheTouchView.setVisibility(View.INVISIBLE);
-			Bitmap bitmap = Bitmap.createBitmap(mCacheTouchView.getDrawingCache());
+			Bitmap bitmap = getDragViewBitmap(mCacheTouchView);
 			startDragging(bitmap, mTouchX, mTouchY);
 		}
+	}
+	
+	private Bitmap getDragViewBitmap(View view){
+	    View dragView = view.findViewById(mDragViewId);
+        if(dragView == null){
+            dragView = view;
+        }
+        return Bitmap.createBitmap(dragView.getDrawingCache());
 	}
 	
 	private void onItemExchange(int x, int y) {
