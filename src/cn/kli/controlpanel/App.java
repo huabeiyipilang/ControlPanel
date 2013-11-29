@@ -7,8 +7,10 @@ import android.app.Application;
 import android.content.res.Configuration;
 import cn.kli.controlpanel.about.AboutFragment;
 import cn.kli.controlpanel.module.AppManager.AppManagerFragment;
+import cn.kli.controlpanel.module.quickpanel.QuickPanelManager;
 import cn.kli.menuui.Config;
 import cn.kli.menuui.Module;
+import cn.kli.utils.KliUtils;
 
 public class App extends Application {
 
@@ -16,11 +18,18 @@ public class App extends Application {
 	
 	private Config mModuleConfig;
 	
+	private QuickPanelManager mQuickPanelManager;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
+        KliUtils.init(this);
 		mModuleConfig = Config.getInstance();
 		initModules();
+		
+		mQuickPanelManager = QuickPanelManager.getInstance(this);
+		mQuickPanelManager.showQuickPanel();
+		
 	}
 	
 	private void initModules(){
