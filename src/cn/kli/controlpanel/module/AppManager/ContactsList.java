@@ -7,9 +7,6 @@ package cn.kli.controlpanel.module.AppManager;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.module.AppManager.ContactsCache.ContactItem;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.CharArrayBuffer;
@@ -33,6 +30,8 @@ import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.module.AppManager.ContactsCache.ContactItem;
 
 
 public class ContactsList extends LinearLayout implements IDataList, OnItemClickListener{

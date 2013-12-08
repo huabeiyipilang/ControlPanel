@@ -1,21 +1,17 @@
 package cn.kli.controlpanel.module.AppManager;
 
-import com.baidu.mobstat.StatService;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.AppManager.IDataList.OnItemSelectListener;
 import cn.kli.controlpanel.module.AppManager.SearchManager.SearchMode;
+
+import com.baidu.mobstat.StatService;
 
 public class T9MainActivity extends Activity implements TextWatcher, IViewsContainer{
 	private DigitsEditText input;

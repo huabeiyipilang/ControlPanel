@@ -1,7 +1,5 @@
 package cn.kli.controlpanel.module.feedback;
 
-import com.baidu.mobstat.StatService;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -13,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import cn.kli.controlpanel.R;
+
+import com.baidu.mobstat.StatService;
 
 public class ComposeMessageActivity extends Activity implements OnClickListener {
 

@@ -6,8 +6,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.kli.utils.klilog;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+import cn.kli.utils.klilog;
 
 public class DbHelper extends SQLiteOpenHelper {
 	private final static String DB_NAME = "database.db";

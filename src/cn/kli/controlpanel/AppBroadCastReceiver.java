@@ -1,10 +1,10 @@
 package cn.kli.controlpanel;
 
-import cn.kli.utils.klilog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import cn.kli.utils.klilog;
 
 public class AppBroadCastReceiver extends BroadcastReceiver {
 

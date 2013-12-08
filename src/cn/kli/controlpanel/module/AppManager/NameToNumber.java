@@ -1,6 +1,5 @@
 package cn.kli.controlpanel.module.AppManager;
 
-import android.util.Log;
 
 /**
  * @author Barami

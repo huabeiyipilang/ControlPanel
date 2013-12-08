@@ -1,11 +1,7 @@
 package cn.kli.controlpanel.updater;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.kli.controlpanel.R;
-import cn.kli.utils.klilog;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
@@ -25,11 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.kli.controlpanel.R;
+import cn.kli.utils.klilog;
 
 public class AppListView extends LinearLayout {
 	private final static int INIT_LIST = 1;

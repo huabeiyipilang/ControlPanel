@@ -1,10 +1,10 @@
 package cn.kli.controlpanel.module.feedback;
 
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import cn.kli.utils.klilog;
 
 public abstract class Sender {
 	

@@ -1,6 +1,5 @@
 package cn.kli.controlpanel.module.AppManager;
 
-import cn.kli.controlpanel.R;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -13,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import cn.kli.controlpanel.R;
 
 public class T9KeyBoard extends LinearLayout implements OnClickListener, OnLongClickListener {
 	

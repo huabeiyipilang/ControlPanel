@@ -1,7 +1,5 @@
 package cn.kli.controlpanel.module.floatpanel;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,14 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-
 import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 
+import com.baidu.mobstat.StatService;
 //import com.baidu.mobads.AdView;
 //import com.baidu.mobads.AdViewListener;
-import com.baidu.mobstat.StatService;
 
 public class ThemeSetting extends Activity implements OnSeekBarChangeListener, OnClickListener{
 	

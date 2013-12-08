@@ -3,8 +3,6 @@ package cn.kli.controlpanel.module.AppManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.kli.utils.klilog;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,7 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import cn.kli.utils.klilog;
 
 public class AppsManager {
 	enum State{

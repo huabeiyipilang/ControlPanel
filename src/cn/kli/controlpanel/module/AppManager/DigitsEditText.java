@@ -1,9 +1,6 @@
 
 package cn.kli.controlpanel.module.AppManager;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import android.content.Context;
 import android.graphics.Rect;
 import android.text.InputType;

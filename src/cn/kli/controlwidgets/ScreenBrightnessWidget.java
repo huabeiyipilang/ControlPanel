@@ -1,11 +1,11 @@
 package cn.kli.controlwidgets;
 
-import cn.kli.controlpanel.R;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
 import android.view.WindowManager;
+import cn.kli.controlpanel.R;
 
 public class ScreenBrightnessWidget extends AControlBar{
 	private Context mContext;

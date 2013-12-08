@@ -1,7 +1,7 @@
 package cn.kli.controlpanel.module.feedback;
 
-import cn.kli.controlpanel.R;
 import android.content.Context;
+import cn.kli.controlpanel.R;
 
 public class EmailAccount {
 	

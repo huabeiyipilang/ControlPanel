@@ -7,9 +7,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.baidu.mobstat.StatService;
-
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.AppManager.IDataList.OnItemSelectListener;
 import cn.kli.controlpanel.module.AppManager.SearchManager.SearchMode;

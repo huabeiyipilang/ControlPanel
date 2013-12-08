@@ -2,8 +2,6 @@ package cn.kli.controlpanel.updater;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
-import android.util.Log;
 
 class UpdateUtils {
     

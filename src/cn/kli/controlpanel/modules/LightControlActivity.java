@@ -3,17 +3,13 @@ package cn.kli.controlpanel.modules;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.R.drawable;
-import cn.kli.controlpanel.R.id;
-import cn.kli.controlpanel.R.layout;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import cn.kli.controlpanel.R;
 
 public class LightControlActivity extends Activity implements OnClickListener {
 	

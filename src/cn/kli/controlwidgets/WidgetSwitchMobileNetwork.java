@@ -1,11 +1,11 @@
 package cn.kli.controlwidgets;
 
-import cn.kli.controlpanel.R;
-import cn.kli.utils.DeviceUtils;
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.AttributeSet;
+import cn.kli.controlpanel.R;
+import cn.kli.utils.DeviceUtils;
+import cn.kli.utils.klilog;
 
 public class WidgetSwitchMobileNetwork extends ASwitch {
 

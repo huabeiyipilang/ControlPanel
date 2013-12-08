@@ -1,11 +1,5 @@
 package cn.kli.controlpanel.modules;
 
-import cn.kli.controlpanel.Baidu;
-import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.R.string;
-
-import com.baidu.mobstat.StatService;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -13,6 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import cn.kli.controlpanel.Baidu;
+import cn.kli.controlpanel.R;
+
+import com.baidu.mobstat.StatService;
 
 public class OneKeyLockScreen extends Activity {
 

@@ -1,7 +1,5 @@
 package cn.kli.controlpanel.base;
 
-import cn.kli.controlpanel.module.floatpanel.FloatView;
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;

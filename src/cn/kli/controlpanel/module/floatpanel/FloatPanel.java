@@ -1,10 +1,5 @@
 package cn.kli.controlpanel.module.floatpanel;
 
-import cn.kli.controlpanel.R;
-import cn.kli.controlwidgets.ASwitch;
-import cn.kli.controlwidgets.IWidget;
-import cn.kli.controlwidgets.WidgetFactory;
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,13 +7,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.AdapterView.OnItemClickListener;
+import cn.kli.controlpanel.R;
+import cn.kli.controlwidgets.ASwitch;
+import cn.kli.controlwidgets.IWidget;
+import cn.kli.controlwidgets.WidgetFactory;
+import cn.kli.utils.klilog;
 
 public class FloatPanel extends FloatView implements OnClickListener,
 	OnItemClickListener, OnItemLongClickListener{

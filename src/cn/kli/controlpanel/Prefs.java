@@ -1,12 +1,11 @@
 package cn.kli.controlpanel;
 
-import cn.kli.utils.klilog;
-
-import com.baidu.mobstat.StatService;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import cn.kli.utils.klilog;
+
+import com.baidu.mobstat.StatService;
 
 public class Prefs {
 	//��Ļ���

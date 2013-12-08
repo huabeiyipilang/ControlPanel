@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
-
 import cn.kli.controlpanel.R;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;

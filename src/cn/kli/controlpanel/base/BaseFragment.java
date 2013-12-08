@@ -1,7 +1,6 @@
 package cn.kli.controlpanel.base;
 
 import android.os.Bundle;
-
 import cn.kli.utils.klilog;
 
 import com.actionbarsherlock.app.SherlockFragment;

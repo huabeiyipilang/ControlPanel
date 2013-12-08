@@ -1,17 +1,14 @@
 package cn.kli.controlpanel.module.floatpanel;
 
-import cn.kli.controlpanel.App;
-import cn.kli.controlpanel.Prefs;
-import cn.kli.controlpanel.App.ConfigurationListener;
-import cn.kli.controlpanel.R;
-import cn.kli.utils.klilog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.view.WindowManager;
+import cn.kli.controlpanel.App;
+import cn.kli.controlpanel.App.ConfigurationListener;
+import cn.kli.controlpanel.R;
 
 
 public class FloatManager implements ConfigurationListener{

@@ -1,16 +1,13 @@
 package cn.kli.controlpanel.module.floatpanel;
 
-import cn.kli.utils.UIUtils;
-import cn.kli.utils.klilog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.preference.PreferenceManager;
+import cn.kli.utils.UIUtils;
+import cn.kli.utils.klilog;
 
 public class FloatPanelService extends Service {
 

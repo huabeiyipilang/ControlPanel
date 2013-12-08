@@ -1,15 +1,14 @@
 package cn.kli.controlpanel.updater;
 
-import cn.kli.controlpanel.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.ViewStub;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import cn.kli.controlpanel.R;
 
 public class CheckUpdateActivity extends Activity implements OnClickListener{
 	private final static int MSG_SYNC_START = 1;

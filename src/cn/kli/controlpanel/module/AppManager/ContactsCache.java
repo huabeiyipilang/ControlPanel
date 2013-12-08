@@ -1,9 +1,7 @@
 package cn.kli.controlpanel.module.AppManager;
 
 import android.content.Context;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.os.Handler;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 
 
