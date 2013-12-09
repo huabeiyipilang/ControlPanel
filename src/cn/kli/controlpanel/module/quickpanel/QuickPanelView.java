@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import cn.kli.controlpanel.R;
@@ -24,11 +23,6 @@ class QuickPanelView extends RelativeLayout {
     
     private LinearLayout mHandleView;
     private LinearLayout mPanelView;
-    
-    private LinearLayout mMenuLv1;
-    private LinearLayout mMenuLv2;
-    private LinearLayout mMenuLv3;
-    private List<LinearLayout> mMenuContainers;
     
     private QuickMenuItemView mFocusItem;
 
@@ -60,13 +54,6 @@ class QuickPanelView extends RelativeLayout {
     private void initViews(){
         mHandleView = (LinearLayout)findViewById(R.id.ll_handle);
         mPanelView = (LinearLayout)findViewById(R.id.ll_panel);
-        mMenuLv1 = (LinearLayout)findViewById(R.id.ll_menulist_lv1);
-        mMenuLv2 = (LinearLayout)findViewById(R.id.ll_menulist_lv2);
-        mMenuLv3 = (LinearLayout)findViewById(R.id.ll_menulist_lv3);
-        mMenuContainers = new ArrayList<LinearLayout>();
-        mMenuContainers.add(mMenuLv1);
-        mMenuContainers.add(mMenuLv2);
-        mMenuContainers.add(mMenuLv3);
         
         mHandleView.setOnTouchListener(new OnHandleTouchListener());
 //        mPanelView.setLayoutParams(new LayoutParams(screenWidth, screenHeight));
@@ -78,7 +65,50 @@ class QuickPanelView extends RelativeLayout {
     
     public void setMenuList(QuickMenuItem root){
         mRootMenuItem = root;
+        
+        //遍历找到菜单树的深度和宽度
+        KuanduShendu calc = new KuanduShendu();
+        calc.shendu(mRootMenuItem);
+        
+        for(int i = 0; i <= calc.shendu; i++){
+            LinearLayout column = newMenuColumn();
+            for(int j = 0; j < calc.kuandu; j++){
+                QuickMenuItemView item = new QuickMenuItemView(getContext());
+                item.setVisibility(View.INVISIBLE);
+                column.addView(item);
+            }
+            mPanelView.addView(column);
+        }
     }
+    
+    private LinearLayout newMenuColumn(){
+        return (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.quick_menu_column, null, true);
+    }
+    
+    private class KuanduShendu{
+        int kuandu = 0;
+        int shendu = 0;
+        
+        private void shendu(QuickMenuItem root){
+            List<QuickMenuItem> children = root.mChildren;
+            int shen = root.level;
+            if(children != null && children.size() > 0){
+                int kuan = children.size();
+                if(kuan > kuandu){
+                    kuandu = kuan;
+                }
+                for(QuickMenuItem item : children){
+                    shendu(item);
+                }
+            }else{
+                if(shen > shendu){
+                    shendu = shen;
+                    log.i("shendu:"+shendu);
+                }
+            }
+        }
+    }
+
     
     private void switchState(State state){
         if(mState == state){
@@ -102,29 +132,57 @@ class QuickPanelView extends RelativeLayout {
     }
     
     private void startMenu(){
-        showChildMenu(mRootMenuItem);
+        showChildMenu(mRootMenuItem, null);
     }
     
-    private void addMenuItem(QuickMenuItem item){
+    private void setMenuItem(QuickMenuItem item, int pos){
         if(item == null){
             return;
         }
-        LinearLayout menu = mMenuContainers.get(item.level);
-        QuickMenuItemView itemView = new QuickMenuItemView(getContext(), item);
-        menu.addView(itemView);
-        log.i("add View at:"+item.level);
+        LinearLayout menu = getColByItem(item);
+        QuickMenuItemView itemView = (QuickMenuItemView)menu.getChildAt(pos);
+        itemView.setMenuItem(item);
+        itemView.setVisibility(View.VISIBLE);
+        log.i("item visible:"+item);
     }
     
-    private void showChildMenu(QuickMenuItem father){
-        if(father == null){
+    private void showChildMenu(QuickMenuItem father, QuickMenuItemView fatherView) {
+        //父菜单数据为Null， 错误情况，清空菜单。
+        if (father == null) {
             clearMenuContainer();
         }
+        //清空父菜单项的子菜单
         clearMenuContainer(father.level + 1);
+
+        //子菜单为空，退出。
         List<QuickMenuItem> children = father.mChildren;
-        if(children != null && father.mChildren.size() > 0){
-            for(QuickMenuItem item : father.mChildren){
-                addMenuItem(item);
+        if (children == null || children.size() <= 0) {
+            return;
+        }
+        
+        //菜单列最大值
+        int max = ((ViewGroup) mPanelView.getChildAt(0)).getChildCount() - 1;
+        //子菜单个数。
+        int size = children.size();
+        //第一个子菜单将要显示的位置。
+        int top = 0;
+
+        if (fatherView == null) { //根菜单的情况
+            top = max - size + 1;
+        } else {
+            //父菜单项在菜单中的位置
+            ViewGroup fatherContainer = getColByItem(father);
+            int fatherIndex = fatherContainer.indexOfChild(fatherView);
+
+            if (max - fatherIndex >= size) {
+                top = fatherIndex;
+            } else {
+                top = max - size + 1;
             }
+        }
+
+        for (int i = 0; i < size; i++) {
+            setMenuItem(children.get(i), i + top);
         }
         updateVisibleMenu();
     }
@@ -144,6 +202,9 @@ class QuickPanelView extends RelativeLayout {
                 if(action == MotionEvent.ACTION_MOVE){
                     notifyMotion((int)event.getRawX(), (int)event.getRawY());
                 }else if(action == MotionEvent.ACTION_UP){
+                    if(mFocusItem != null){
+                        mFocusItem.onSelect();
+                    }
                     switchState(State.HANDLE);
                 }
                 return true;
@@ -168,8 +229,12 @@ class QuickPanelView extends RelativeLayout {
             }
         }
         
-        if(mFocusItem != null && mFocusItem.getMenuItem().mChildren.size() > 0){
-            showChildMenu(mFocusItem.getMenuItem());
+        if (mFocusItem != null) {
+            if (mFocusItem.getMenuItem().mChildren.size() > 0) {
+                showChildMenu(mFocusItem.getMenuItem(), mFocusItem);
+            }else{
+                clearMenuContainer(mFocusItem.getMenuItem().level + 1);
+            }
         }
     }
     
@@ -197,10 +262,11 @@ class QuickPanelView extends RelativeLayout {
     
     private List<QuickMenuItemView> getMenuItems(){
         List<QuickMenuItemView> list = new ArrayList<QuickMenuItemView>();
-        for(LinearLayout container : mMenuContainers){
-            for(int i = 0; i < container.getChildCount(); i++){
-                View view = container.getChildAt(i);
-                if(view instanceof QuickMenuItemView){
+        for(int i = 0; i < mPanelView.getChildCount(); i++){
+            ViewGroup container = (ViewGroup) mPanelView.getChildAt(i);
+            for(int j = 0; j < container.getChildCount(); j++){
+                View view = container.getChildAt(j);
+                if(view instanceof QuickMenuItemView && view.getVisibility() == View.VISIBLE){
                     list.add((QuickMenuItemView) view);
                 }
             }
@@ -209,15 +275,34 @@ class QuickPanelView extends RelativeLayout {
     }
     
     private void clearMenuContainer(){
-        for(LinearLayout container : mMenuContainers){
-            container.removeAllViews();
+        for(int i = 0; i < mPanelView.getChildCount(); i++){
+            invisibleAllChildView((ViewGroup) mPanelView.getChildAt(i));
         }
     }
     
     private void clearMenuContainer(int level){
-        LinearLayout container = mMenuContainers.get(level);
-        if(container != null){
-            container.removeAllViews();
+        if(level > mPanelView.getChildCount()){
+            return;
         }
+        int index = getColIndexByLevel(level);
+        LinearLayout container = (LinearLayout) mPanelView.getChildAt(index);
+        if(container != null){
+            invisibleAllChildView(container);
+        }
+    }
+    
+    private void invisibleAllChildView(ViewGroup group){
+        for(int i = 0; i < group.getChildCount(); i++){
+            group.getChildAt(i).setVisibility(View.INVISIBLE);
+        }
+    }
+    
+    private LinearLayout getColByItem(QuickMenuItem item){
+        int index = getColIndexByLevel(item.level);
+        return (LinearLayout) mPanelView.getChildAt(index);
+    }
+    
+    private int getColIndexByLevel(int level){
+        return mPanelView.getChildCount() - 1 - level;
     }
 }

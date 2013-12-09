@@ -7,6 +7,6 @@
     <color name="tag_view_bg_pressed">#FF0099FF</color>
     <color name="t9_list_bg">#CC000000</color>
     
-    <color name="quick_item_bg_focus">#aa0099ff</color>
-    <color name="quick_item_bg_nomarl">#aa000000</color>
+    <color name="quick_item_bg_focus">#cc0099ff</color>
+    <color name="quick_item_bg_nomarl">#cc000000</color>
 </resources>

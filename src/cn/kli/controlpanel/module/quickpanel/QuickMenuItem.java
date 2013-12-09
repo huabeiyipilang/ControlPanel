@@ -8,6 +8,8 @@ public class QuickMenuItem {
     int icon;
     int title;
     List<QuickMenuItem> mChildren = new ArrayList<QuickMenuItem>();
+
+    private Runnable mSelectedRunable;
     
     public QuickMenuItem() {
     }
@@ -16,6 +18,19 @@ public class QuickMenuItem {
         this.level = level;
         this.icon = icon;
         this.title = title;
+    }
+    
+    public void setOnSelectRunnable(Runnable runnable){
+        mSelectedRunable = runnable;
+    }
+    
+    public Runnable getOnSelectRunnable(){
+        return mSelectedRunable;
+    }
+
+    @Override
+    public String toString() {
+        return "title:"+title+", level:"+level+", children:"+mChildren.size();
     }
     
     

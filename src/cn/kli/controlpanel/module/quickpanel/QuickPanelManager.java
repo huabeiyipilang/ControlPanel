@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.State;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.StateChangeListener;
+import cn.kli.controlpanel.modules.OneKeyLockScreen;
 import cn.kli.utils.klilog;
 
 public class QuickPanelManager{
@@ -88,23 +90,33 @@ public class QuickPanelManager{
     }
     
     private void initMenuList(){
-        QuickMenuItem item1 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        QuickMenuItem item2 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        QuickMenuItem item3 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        QuickMenuItem item4 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
+        QuickMenuItem item1 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_lock_screen);
+        QuickMenuItem item2 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_light);
+        QuickMenuItem item3 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_light);
+        QuickMenuItem item4 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_light);
         
-        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
-        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
+        item1.setOnSelectRunnable(new Runnable(){
+
+            @Override
+            public void run() {
+                Intent intent = new Intent(mContext, OneKeyLockScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+            
+        });
+//        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
+//        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
         
 
-        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_about));
-        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_about));
+        item2.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_about));
+        item2.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_about));
 
-        item3.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_app_manager));
+        item3.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_app_manager));
 
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
+        item4.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
+        item4.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
+        item4.mChildren.add(new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
         
         List<QuickMenuItem> menuList = new ArrayList<QuickMenuItem>();
         menuList.add(item1);

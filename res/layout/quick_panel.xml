@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:id="@+id/ll_handle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#99ff6600"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/seek_thumb_pressed" />
+        android:layout_width="15dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="#cc0066ff" >
     </LinearLayout>
 
     <LinearLayout
@@ -26,53 +20,6 @@
         android:orientation="horizontal"
         android:visibility="gone" >
 
-        <LinearLayout
-            android:id="@+id/ll_menulist_lv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#99ff6600"
-            android:orientation="vertical" >
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_menulist_lv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#99ff6600"
-            android:orientation="vertical" >
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_menulist_lv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#99ff6600"
-            android:orientation="vertical" >
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <cn.kli.controlpanel.module.quickpanel.QuickMenuItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

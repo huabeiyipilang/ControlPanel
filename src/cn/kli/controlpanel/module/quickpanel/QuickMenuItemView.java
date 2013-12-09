@@ -3,7 +3,6 @@ package cn.kli.controlpanel.module.quickpanel;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +16,7 @@ public class QuickMenuItemView extends LinearLayout {
     private ImageView mIcon;
     private TextView mTitle;
     
-    private Rect mRect = new Rect();;
+    private Rect mRect = new Rect();
     private QuickMenuItem mItem;
     
     public QuickMenuItemView(Context context) {
@@ -53,7 +52,7 @@ public class QuickMenuItemView extends LinearLayout {
     }
     
     private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.quick_meui_item, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.quick_menu_item, this, true);
         setBackgroundResource(R.color.quick_item_bg_nomarl);
         initView();
     }
@@ -90,5 +89,12 @@ public class QuickMenuItemView extends LinearLayout {
 
     private void onMotionOver(boolean over){
         setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
+    }
+    
+    public void onSelect(){
+        Runnable runnable = mItem.getOnSelectRunnable();
+        if(runnable != null){
+            post(runnable);
+        }
     }
 }
