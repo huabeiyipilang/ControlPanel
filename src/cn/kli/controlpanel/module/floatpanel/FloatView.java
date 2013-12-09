@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import cn.kli.utils.klilog;
 
 public class FloatView extends LinearLayout {
-	protected Context mContext;
 	protected View mContentView;
 	private WindowManager mWinManager;
 	private WindowManager.LayoutParams mParams;
@@ -19,14 +18,13 @@ public class FloatView extends LinearLayout {
 	
 	public FloatView(Context context){
 		super(context);
-		mContext = context;
-		mWinManager =  (WindowManager) mContext.getSystemService("window");
-		onFloatPrepare();
+		mWinManager =  (WindowManager) getContext().getSystemService("window");
 	}
 	
 	public void setContentView(View view){
 		mContentView = view;
 		this.addView(mContentView);
+        onFloatPrepare();
 	}
 	
 	protected int onInitDragView(){

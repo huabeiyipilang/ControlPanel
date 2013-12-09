@@ -51,9 +51,9 @@ public class FloatIndicator extends FloatView{
 	
 	public FloatIndicator(Context context) {
 		super(context);
-		View contentView = LayoutInflater.from(mContext).inflate(R.layout.float_indicator, null);
+		View contentView = LayoutInflater.from(getContext()).inflate(R.layout.float_indicator, null);
 		this.setContentView(contentView);
-		mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		mPref = PreferenceManager.getDefaultSharedPreferences(getContext());
 		
 		//init type
 		String type = mPref.getString(SettingsActivity.KEY_PREF_INDICATOR_TYPES, null);
@@ -72,7 +72,7 @@ public class FloatIndicator extends FloatView{
 				if(!mIsStatusbarMode){
 					closePanel();
 				}
-				FloatPanelService.showPanel(mContext);
+				FloatPanelService.showPanel(getContext());
 			}
 			
 		});
@@ -85,13 +85,13 @@ public class FloatIndicator extends FloatView{
 	public void setStatusbarMode(boolean enable){
 		mIsStatusbarMode = enable;
 		if(mIsStatusbarMode){
-			UIUtils.isOrentationPortrait(mContext);
-			int statusbarHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
+			UIUtils.isOrentationPortrait(getContext());
+			int statusbarHeight = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
 			klilog.info("statusbarHeight = "+statusbarHeight);
 			setLocation(0, -getScreenHeight()/2 + statusbarHeight/2);
 			setBgColor(Color.TRANSPARENT);
 		}else{
-			setBgColor(mContext.getResources().getColor(R.color.translucent_background));
+			setBgColor(getContext().getResources().getColor(R.color.translucent_background));
 		}
 	}
 	
@@ -107,8 +107,8 @@ public class FloatIndicator extends FloatView{
 			setStatusbarMode(mIsStatusbarMode);
 		}else{
 			mScreenWidth = getScreenWidth();
-			int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
-			int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
+			int x = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_X, -1);
+			int y = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_Y, -1);
 			if(x == -1 && y == -1){
 				//���ó�ʼλ��
 				setLocation(mScreenWidth / 2, 0);
@@ -128,7 +128,7 @@ public class FloatIndicator extends FloatView{
 	
 	private int getScreenWidth(){
 		int width = 0;
-		Configuration config = mContext.getResources().getConfiguration();
+		Configuration config = getContext().getResources().getConfiguration();
 		if(config.orientation == Configuration.ORIENTATION_PORTRAIT){
 			width = mPref.getInt(Prefs.PREF_SCREEN_WIDTH, 0);
 		}else if(config.orientation ==Configuration.ORIENTATION_LANDSCAPE){
@@ -139,7 +139,7 @@ public class FloatIndicator extends FloatView{
 	
 	private int getScreenHeight(){
 		int height = 0;
-		Configuration config = mContext.getResources().getConfiguration();
+		Configuration config = getContext().getResources().getConfiguration();
 		if(config.orientation == Configuration.ORIENTATION_PORTRAIT){
 			height = mPref.getInt(Prefs.PREF_SCREEN_HEIGHT, 0);
 		}else if(config.orientation ==Configuration.ORIENTATION_LANDSCAPE){
@@ -157,7 +157,7 @@ public class FloatIndicator extends FloatView{
 			x = x > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
 		}
 		super.setLocation(x, y);
-		Editor editor = Prefs.getPrefs(mContext).edit();
+		Editor editor = Prefs.getPrefs(getContext()).edit();
 		editor.putInt(Prefs.PREF_INDICATOR_X, (int) x);
 		editor.putInt(Prefs.PREF_INDICATOR_Y, (int) y);
 		editor.commit();
@@ -185,15 +185,15 @@ public class FloatIndicator extends FloatView{
 			return;
 		}
 		mScreenWidth = getScreenWidth();
-		int x = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_X, -1);
-		int y = Prefs.getPrefs(mContext).getInt(Prefs.PREF_INDICATOR_Y, -1);
+		int x = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_X, -1);
+		int y = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_Y, -1);
 		int screenWidth = 0, screenHeight = 0;
 		if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
-			screenWidth = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
-			screenHeight = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+			screenWidth = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenHeight = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
         }else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-			screenHeight= Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
-			screenWidth = Prefs.getPrefs(mContext).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+			screenHeight= Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenWidth = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
         }
 		setLocation(getMax(x, screenWidth/2), getMax(y, screenHeight/2));
 	}
@@ -250,7 +250,7 @@ public class FloatIndicator extends FloatView{
 		
 		@Override
 		public String getDisplay() {
-			double availMem = DeviceUtils.getAvailMemory(mContext);
+			double availMem = DeviceUtils.getAvailMemory(getContext());
 			double totalMem = DeviceUtils.getTotalMemory();
 			DecimalFormat df = new DecimalFormat("0");
 			String display = df.format((1 - availMem / totalMem)*100);

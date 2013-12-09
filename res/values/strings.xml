@@ -145,4 +145,7 @@
     
     <!-- 广告 应用推荐 -->
     <string name="app_recommend">推荐</string>
+    
+    <!-- 音量 -->
+    <string name="module_sound">音量</string>
 </resources>
