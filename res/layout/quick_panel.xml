@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/ll_handle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#99ff6600"
-        android:orientation="vertical" 
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
+        android:orientation="vertical" >
 
         <ImageView
             android:layout_width="15dp"
@@ -25,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <LinearLayout
             android:id="@+id/ll_menulist_lv3"

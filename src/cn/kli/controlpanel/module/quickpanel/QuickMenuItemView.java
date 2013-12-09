@@ -3,13 +3,16 @@ package cn.kli.controlpanel.module.quickpanel;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
+import cn.kli.utils.klilog;
 
 public class QuickMenuItemView extends LinearLayout {
+    private static final klilog log = new klilog(QuickMenuItemView.class);
     
     private ImageView mIcon;
     private TextView mTitle;
@@ -24,8 +27,8 @@ public class QuickMenuItemView extends LinearLayout {
     
     public QuickMenuItemView(Context context, QuickMenuItem item){
         super(context);
-        setMenuItem(item);
         init();
+        setMenuItem(item);
     }
     
     public QuickMenuItemView(Context context, AttributeSet attrs) {
@@ -74,11 +77,18 @@ public class QuickMenuItemView extends LinearLayout {
         mIcon.setImageResource(resId);
     }
     
-    public boolean onTouchChanged(int x, int y){
+    public boolean isTouchOver(int x, int y){
         return mRect.contains(x, y);
     }
+    
+    public boolean onTouchChanged(int x, int y){
+        getGlobalVisibleRect(mRect);
+        boolean res = mRect.contains(x, y);
+        onMotionOver(res);
+        return res;
+    }
 
-    public void onMotionOver(boolean over){
+    private void onMotionOver(boolean over){
         setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
     }
 }

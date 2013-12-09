@@ -19,7 +19,6 @@ import cn.kli.utils.klilog;
 class QuickPanelView extends RelativeLayout {
     private klilog log = new klilog(QuickPanelView.class);
 
-    private WindowManager.LayoutParams mPanelParams;
     private int screenWidth;
     private int screenHeight;
     
@@ -33,13 +32,18 @@ class QuickPanelView extends RelativeLayout {
     
     private QuickMenuItemView mFocusItem;
 
-    private List<QuickMenuItem> mMenuList;
+    private QuickMenuItem mRootMenuItem;
     private List<QuickMenuItemView> mVisibleMenuList;
     
     private State mState;
+    private StateChangeListener mStateChangeListener; 
     
     enum State{
         PANEL, HANDLE
+    }
+    
+    interface StateChangeListener{
+        void onStateChanged(State state);
     }
     
     public QuickPanelView(Context context){
@@ -68,8 +72,12 @@ class QuickPanelView extends RelativeLayout {
 //        mPanelView.setLayoutParams(new LayoutParams(screenWidth, screenHeight));
     }
     
-    public void setMenuList(List<QuickMenuItem> list){
-        mMenuList = list;
+    public void setStateChangeListener(StateChangeListener listener){
+        mStateChangeListener = listener;
+    }
+    
+    public void setMenuList(QuickMenuItem root){
+        mRootMenuItem = root;
     }
     
     private void switchState(State state){
@@ -78,30 +86,47 @@ class QuickPanelView extends RelativeLayout {
         }
         log.i("switch state:"+mState+" => "+state);
         mState = state;
+        notifyStateChanged();
         switch(mState){
         case HANDLE:
             mPanelView.setVisibility(View.GONE);
             mHandleView.setVisibility(View.VISIBLE);
-            startMenu();
+            clearMenuContainer();
             break;
         case PANEL:
             mHandleView.setVisibility(View.GONE);
             mPanelView.setVisibility(View.VISIBLE);
+            startMenu();
             break;
         }
     }
     
     private void startMenu(){
-        for(QuickMenuItem item : mMenuList){
-            addMenuItem(item);
-        }
-        updateVisibleMenu();
+        showChildMenu(mRootMenuItem);
     }
     
     private void addMenuItem(QuickMenuItem item){
+        if(item == null){
+            return;
+        }
         LinearLayout menu = mMenuContainers.get(item.level);
         QuickMenuItemView itemView = new QuickMenuItemView(getContext(), item);
         menu.addView(itemView);
+        log.i("add View at:"+item.level);
+    }
+    
+    private void showChildMenu(QuickMenuItem father){
+        if(father == null){
+            clearMenuContainer();
+        }
+        clearMenuContainer(father.level + 1);
+        List<QuickMenuItem> children = father.mChildren;
+        if(children != null && father.mChildren.size() > 0){
+            for(QuickMenuItem item : father.mChildren){
+                addMenuItem(item);
+            }
+        }
+        updateVisibleMenu();
     }
     
     private class OnHandleTouchListener implements OnTouchListener{
@@ -117,7 +142,7 @@ class QuickPanelView extends RelativeLayout {
                 return true;
             case PANEL:
                 if(action == MotionEvent.ACTION_MOVE){
-                    
+                    notifyMotion((int)event.getRawX(), (int)event.getRawY());
                 }else if(action == MotionEvent.ACTION_UP){
                     switchState(State.HANDLE);
                 }
@@ -127,14 +152,43 @@ class QuickPanelView extends RelativeLayout {
         }
     }
     
+    private void notifyStateChanged(){
+        if(mStateChangeListener != null){
+            mStateChangeListener.onStateChanged(mState);
+        }
+    }
+    
     private void notifyMotion(int x, int y){
         if(mFocusItem == null){
-            //遍历可见菜单，找出focus
-            //focus 空返回
-            //focus 非空 传递
+            mFocusItem = notifyAllVisibleItemTouchChanged(x, y);
         }else{
-//            mFocusItem.onMotionOver(x, y);
+            boolean res = mFocusItem.onTouchChanged(x, y);
+            if(!res){
+                mFocusItem = null;
+            }
         }
+        
+        if(mFocusItem != null && mFocusItem.getMenuItem().mChildren.size() > 0){
+            showChildMenu(mFocusItem.getMenuItem());
+        }
+    }
+    
+    /**
+     * 遍历所有可见menu，直到找到焦点。返回焦点
+     * @Title: notifyAllVisibleItem
+     * @param x
+     * @param y
+     * @return
+     * @return QuickMenuItemView
+     * @date 2013-12-9 上午11:03:27
+     */
+    private QuickMenuItemView notifyAllVisibleItemTouchChanged(int x, int y){
+        for(QuickMenuItemView item : mVisibleMenuList){
+            if(item.onTouchChanged(x, y)){
+                return item;
+            }
+        }
+        return null;
     }
     
     private void updateVisibleMenu(){
@@ -152,5 +206,18 @@ class QuickPanelView extends RelativeLayout {
             }
         }
         return list;
+    }
+    
+    private void clearMenuContainer(){
+        for(LinearLayout container : mMenuContainers){
+            container.removeAllViews();
+        }
+    }
+    
+    private void clearMenuContainer(int level){
+        LinearLayout container = mMenuContainers.get(level);
+        if(container != null){
+            container.removeAllViews();
+        }
     }
 }

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.module.quickpanel.QuickPanelView.State;
+import cn.kli.controlpanel.module.quickpanel.QuickPanelView.StateChangeListener;
 import cn.kli.utils.klilog;
 
 public class QuickPanelManager{
@@ -25,6 +27,25 @@ public class QuickPanelManager{
         mQuickPanel = new QuickPanelView(mContext);
         initParams();
         initMenuList();
+        mQuickPanel.setStateChangeListener(new StateChangeListener() {
+            
+            @Override
+            public void onStateChanged(State state) {
+                switch(state){
+                case HANDLE:
+                    mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    mParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                    break;
+                case PANEL:
+                    mParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    mParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+                    mParams.gravity = Gravity.CENTER;
+                    break;
+                }
+                updateQuickPanel();
+            }
+        });
     }
 
     public static QuickPanelManager getInstance(Context context){
@@ -38,6 +59,12 @@ public class QuickPanelManager{
         if(!isPanelShow()){
             mWinManager.addView(mQuickPanel, mParams);
             isPanelShow = true;
+        }
+    }
+    
+    private void updateQuickPanel(){
+        if(isPanelShow()){
+            mWinManager.updateViewLayout(mQuickPanel, mParams);
         }
     }
     
@@ -62,25 +89,22 @@ public class QuickPanelManager{
     
     private void initMenuList(){
         QuickMenuItem item1 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        
-
         QuickMenuItem item2 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        
         QuickMenuItem item3 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        item3.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item3.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item3.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-
         QuickMenuItem item4 = new QuickMenuItem(1, R.drawable.ic_audio_alarm, R.string.module_light);
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
-        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_light));
+        
+        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
+        item1.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_feedback));
+        
+
+        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_about));
+        item2.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_about));
+
+        item3.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_app_manager));
+
+        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
+        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
+        item4.mChildren.add(new QuickMenuItem(2, R.drawable.ic_audio_alarm, R.string.module_lock_screen));
         
         List<QuickMenuItem> menuList = new ArrayList<QuickMenuItem>();
         menuList.add(item1);
@@ -88,6 +112,9 @@ public class QuickPanelManager{
         menuList.add(item3);
         menuList.add(item4);
         
-        mQuickPanel.setMenuList(menuList);
+        QuickMenuItem root = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_light);
+        root.mChildren = menuList;
+        
+        mQuickPanel.setMenuList(root);
     }
 }
