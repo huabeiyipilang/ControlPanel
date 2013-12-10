@@ -7,8 +7,7 @@
         android:id="@+id/ll_handle"
         android:layout_width="15dp"
         android:layout_height="100dp"
-        android:orientation="vertical"
-        android:background="#cc0066ff" >
+        android:orientation="vertical" >
     </LinearLayout>
 
     <LinearLayout

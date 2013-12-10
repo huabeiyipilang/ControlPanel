@@ -68,8 +68,8 @@ public class QuickMenuItemView extends LinearLayout {
         setTitle(mItem.title);
     }
     
-    private void setTitle(int resId){
-        mTitle.setText(resId);
+    private void setTitle(String title){
+        mTitle.setText(title);
     }
     
     private void setIcon(int resId){

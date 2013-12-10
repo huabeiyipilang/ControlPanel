@@ -92,31 +92,22 @@ public class QuickPanelManager{
     }
     
     private void initMenuList(){
-        QuickMenuItem item1 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_lock_screen);        
-        item1.setOnSelectRunnable(new Runnable(){
-            @Override
-            public void run() {
-                Intent intent = new Intent(mContext, OneKeyLockScreen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
+        MenuItemFactory factory = new MenuItemFactory(mContext);
         
-        QuickMenuItem item2 = new QuickMenuItem(0, R.drawable.ic_audio_alarm, R.string.module_sound);
-        item2.setOnSelectRunnable(new Runnable() {
-            
-            @Override
-            public void run() {
-                FloatManager.getInstance(mContext).showPanel();
-            }
-        });
+        //1 锁屏
+        QuickMenuItem item1 = factory.getLockScreenItem();
+        
+        //2 音量
+        QuickMenuItem item2 = factory.getSoundItem();
+        item2.mChildren.add(factory.getRingerModeNormalItem());
+        item2.mChildren.add(factory.getRingerModeSilentItem());
+        item2.mChildren.add(factory.getRingerModeVibrateItem());
 
-        List<QuickMenuItem> menuList = new ArrayList<QuickMenuItem>();
-        menuList.add(item1);
-        menuList.add(item2);
-        
+        //root menu
         QuickMenuItem root = new QuickMenuItem();
-        root.mChildren = menuList;
+        root.mChildren.add(item1);
+        root.mChildren.add(item2);
+        root.level = -1;
         
         mQuickPanel.setMenuList(root);
     }

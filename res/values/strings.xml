@@ -148,4 +148,9 @@
     
     <!-- 音量 -->
     <string name="module_sound">音量</string>
+    <string name="ringer_mode_normal">标准模式</string>
+    <string name="ringer_mode_vibrate">振动模式</string>
+    <string name="ringer_mode_silent">静音模式</string>
+    <string name="current">（当前）</string>
+    <string name="ringer_mode_change">铃声切换为 </string>
 </resources>

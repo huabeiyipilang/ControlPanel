@@ -6,16 +6,16 @@ import java.util.List;
 public class QuickMenuItem {
     int level;
     int icon;
-    int title;
+    String title;
     List<QuickMenuItem> mChildren = new ArrayList<QuickMenuItem>();
 
     private Runnable mSelectedRunable;
+    private Runnable mUpdateRunable;
     
     public QuickMenuItem() {
     }
 
-    public QuickMenuItem(int level, int icon, int title) {
-        this.level = level;
+    public QuickMenuItem(int icon, String title) {
         this.icon = icon;
         this.title = title;
     }
@@ -27,7 +27,15 @@ public class QuickMenuItem {
     public Runnable getOnSelectRunnable(){
         return mSelectedRunable;
     }
-
+    
+    public void setUpdateRunnable(Runnable runnable){
+        mUpdateRunable = runnable;
+    }
+    
+    public Runnable getUpdateRunnable(){
+        return mUpdateRunable;
+    }
+    
     @Override
     public String toString() {
         return "title:"+title+", level:"+level+", children:"+mChildren.size();

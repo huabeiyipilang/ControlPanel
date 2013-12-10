@@ -91,6 +91,9 @@ class QuickPanelView extends RelativeLayout {
         
         private void shendu(QuickMenuItem root){
             List<QuickMenuItem> children = root.mChildren;
+            for(QuickMenuItem item : children){
+                item.level = root.level + 1;
+            }
             int shen = root.level;
             if(children != null && children.size() > 0){
                 int kuan = children.size();
@@ -141,6 +144,7 @@ class QuickPanelView extends RelativeLayout {
         }
         LinearLayout menu = getColByItem(item);
         QuickMenuItemView itemView = (QuickMenuItemView)menu.getChildAt(pos);
+        itemView.post(item.getUpdateRunnable());
         itemView.setMenuItem(item);
         itemView.setVisibility(View.VISIBLE);
         log.i("item visible:"+item);
@@ -188,14 +192,19 @@ class QuickPanelView extends RelativeLayout {
     }
     
     private class OnHandleTouchListener implements OnTouchListener{
-
+        private float handleDownX;
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             int action = event.getAction();
             switch(mState){
             case HANDLE:
                 if(action == MotionEvent.ACTION_DOWN){
-                    switchState(State.PANEL);
+                    handleDownX = event.getRawX();
+                }else if(action == MotionEvent.ACTION_MOVE){
+                    if(Math.abs(event.getRawX() - handleDownX) > 30){
+                        switchState(State.PANEL);
+                        handleDownX = 0;
+                    }
                 }
                 return true;
             case PANEL:
