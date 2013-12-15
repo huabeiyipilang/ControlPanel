@@ -96,5 +96,10 @@ public class QuickMenuItemView extends LinearLayout {
         if(runnable != null){
             post(runnable);
         }
+
+        Runnable updaterunable = mItem.getUpdateRunnable();
+        if(updaterunable != null){
+            post(updaterunable);
+        }
     }
 }

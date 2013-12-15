@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.widget.Toast;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.floatpanel.FloatManager;
+import cn.kli.controlpanel.modules.FlashLightManager;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
 
 public class MenuItemFactory {
@@ -125,6 +126,32 @@ public class MenuItemFactory {
                 if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT){
                     item.title += mContext.getString(R.string.current);
                 }
+            }
+            
+        });
+        return item;
+    }
+    
+    //手电筒
+    public QuickMenuItem getFlashLightItem(){
+        final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm,
+                mContext.getString(FlashLightManager.getInstance().isOn() ? R.string.flash_light_on : R.string.flash_light_off));
+        item.setOnSelectRunnable(new Runnable() {
+            
+            @Override
+            public void run() {
+                if(FlashLightManager.getInstance().isOn()){
+                    FlashLightManager.getInstance().close();
+                }else{
+                    FlashLightManager.getInstance().open();
+                }
+            }
+        });
+        item.setUpdateRunnable(new Runnable(){
+
+            @Override
+            public void run() {
+                item.title = mContext.getString(FlashLightManager.getInstance().isOn() ? R.string.flash_light_on : R.string.flash_light_off);
             }
             
         });

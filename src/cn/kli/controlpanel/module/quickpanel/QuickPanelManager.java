@@ -103,10 +103,14 @@ public class QuickPanelManager{
         item2.mChildren.add(factory.getRingerModeSilentItem());
         item2.mChildren.add(factory.getRingerModeVibrateItem());
 
+        //3 手电筒
+        QuickMenuItem item3 = factory.getFlashLightItem();
+        
         //root menu
         QuickMenuItem root = new QuickMenuItem();
         root.mChildren.add(item1);
         root.mChildren.add(item2);
+        root.mChildren.add(item3);
         root.level = -1;
         
         mQuickPanel.setMenuList(root);
