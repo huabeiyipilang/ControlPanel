@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ public class QuickMenuItemView extends LinearLayout {
     
     private ImageView mIcon;
     private TextView mTitle;
+    private CheckBox mToggle;
     
     private Rect mRect = new Rect();
     private QuickMenuItem mItem;
@@ -60,11 +63,20 @@ public class QuickMenuItemView extends LinearLayout {
     private void initView(){
         mIcon = (ImageView)findViewById(R.id.iv_icon);
         mTitle = (TextView)findViewById(R.id.tv_title);
+        mToggle = (CheckBox)findViewById(R.id.cb_toggle);
     }
     
     public void setMenuItem(QuickMenuItem item){
         mItem = item;
-        setIcon(mItem.icon);
+        if(mItem.toggle == 0){
+            mIcon.setVisibility(View.VISIBLE);
+            mToggle.setVisibility(View.GONE);
+            setIcon(mItem.icon);
+        }else{
+            mIcon.setVisibility(View.GONE);
+            mToggle.setVisibility(View.VISIBLE);
+            mToggle.setChecked(mItem.toggle == 1);
+        }
         setTitle(mItem.title);
     }
     

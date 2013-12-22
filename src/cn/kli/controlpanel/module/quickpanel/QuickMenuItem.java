@@ -3,10 +3,15 @@ package cn.kli.controlpanel.module.quickpanel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickMenuItem {
+class QuickMenuItem {
+    final static int TOGGLE_DISABLE = 0;
+    final static int TOGGLE_ON = 1;
+    final static int TOGGLE_OFF = 2;
+    
     int level;
     int icon;
     String title;
+    int toggle; // 0:diable 1:on 2:off
     List<QuickMenuItem> mChildren = new ArrayList<QuickMenuItem>();
 
     private Runnable mSelectedRunable;
@@ -34,6 +39,10 @@ public class QuickMenuItem {
     
     public Runnable getUpdateRunnable(){
         return mUpdateRunable;
+    }
+    
+    public void setToggle(boolean on){
+        toggle = on ? TOGGLE_ON : TOGGLE_OFF;
     }
     
     @Override

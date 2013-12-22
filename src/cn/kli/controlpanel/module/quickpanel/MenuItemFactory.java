@@ -8,14 +8,17 @@ import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.floatpanel.FloatManager;
 import cn.kli.controlpanel.modules.FlashLightManager;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
+import cn.kli.utils.NetworkManager;
 
 public class MenuItemFactory {
     private Context mContext;
-    AudioManager mAudioManager;
+    private AudioManager mAudioManager;
+    private NetworkManager mNetworkManager;
     
     public MenuItemFactory(Context context){
         mContext = context;
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        mNetworkManager = new NetworkManager(mContext);
     }
     
     //锁屏
@@ -48,9 +51,7 @@ public class MenuItemFactory {
     //音量 标准模式
     public QuickMenuItem getRingerModeNormalItem(){
         final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.ringer_mode_normal));
-        if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL){
-            item.title += mContext.getString(R.string.current);
-        }
+        item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL);
         item.setOnSelectRunnable(new Runnable() {
             
             @Override
@@ -65,9 +66,7 @@ public class MenuItemFactory {
             @Override
             public void run() {
                 item.title = mContext.getString(R.string.ringer_mode_normal);
-                if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL){
-                    item.title += mContext.getString(R.string.current);
-                }
+                item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL);
             }
             
         });
@@ -77,9 +76,7 @@ public class MenuItemFactory {
     //音量 振动模式
     public QuickMenuItem getRingerModeVibrateItem(){
         final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.ringer_mode_vibrate));
-        if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE){
-            item.title += mContext.getString(R.string.current);
-        }
+        item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE);
         item.setOnSelectRunnable(new Runnable() {
             
             @Override
@@ -94,9 +91,7 @@ public class MenuItemFactory {
             @Override
             public void run() {
                 item.title = mContext.getString(R.string.ringer_mode_vibrate);
-                if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE){
-                    item.title += mContext.getString(R.string.current);
-                }
+                item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE);
             }
             
         });
@@ -106,9 +101,7 @@ public class MenuItemFactory {
     //音量 静音模式
     public QuickMenuItem getRingerModeSilentItem(){
         final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.ringer_mode_silent));
-        if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT){
-            item.title += mContext.getString(R.string.current);
-        }
+        item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT);
         item.setOnSelectRunnable(new Runnable() {
             
             @Override
@@ -123,9 +116,7 @@ public class MenuItemFactory {
             @Override
             public void run() {
                 item.title = mContext.getString(R.string.ringer_mode_silent);
-                if(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT){
-                    item.title += mContext.getString(R.string.current);
-                }
+                item.setToggle(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT);
             }
             
         });
@@ -152,6 +143,68 @@ public class MenuItemFactory {
             @Override
             public void run() {
                 item.title = mContext.getString(FlashLightManager.getInstance().isOn() ? R.string.flash_light_on : R.string.flash_light_off);
+            }
+            
+        });
+        return item;
+    }
+    
+    //移动网络开关
+    public QuickMenuItem getMobileToggleItem(){
+        final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.menu_mobile));
+        try {
+            item.setToggle(mNetworkManager.getMobileDataEnabled());
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        item.setOnSelectRunnable(new Runnable() {
+            
+            @Override
+            public void run() {
+                try {
+                    mNetworkManager.toggleGprs(!mNetworkManager.getMobileDataEnabled());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(mContext, R.string.setting_error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        item.setUpdateRunnable(new Runnable(){
+
+            @Override
+            public void run() {
+                try {
+                    item.setToggle(mNetworkManager.getMobileDataEnabled());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        });
+        return item;
+    }
+    
+    //WIFI开关
+    public QuickMenuItem getWifiToggleItem(){
+        final QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.menu_wifi));
+        item.setToggle(mNetworkManager.getWifiEnabled());
+        item.setOnSelectRunnable(new Runnable() {
+            
+            @Override
+            public void run() {
+                try {
+                    mNetworkManager.toggleWiFi(!mNetworkManager.getWifiEnabled());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(mContext, R.string.setting_error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        item.setUpdateRunnable(new Runnable(){
+
+            @Override
+            public void run() {
+                item.setToggle(mNetworkManager.getWifiEnabled());
             }
             
         });

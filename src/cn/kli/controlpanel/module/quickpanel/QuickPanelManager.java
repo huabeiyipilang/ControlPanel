@@ -99,18 +99,24 @@ public class QuickPanelManager{
         
         //2 音量
         QuickMenuItem item2 = factory.getSoundItem();
-        item2.mChildren.add(factory.getRingerModeNormalItem());
-        item2.mChildren.add(factory.getRingerModeSilentItem());
-        item2.mChildren.add(factory.getRingerModeVibrateItem());
+        
+        //3 铃声
+        QuickMenuItem item3 = new QuickMenuItem(R.drawable.ic_audio_ring_notif, mContext.getString(R.string.module_ringer_mode));
+        item3.mChildren.add(factory.getRingerModeNormalItem());
+        item3.mChildren.add(factory.getRingerModeSilentItem());
+        item3.mChildren.add(factory.getRingerModeVibrateItem());
 
-        //3 手电筒
-        QuickMenuItem item3 = factory.getFlashLightItem();
+        //4 网络
+        QuickMenuItem item4 = new QuickMenuItem(R.drawable.ic_settings_display, mContext.getString(R.string.module_network));
+        item4.mChildren.add(factory.getMobileToggleItem());
+        item4.mChildren.add(factory.getWifiToggleItem());
         
         //root menu
         QuickMenuItem root = new QuickMenuItem();
         root.mChildren.add(item1);
         root.mChildren.add(item2);
         root.mChildren.add(item3);
+        root.mChildren.add(item4);
         root.level = -1;
         
         mQuickPanel.setMenuList(root);

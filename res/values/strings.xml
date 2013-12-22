@@ -157,4 +157,12 @@
     <string name="flash_light">手电筒</string>
     <string name="flash_light_on">手电筒（已开启）</string>
     <string name="flash_light_off">手电筒（已关闭）</string>
+    
+    <string name="module_ringer_mode">铃声模式</string>
+    
+    <string name="module_network">网络</string>
+    <string name="menu_mobile">移动网络</string>
+    <string name="menu_wifi">WLAN</string>
+    
+    <string name="setting_error">设置失败</string>
 </resources>
