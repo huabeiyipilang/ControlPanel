@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 public interface IDataList {
 	

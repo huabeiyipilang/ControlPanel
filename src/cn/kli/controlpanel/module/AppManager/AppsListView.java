@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.base.DragGridView;
-import cn.kli.controlpanel.module.AppManager.AppsManager.State;
+import cn.kli.controlpanel.module.appmanager.AppsManager.State;
 import cn.kli.utils.klilog;
 
 import com.baidu.mobstat.StatService;

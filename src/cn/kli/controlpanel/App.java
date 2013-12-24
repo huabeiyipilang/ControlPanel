@@ -6,7 +6,7 @@ import java.util.List;
 import android.app.Application;
 import android.content.res.Configuration;
 import cn.kli.controlpanel.about.AboutFragment;
-import cn.kli.controlpanel.module.AppManager.AppManagerFragment;
+import cn.kli.controlpanel.module.appmanager.AppManagerFragment;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelManager;
 import cn.kli.menuui.Config;
 import cn.kli.menuui.Module;
@@ -38,11 +38,6 @@ public class App extends Application {
 		appModule.name = getString(R.string.module_app_manager);
 		appModule.cls = AppManagerFragment.class;
 		mModuleConfig.addModule(appModule);
-		
-		Module adsModule = new Module();
-		adsModule.name = getString(R.string.app_recommend);
-		adsModule.cls = Object.class;
-		mModuleConfig.addModule(adsModule);
 		
 		//about module
 		Module aboutModule = new Module();

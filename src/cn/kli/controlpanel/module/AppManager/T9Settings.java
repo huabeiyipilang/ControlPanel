@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

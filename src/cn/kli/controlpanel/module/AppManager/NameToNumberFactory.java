@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 import java.util.Locale;
 

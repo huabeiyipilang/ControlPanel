@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.module.AppManager.IDataList.OnItemSelectListener;
-import cn.kli.controlpanel.module.AppManager.SearchManager.SearchMode;
+import cn.kli.controlpanel.module.appmanager.IDataList.OnItemSelectListener;
+import cn.kli.controlpanel.module.appmanager.SearchManager.SearchMode;
 
 import com.baidu.mobstat.StatService;
 

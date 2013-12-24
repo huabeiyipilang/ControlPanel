@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <cn.kli.controlpanel.module.AppManager.DigitsEditText
+            <cn.kli.controlpanel.module.appmanager.DigitsEditText
                 android:id="@+id/input"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

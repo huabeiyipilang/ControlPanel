@@ -3,9 +3,7 @@ package cn.kli.controlpanel.base;
 import android.os.Bundle;
 import cn.kli.utils.klilog;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
-public class BaseFragment extends SherlockFragment {
+public class BaseFragment extends cn.kli.menuui.BaseFragment {
 	protected klilog log;
 
 	@Override

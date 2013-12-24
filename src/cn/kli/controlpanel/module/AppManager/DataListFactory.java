@@ -1,7 +1,7 @@
-package cn.kli.controlpanel.module.AppManager;
+package cn.kli.controlpanel.module.appmanager;
 
 import android.content.Context;
-import cn.kli.controlpanel.module.AppManager.SearchManager.SearchMode;
+import cn.kli.controlpanel.module.appmanager.SearchManager.SearchMode;
 
 public class DataListFactory {
 	public static IDataList create(Context context, SearchMode mode){
