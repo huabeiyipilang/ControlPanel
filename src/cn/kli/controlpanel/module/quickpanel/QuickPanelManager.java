@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.about.AboutFragment;
 import cn.kli.controlpanel.module.floatpanel.FloatManager;
 import cn.kli.controlpanel.module.floatpanel.FloatPanelService;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.State;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.StateChangeListener;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
+import cn.kli.controlpanel.settings.SettingsFragment;
 import cn.kli.utils.klilog;
 
 public class QuickPanelManager{
@@ -94,31 +96,40 @@ public class QuickPanelManager{
     private void initMenuList(){
         MenuItemFactory factory = new MenuItemFactory(mContext);
         
-        //1 锁屏
-        QuickMenuItem item1 = factory.getLockScreenItem();
+        // 音量
+        QuickMenuItem soundMenu = factory.getSoundItem();
         
-        //2 音量
-        QuickMenuItem item2 = factory.getSoundItem();
-        
-        //3 铃声
-        QuickMenuItem item3 = new QuickMenuItem(R.drawable.ic_audio_ring_notif, mContext.getString(R.string.module_ringer_mode));
-        item3.mChildren.add(factory.getRingerModeNormalItem());
-        item3.mChildren.add(factory.getRingerModeSilentItem());
-        item3.mChildren.add(factory.getRingerModeVibrateItem());
+        // 铃声
+        QuickMenuItem ringerMenu = factory.getFolderItem(R.drawable.ic_audio_ring_notif, R.string.module_ringer_mode);
+        ringerMenu.addChild(factory.getRingerModeNormalItem());
+        ringerMenu.addChild(factory.getRingerModeSilentItem());
+        ringerMenu.addChild(factory.getRingerModeVibrateItem());
 
-        //4 网络
-        QuickMenuItem item4 = new QuickMenuItem(R.drawable.ic_settings_display, mContext.getString(R.string.module_network));
-        item4.mChildren.add(factory.getMobileToggleItem());
-        item4.mChildren.add(factory.getWifiToggleItem());
+        // 网络
+        QuickMenuItem networkMenu = factory.getFolderItem(R.drawable.ic_settings_display, R.string.module_network);
+        networkMenu.addChild(factory.getMobileToggleItem());
+        networkMenu.addChild(factory.getWifiToggleItem());
+
+        // 锁屏
+        QuickMenuItem lockMenu = factory.getLockScreenItem();
+        
+        QuickMenuItem aboutMenu = factory.getFragmentItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutFragment.class);
+        QuickMenuItem settingsMenu = factory.getFragmentItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings), SettingsFragment.class);
         
         //root menu
         QuickMenuItem root = new QuickMenuItem();
-        root.mChildren.add(item1);
-        root.mChildren.add(item2);
-        root.mChildren.add(item3);
-        root.mChildren.add(item4);
+        root.addChild(ringerMenu);
+        root.addChild(networkMenu);
+        root.addChild(soundMenu);
+        root.addChild(lockMenu);
+        root.addChild(aboutMenu);
+        root.addChild(settingsMenu);
         root.level = -1;
         
         mQuickPanel.setMenuList(root);
+    }
+    
+    private String getString(int res){
+        return mContext.getString(res);
     }
 }

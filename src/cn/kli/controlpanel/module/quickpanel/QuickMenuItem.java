@@ -25,6 +25,18 @@ class QuickMenuItem {
         this.title = title;
     }
     
+    public void addChild(QuickMenuItem item){
+        mChildren.add(item);
+    }
+    
+    public void removeChild(QuickMenuItem item){
+        mChildren.remove(item);
+    }
+    
+    public int getChildCount(){
+        return mChildren.size();
+    }
+    
     public void setOnSelectRunnable(Runnable runnable){
         mSelectedRunable = runnable;
     }

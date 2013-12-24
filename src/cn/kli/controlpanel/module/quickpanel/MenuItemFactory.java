@@ -1,10 +1,13 @@
 package cn.kli.controlpanel.module.quickpanel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.widget.Toast;
+import cn.kli.controlpanel.BlackActivity;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.BaseFragment;
 import cn.kli.controlpanel.module.floatpanel.FloatManager;
 import cn.kli.controlpanel.modules.FlashLightManager;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
@@ -21,18 +24,50 @@ public class MenuItemFactory {
         mNetworkManager = new NetworkManager(mContext);
     }
     
-    //锁屏
-    public QuickMenuItem getLockScreenItem(){
-        QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.module_lock_screen));        
+    //folder Item
+    public QuickMenuItem getFolderItem(int icon, String title){
+        QuickMenuItem item = new QuickMenuItem(icon, title);
+        return item;
+    }
+    
+    //folder Item
+    public QuickMenuItem getFolderItem(int icon, int title){
+        QuickMenuItem item = new QuickMenuItem(icon, mContext.getString(title));
+        return item;
+    }
+    
+    //activity Item
+    public QuickMenuItem getActivityItem(int icon, String title, final Class<? extends Activity> cls){
+        QuickMenuItem item = new QuickMenuItem(icon, title);
         item.setOnSelectRunnable(new Runnable(){
             @Override
             public void run() {
-                Intent intent = new Intent(mContext, OneKeyLockScreen.class);
+                Intent intent = new Intent(mContext, cls);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
         return item;
+    }
+    
+    //fragment Item
+    public QuickMenuItem getFragmentItem(int icon, String title, final Class<? extends BaseFragment> cls){
+        QuickMenuItem item = new QuickMenuItem(icon, title);
+        item.setOnSelectRunnable(new Runnable(){
+            @Override
+            public void run() {
+                Intent intent = new Intent(mContext, BlackActivity.class);
+                intent.putExtra("fragment", cls);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+        return item;
+    }
+    
+    //锁屏
+    public QuickMenuItem getLockScreenItem(){
+        return getActivityItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.module_lock_screen), OneKeyLockScreen.class);
     }
     
     //音量

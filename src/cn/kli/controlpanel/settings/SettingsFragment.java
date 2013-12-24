@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.BaseFragment;
 import cn.kli.controlpanel.module.floatpanel.SettingsActivity;
-import cn.kli.menuui.BaseFragment;
 
 public class SettingsFragment extends BaseFragment {
 	private ListView mListView;

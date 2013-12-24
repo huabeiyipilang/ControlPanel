@@ -236,6 +236,8 @@
 		<activity android:name="com.baidu.mobads.appoffers.OffersActivity" 
 		    android:configChanges="keyboard|keyboardHidden|orientation" />
 		<service android:name=".module.quickpanel.QuickPanelService"></service>
+		<activity android:name="BlackActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
     </application>
 
 </manifest>
