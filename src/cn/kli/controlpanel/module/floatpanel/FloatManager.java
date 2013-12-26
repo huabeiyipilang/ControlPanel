@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import cn.kli.controlpanel.App;
 import cn.kli.controlpanel.App.ConfigurationListener;
+import cn.kli.controlpanel.module.indicator.FloatIndicator;
 import cn.kli.controlpanel.R;
 
 

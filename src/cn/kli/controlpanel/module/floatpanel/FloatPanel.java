@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.FloatView;
 import cn.kli.controlwidgets.ASwitch;
 import cn.kli.controlwidgets.IWidget;
 import cn.kli.controlwidgets.WidgetFactory;

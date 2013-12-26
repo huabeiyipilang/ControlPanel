@@ -114,7 +114,8 @@ public class QuickPanelManager{
         QuickMenuItem lockMenu = factory.getLockScreenItem();
         
         QuickMenuItem aboutMenu = factory.getFragmentItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutFragment.class);
-        QuickMenuItem settingsMenu = factory.getFragmentItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings), SettingsFragment.class);
+        QuickMenuItem settingsMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, R.string.group_settings);
+        settingsMenu.addChild(aboutMenu);
         
         //root menu
         QuickMenuItem root = new QuickMenuItem();
@@ -122,7 +123,6 @@ public class QuickPanelManager{
         root.addChild(networkMenu);
         root.addChild(soundMenu);
         root.addChild(lockMenu);
-        root.addChild(aboutMenu);
         root.addChild(settingsMenu);
         root.level = -1;
         

@@ -165,4 +165,6 @@
     <string name="menu_wifi">WLAN</string>
     
     <string name="setting_error">设置失败</string>
+    
+    <string name="setting_indicator">指示器设置</string>
 </resources>
