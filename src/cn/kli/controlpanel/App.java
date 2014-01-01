@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.res.Configuration;
 import cn.kli.controlpanel.about.AboutFragment;
 import cn.kli.controlpanel.module.appsmanager.AppManagerFragment;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelManager;
+import cn.kli.controlpanel.module.quickpanel.QuickPanelService;
 import cn.kli.menuui.Config;
 import cn.kli.menuui.Module;
 import cn.kli.utils.KliUtils;
@@ -18,8 +20,6 @@ public class App extends Application {
 	
 	private Config mModuleConfig;
 	
-	private QuickPanelManager mQuickPanelManager;
-	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -27,9 +27,9 @@ public class App extends Application {
 		mModuleConfig = Config.getInstance();
 		initModules();
 		
-		mQuickPanelManager = QuickPanelManager.getInstance(this);
-		mQuickPanelManager.showQuickPanel();
-		
+		Intent intent = new Intent(this, QuickPanelService.class);
+		intent.putExtra(QuickPanelService.SERVICE_CMD, QuickPanelService.MSG_SHOW_QUICK_PANEL);
+		startService(intent);
 	}
 	
 	private void initModules(){
