@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.appmanager;
+package cn.kli.controlpanel.module.appsmanager;
 
 
 /**

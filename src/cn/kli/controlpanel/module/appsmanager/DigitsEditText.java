@@ -1,5 +1,5 @@
 
-package cn.kli.controlpanel.module.appmanager;
+package cn.kli.controlpanel.module.appsmanager;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -1,4 +1,4 @@
-package cn.kli.controlpanel.module.appmanager;
+package cn.kli.controlpanel.module.appsmanager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.module.appmanager.IDataList.OnItemSelectListener;
-import cn.kli.controlpanel.module.appmanager.SearchManager.SearchMode;
+import cn.kli.controlpanel.module.appsmanager.IDataList.OnItemSelectListener;
+import cn.kli.controlpanel.module.appsmanager.SearchManager.SearchMode;
 import cn.kli.menuui.BaseFragment;
 
 public class AppManagerFragment extends BaseFragment implements TextWatcher, IViewsContainer {

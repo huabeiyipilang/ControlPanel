@@ -2,7 +2,7 @@
  * kli add for new dialpad, dfdun merge
  * */
 
-package cn.kli.controlpanel.module.appmanager;
+package cn.kli.controlpanel.module.appsmanager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.module.appmanager.ContactsCache.ContactItem;
+import cn.kli.controlpanel.module.appsmanager.ContactsCache.ContactItem;
 
 
 public class ContactsList extends LinearLayout implements IDataList, OnItemClickListener{

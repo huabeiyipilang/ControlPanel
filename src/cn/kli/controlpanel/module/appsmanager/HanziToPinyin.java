@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.kli.controlpanel.module.appmanager;
+package cn.kli.controlpanel.module.appsmanager;
 
 import java.text.Collator;
 import java.util.ArrayList;
