@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.utils.VibrateUtils;
 import cn.kli.utils.DeviceUtils;
 import cn.kli.utils.klilog;
 
@@ -199,6 +200,7 @@ class QuickPanelView extends RelativeLayout {
             switch(mState){
             case HANDLE:
                 if(action == MotionEvent.ACTION_DOWN){
+                    VibrateUtils.getInstance(getContext()).vibrateShortly();
                     handleDownX = event.getRawX();
                 }else if(action == MotionEvent.ACTION_MOVE){
                     if(Math.abs(event.getRawX() - handleDownX) > 30){

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.utils.VibrateUtils;
 import cn.kli.utils.klilog;
 
 public class QuickMenuItemView extends LinearLayout {
@@ -21,6 +22,9 @@ public class QuickMenuItemView extends LinearLayout {
     
     private Rect mRect = new Rect();
     private QuickMenuItem mItem;
+    
+    private boolean mFocused;
+    private boolean mLastFocused;
     
     public QuickMenuItemView(Context context) {
         super(context);
@@ -95,12 +99,17 @@ public class QuickMenuItemView extends LinearLayout {
     public boolean onTouchChanged(int x, int y){
         getGlobalVisibleRect(mRect);
         boolean res = mRect.contains(x, y);
+        mLastFocused = mFocused;
+        mFocused = res;
         onMotionOver(res);
         return res;
     }
 
     private void onMotionOver(boolean over){
         setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
+        if(!mLastFocused && over){
+            VibrateUtils.getInstance(getContext()).vibrateShortly();
+        }
     }
     
     public void onSelect(){
