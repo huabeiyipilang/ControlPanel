@@ -7,7 +7,9 @@ import android.media.AudioManager;
 import android.widget.Toast;
 import cn.kli.controlpanel.BlackActivity;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.base.BaseFloatWindow;
 import cn.kli.controlpanel.base.BaseFragment;
+import cn.kli.controlpanel.base.FloatWindowManager;
 import cn.kli.controlpanel.module.floatpanel.FloatManager;
 import cn.kli.controlpanel.modules.FlashLightManager;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
@@ -60,6 +62,18 @@ public class MenuItemFactory {
                 intent.putExtra("fragment", cls);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
+            }
+        });
+        return item;
+    }
+
+    //float window Item
+    public QuickMenuItem getWindowItem(int icon, String title, final Class<? extends BaseFloatWindow> cls){
+        QuickMenuItem item = new QuickMenuItem(icon, title);
+        item.setOnSelectRunnable(new Runnable(){
+            @Override
+            public void run() {
+                FloatWindowManager.startWindow(mContext, cls);
             }
         });
         return item;

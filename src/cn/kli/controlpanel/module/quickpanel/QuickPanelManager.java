@@ -1,20 +1,11 @@
 package cn.kli.controlpanel.module.quickpanel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.Gravity;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.about.AboutFragment;
-import cn.kli.controlpanel.module.floatpanel.FloatManager;
-import cn.kli.controlpanel.module.floatpanel.FloatPanelService;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.State;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.StateChangeListener;
-import cn.kli.controlpanel.modules.OneKeyLockScreen;
-import cn.kli.controlpanel.settings.SettingsFragment;
 import cn.kli.utils.klilog;
 
 public class QuickPanelManager{
@@ -113,7 +104,7 @@ public class QuickPanelManager{
         // 锁屏
         QuickMenuItem lockMenu = factory.getLockScreenItem();
         
-        QuickMenuItem aboutMenu = factory.getFragmentItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutFragment.class);
+        QuickMenuItem aboutMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutWindow.class);
         QuickMenuItem settingsMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, R.string.group_settings);
         settingsMenu.addChild(aboutMenu);
         
