@@ -13,14 +13,14 @@ public class SettingItemEntry extends SettingItem{
 	public SettingItemEntry(Context context, Class<?> cls) {
 		super(context);
 		mTarget = cls;
-		init();
 	}
-	
-	private void init(){
-		LayoutInflater inflater = LayoutInflater.from(getContext());
-		inflater.inflate(R.layout.settings_item_entry, this);
-		mTitle = (TextView)findViewById(R.id.tv_title);
-	}
+
+    @Override
+    void onViewInit() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        inflater.inflate(R.layout.settings_item_entry, this);
+        mTitle = (TextView)findViewById(R.id.tv_title);
+    }
 
 	public void setTitle(int res){
 		mTitle.setText(res);

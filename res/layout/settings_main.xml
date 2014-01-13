@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:controlpanel="http://schemas.android.com/apk/res/cn.kli.controlpanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <cn.kli.controlpanel.settings.SettingItemToggle
+        android:id="@+id/sit_notif_network_speed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        controlpanel:setting_title="test"
+        >
+        
+    </cn.kli.controlpanel.settings.SettingItemToggle>
+
+</LinearLayout>

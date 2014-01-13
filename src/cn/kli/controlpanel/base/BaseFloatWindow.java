@@ -14,6 +14,7 @@ public class BaseFloatWindow {
     private WindowManager mWinManager;
     private WindowManager.LayoutParams mParams;
     private View mRootView;
+    private ViewGroup mContentView;
     private Context mContext;
 
     public BaseFloatWindow() {
@@ -67,7 +68,14 @@ public class BaseFloatWindow {
     }
     
     protected ViewGroup getContentView(){
-        return (ViewGroup)mRootView.findViewById(R.id.fl_content);
+        if(mContentView == null){
+            mContentView = (ViewGroup)mRootView.findViewById(R.id.fl_content);
+        }
+        return mContentView;
+    }
+    
+    protected View findViewById(int resId){
+        return getContentView().findViewById(resId);
     }
 
     private void initParams() {

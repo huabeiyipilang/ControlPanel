@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.about.AboutWindow;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.State;
 import cn.kli.controlpanel.module.quickpanel.QuickPanelView.StateChangeListener;
+import cn.kli.controlpanel.settings.SettingsWindow;
 import cn.kli.utils.klilog;
 
 public class QuickPanelManager{
@@ -105,7 +107,7 @@ public class QuickPanelManager{
         QuickMenuItem lockMenu = factory.getLockScreenItem();
         
         QuickMenuItem aboutMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutWindow.class);
-        QuickMenuItem settingsMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, R.string.group_settings);
+        QuickMenuItem settingsMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings), SettingsWindow.class);
         settingsMenu.addChild(aboutMenu);
         
         //root menu
