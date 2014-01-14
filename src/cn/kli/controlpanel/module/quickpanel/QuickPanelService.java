@@ -78,6 +78,9 @@ public class QuickPanelService extends Service {
             mHandler.removeMessages(MSG_UPDATE_NOTIFICATION);
             mHandler.sendEmptyMessageDelayed(MSG_UPDATE_NOTIFICATION, getNotificationUpdateDuring());
         }else{
+            if(mNetworkSpeedManager != null){
+                mNetworkSpeedManager = null;
+            }
             notif.icon = R.drawable.ic_logo;
             notif.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
             notif.setLatestEventInfo(this, 

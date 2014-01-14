@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import cn.kli.controlpanel.module.quickpanel.QuickPanelService;
 import cn.kli.utils.klilog;
 
 public class AppBroadCastReceiver extends BroadcastReceiver {
@@ -19,8 +20,9 @@ public class AppBroadCastReceiver extends BroadcastReceiver {
 		} 
 		
 		if(action.equals(Intent.ACTION_BOOT_COMPLETED)){
-			intent_service.putExtra(MainService.SERVICE_CMD, MainService.CMD_BOOT_COMPLETED);
-			context.startService(intent_service);
+//			intent_service.putExtra(MainService.SERVICE_CMD, MainService.CMD_BOOT_COMPLETED);
+//			context.startService(intent_service);
+		    context.startService(new Intent(context, QuickPanelService.class));
 		}
 	}
 

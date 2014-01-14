@@ -8,7 +8,7 @@
         android:id="@+id/sit_notif_network_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        controlpanel:setting_title="test"
+        controlpanel:setting_title="@string/settings_show_notification_network_speed"
         >
         
     </cn.kli.controlpanel.settings.SettingItemToggle>
