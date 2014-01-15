@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="close">关闭</string>
 
     <string name="hello">Hello World, ControlPanelActivity!</string>
     <string name="app_name">控制面板</string>

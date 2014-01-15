@@ -4,37 +4,27 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.module.quickpanel.WindowRootView;
+import cn.kli.controlpanel.module.quickpanel.WindowRootView.OnBackKeyPressedListener;
 
-public class BaseFloatWindow {
+public class BaseFloatWindow{
 
     private WindowManager mWinManager;
     private WindowManager.LayoutParams mParams;
-    private View mRootView;
+    private WindowRootView mRootView;
     private ViewGroup mContentView;
     private Context mContext;
-
-    public BaseFloatWindow() {
-    }
     
     void setContext(Context context){
         mContext = context;
-        mRootView = LayoutInflater.from(context).inflate(R.layout.window_base, null);
-        mRootView.setOnClickListener(new OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                hide();
-            }
-            
-        });
-        mRootView.findViewById(R.id.bt_close).setOnClickListener(new OnClickListener() {
+        mRootView = (WindowRootView)LayoutInflater.from(context).inflate(R.layout.window_base, null);
+        mRootView.setOnBackKeyPressedListener(new OnBackKeyPressedListener() {
             
             @Override
-            public void onClick(View v) {
+            public void OnBackKeyPressed() {
                 hide();
             }
         });
