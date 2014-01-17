@@ -1,10 +1,16 @@
 package cn.kli.controlpanel.module.quickpanel;
 
+import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
+import com.actionbarsherlock.internal.nineoldandroids.animation.ValueAnimator;
+
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +31,7 @@ public class QuickMenuItemView extends LinearLayout {
     
     private boolean mFocused;
     private boolean mLastFocused;
+    private ValueAnimator mFocuseAnim;
     
     public QuickMenuItemView(Context context) {
         super(context);
@@ -60,14 +67,17 @@ public class QuickMenuItemView extends LinearLayout {
     
     private void init(){
         LayoutInflater.from(getContext()).inflate(R.layout.quick_menu_item, this, true);
-        setBackgroundResource(R.color.quick_item_bg_nomarl);
         initView();
+        setBackgroundColor(getResources().getColor(R.color.quick_item_bg_nomarl));
     }
 
     private void initView(){
         mIcon = (ImageView)findViewById(R.id.iv_icon);
         mTitle = (TextView)findViewById(R.id.tv_title);
         mToggle = (CheckBox)findViewById(R.id.cb_toggle);
+        mFocuseAnim = ObjectAnimator.ofInt(this, "backgroundColor", 
+                getResources().getColor(R.color.quick_item_bg_nomarl), getResources().getColor(R.color.quick_item_bg_focus));
+        mFocuseAnim.setDuration(200);
     }
     
     public void setMenuItem(QuickMenuItem item){
@@ -106,9 +116,13 @@ public class QuickMenuItemView extends LinearLayout {
     }
 
     private void onMotionOver(boolean over){
-        setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
+//        setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
+        
         if(!mLastFocused && over){
             VibrateUtils.getInstance(getContext()).vibrateShortly();
+            mFocuseAnim.start();
+        }else if(mLastFocused && !over){
+            mFocuseAnim.reverse();
         }
     }
     
