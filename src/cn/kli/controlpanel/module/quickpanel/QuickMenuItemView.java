@@ -116,13 +116,13 @@ public class QuickMenuItemView extends LinearLayout {
     }
 
     private void onMotionOver(boolean over){
-//        setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
+        setBackgroundResource(over ? R.color.quick_item_bg_focus :R.color.quick_item_bg_nomarl);
         
         if(!mLastFocused && over){
             VibrateUtils.getInstance(getContext()).vibrateShortly();
-            mFocuseAnim.start();
+//            mFocuseAnim.start();
         }else if(mLastFocused && !over){
-            mFocuseAnim.reverse();
+//            mFocuseAnim.reverse();
         }
     }
     
