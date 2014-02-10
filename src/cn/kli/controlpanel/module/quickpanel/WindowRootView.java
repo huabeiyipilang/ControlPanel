@@ -31,7 +31,8 @@ public class WindowRootView extends FrameLayout {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(mListener != null && event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+        if(mListener != null && event.getKeyCode() == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN){
             mListener.OnBackKeyPressed();
             return true;
         }

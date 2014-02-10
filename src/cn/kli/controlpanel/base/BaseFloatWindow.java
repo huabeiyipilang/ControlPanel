@@ -15,6 +15,9 @@ import cn.kli.controlpanel.module.quickpanel.WindowRootView;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView.OnBackKeyPressedListener;
 
 public class BaseFloatWindow{
+    
+    public static final int TYPE_WINDOW = 1;
+    public static final int TYPE_WRAP_CONTENT = 2;
 
     private WindowManager mWinManager;
     private WindowManager.LayoutParams mParams;
@@ -22,6 +25,8 @@ public class BaseFloatWindow{
     private ViewGroup mWindowView;
     private ViewGroup mContentView;
     private Context mContext;
+    private int type = TYPE_WINDOW;
+    private boolean mAnimating;
     
     void setContext(Context context){
         mContext = context;
@@ -31,17 +36,21 @@ public class BaseFloatWindow{
             
             @Override
             public void OnBackKeyPressed() {
+                if(mAnimating){
+                    return;
+                }
                 Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_out);
                 anim.setAnimationListener(new AnimationListener(){
 
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        
+                        mAnimating = true;
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         hide();
+                        mAnimating = false;
                     }
 
                     @Override
@@ -86,6 +95,15 @@ public class BaseFloatWindow{
         ((TextView)mRootView.findViewById(R.id.tv_window_title)).setText(title);
     }
     
+    protected void setType(int type){
+        switch(type){
+        case TYPE_WINDOW:
+            break;
+        case TYPE_WRAP_CONTENT:
+            break;
+        }
+    }
+    
     protected ViewGroup getContentView(){
         if(mContentView == null){
             mContentView = (ViewGroup)mRootView.findViewById(R.id.fl_content);
@@ -119,12 +137,13 @@ public class BaseFloatWindow{
 
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        
+                        mAnimating = true;
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         onStart();
+                        mAnimating = false;
                     }
 
                     @Override
