@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView;
@@ -96,12 +97,16 @@ public class BaseFloatWindow{
     }
     
     protected void setType(int type){
+        LayoutParams lp = (LayoutParams) mWindowView.getLayoutParams();
         switch(type){
         case TYPE_WINDOW:
+            lp.height = LayoutParams.MATCH_PARENT;
             break;
         case TYPE_WRAP_CONTENT:
+            lp.height = LayoutParams.WRAP_CONTENT;
             break;
         }
+        mWindowView.setLayoutParams(lp);
     }
     
     protected ViewGroup getContentView(){
