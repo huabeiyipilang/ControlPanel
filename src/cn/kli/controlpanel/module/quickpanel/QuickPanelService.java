@@ -24,6 +24,7 @@ public class QuickPanelService extends Service {
     public static final int MSG_UPDATE_NOTIFICATION = 2;
     
     private NetworkSpeedManager mNetworkSpeedManager;
+    private Notification mNotification = new Notification();
 	
 	private Handler mHandler = new Handler(){
 
@@ -50,6 +51,7 @@ public class QuickPanelService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		initNotification();
 	}
 
 	@Override
@@ -59,35 +61,38 @@ public class QuickPanelService extends Service {
 		return START_STICKY;
 	}
 	
+	private void initNotification(){
+	    mNotification = new Notification();
+        mNotification.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
+	    
+	}
+	
 	private void updateNotification(){
 	    boolean networkSpeed = Prefs.getPrefs(this).getBoolean(SettingsWindow.SETTING_NOTIFI_NETWORK_SPEED, false);
 //        Intent intent_show = new Intent(this, FloatPanelLauncher.class);
 //        PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent_show,0);
-        Notification notif = new Notification();
         if(networkSpeed){
             if(mNetworkSpeedManager == null){
                 mNetworkSpeedManager = new NetworkSpeedManager();
             }
-            notif.icon = mNetworkSpeedManager.getIcon();
-            notif.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
-            notif.largeIcon = Conversion.drawable2Bitmap(getResources().getDrawable(R.drawable.ic_logo));
+            mNotification.icon = mNetworkSpeedManager.getIcon();
+            mNotification.largeIcon = Conversion.drawable2Bitmap(getResources().getDrawable(R.drawable.ic_logo));
             RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.notification_main);
             contentView.setTextViewText(R.id.tv_title, getString(R.string.app_name));
-            notif.contentView = contentView;
-            startForeground(1001, notif);
+            mNotification.contentView = contentView;
+            startForeground(1001, mNotification);
             mHandler.removeMessages(MSG_UPDATE_NOTIFICATION);
             mHandler.sendEmptyMessageDelayed(MSG_UPDATE_NOTIFICATION, getNotificationUpdateDuring());
         }else{
             if(mNetworkSpeedManager != null){
                 mNetworkSpeedManager = null;
             }
-            notif.icon = R.drawable.ic_logo;
-            notif.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
-            notif.setLatestEventInfo(this, 
+            mNotification.icon = R.drawable.ic_logo;
+            mNotification.setLatestEventInfo(this, 
                     getResources().getText(R.string.app_name), 
                     getResources().getText(R.string.notification_summary), 
                     null);
-            startForeground(1001, notif);
+            startForeground(1001, mNotification);
         }
 	}
 	
