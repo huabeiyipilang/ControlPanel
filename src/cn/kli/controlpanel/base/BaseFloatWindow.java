@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView.OnBackKeyPressedListener;
@@ -15,17 +18,38 @@ public class BaseFloatWindow{
     private WindowManager mWinManager;
     private WindowManager.LayoutParams mParams;
     private WindowRootView mRootView;
+    private ViewGroup mWindowView;
     private ViewGroup mContentView;
     private Context mContext;
     
     void setContext(Context context){
         mContext = context;
         mRootView = (WindowRootView)LayoutInflater.from(context).inflate(R.layout.window_base, null);
+        mWindowView = (ViewGroup)mRootView.findViewById(R.id.ll_window);
         mRootView.setOnBackKeyPressedListener(new OnBackKeyPressedListener() {
             
             @Override
             public void OnBackKeyPressed() {
-                hide();
+                Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_out);
+                anim.setAnimationListener(new AnimationListener(){
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        hide();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        
+                    }
+                    
+                });
+                mWindowView.startAnimation(anim);
             }
         });
         mWinManager = (WindowManager) mContext.getSystemService("window");
@@ -81,8 +105,27 @@ public class BaseFloatWindow{
     public void show(){
         if(mWinManager != null && mParams != null){
             try {
+                Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_in);
+                anim.setAnimationListener(new AnimationListener(){
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        onStart();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        
+                    }
+                    
+                });
                 mWinManager.addView(mRootView, mParams);
-                onStart();
+                mWindowView.startAnimation(anim);
             } catch (Exception e) {
                 e.printStackTrace();
             }
