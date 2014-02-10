@@ -17,6 +17,7 @@ public class SettingsWindow extends BaseFloatWindow implements OnCheckedChangeLi
     protected void onCreate() {
         super.onCreate();
         setContentView(R.layout.settings_main);
+        setTitle(getString(R.string.setting));
         initViews();
     }
 

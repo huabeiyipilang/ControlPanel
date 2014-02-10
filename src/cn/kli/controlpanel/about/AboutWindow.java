@@ -1,6 +1,7 @@
 package cn.kli.controlpanel.about;
 
 import android.webkit.WebView;
+import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.base.BaseFloatWindow;
 
 public class AboutWindow extends BaseFloatWindow {
@@ -11,6 +12,7 @@ public class AboutWindow extends BaseFloatWindow {
         WebView view = new WebView(getContext());
         view.loadUrl("file:///android_asset/html/about.html");
         setContentView(view);
+        setTitle(getString(R.string.about));
     }
 
 

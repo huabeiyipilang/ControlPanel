@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView;
 import cn.kli.controlpanel.module.quickpanel.WindowRootView.OnBackKeyPressedListener;
@@ -81,6 +82,10 @@ public class BaseFloatWindow{
         LayoutInflater.from(mContext).inflate(resId, getContentView());
     }
     
+    protected void setTitle(String title){
+        ((TextView)mRootView.findViewById(R.id.tv_window_title)).setText(title);
+    }
+    
     protected ViewGroup getContentView(){
         if(mContentView == null){
             mContentView = (ViewGroup)mRootView.findViewById(R.id.fl_content);
@@ -90,6 +95,10 @@ public class BaseFloatWindow{
     
     protected View findViewById(int resId){
         return getContentView().findViewById(resId);
+    }
+    
+    protected String getString(int resId){
+        return mContext.getString(resId);
     }
 
     private void initParams() {
