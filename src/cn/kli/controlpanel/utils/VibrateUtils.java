@@ -1,5 +1,7 @@
 package cn.kli.controlpanel.utils;
 
+import cn.kli.controlpanel.Prefs;
+import cn.kli.controlpanel.settings.SettingsWindow;
 import android.content.Context;
 import android.os.Vibrator;
 
@@ -8,8 +10,10 @@ public class VibrateUtils {
     private static VibrateUtils sInstance;
     
     private Vibrator mVibrator;
+    private Context mContext;
     
     private VibrateUtils(Context context){
+        mContext = context;
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
     
@@ -21,7 +25,9 @@ public class VibrateUtils {
     }
     
     public void vibrateShortly(){
-        mVibrator.vibrate(LENGTH_SHORT);
+        if(Prefs.getPrefs(mContext).getBoolean(SettingsWindow.SETTING_MENU_VIBRATE, false)){
+            mVibrator.vibrate(LENGTH_SHORT);
+        }
     }
     
 }

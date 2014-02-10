@@ -9,8 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         controlpanel:setting_title="@string/settings_show_notification_network_speed"
-        >
+        />
         
-    </cn.kli.controlpanel.settings.SettingItemToggle>
+    <cn.kli.controlpanel.settings.SettingItemToggle
+        android:id="@+id/sit_menu_vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        controlpanel:setting_title="@string/settings_menu_vibrate"
+        />
 
 </LinearLayout>

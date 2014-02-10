@@ -32,6 +32,7 @@
     <string name="lockscreen_added_toast">已在桌面创建快捷方式</string>
     <string name="get_device_admin_toast">请点击“激活”，以启用设备。</string>
 	<string name="settings_show_notification_network_speed">状态栏图标显示网速</string>
+	<string name="settings_menu_vibrate">震动反馈</string>
     
 	<string name="sync_failed">同步失败！</string>
 	<string name="checking">正在检查</string>
