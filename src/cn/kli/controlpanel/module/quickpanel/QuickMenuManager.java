@@ -3,6 +3,7 @@ package cn.kli.controlpanel.module.quickpanel;
 import android.content.Context;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.about.AboutWindow;
+import cn.kli.controlpanel.device.SoundWindow;
 import cn.kli.controlpanel.settings.SettingsWindow;
 
 public class QuickMenuManager {
@@ -16,7 +17,7 @@ public class QuickMenuManager {
         MenuItemFactory factory = new MenuItemFactory(mContext);
 
         // 音量
-        QuickMenuItem soundMenu = factory.getSoundItem();
+        QuickMenuItem soundMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_sound), SoundWindow.class);
 
         // 铃声
         QuickMenuItem ringerMenu = factory.getFolderItem(R.drawable.ic_audio_ring_notif, R.string.module_ringer_mode);
@@ -33,7 +34,9 @@ public class QuickMenuManager {
         QuickMenuItem lockMenu = factory.getLockScreenItem();
 
         QuickMenuItem aboutMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutWindow.class);
-        QuickMenuItem settingsMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings), SettingsWindow.class);
+        QuickMenuItem preferenceMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.setting_preference), SettingsWindow.class);
+        QuickMenuItem settingsMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings));
+        settingsMenu.addChild(preferenceMenu);
         settingsMenu.addChild(aboutMenu);
 
         //root menu

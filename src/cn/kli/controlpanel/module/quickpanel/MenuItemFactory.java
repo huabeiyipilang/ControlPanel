@@ -83,19 +83,6 @@ public class MenuItemFactory {
     public QuickMenuItem getLockScreenItem(){
         return getActivityItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.module_lock_screen), OneKeyLockScreen.class);
     }
-    
-    //音量
-    public QuickMenuItem getSoundItem(){
-        QuickMenuItem item = new QuickMenuItem(R.drawable.ic_audio_alarm, mContext.getString(R.string.module_sound));
-        item.setOnSelectRunnable(new Runnable() {
-            
-            @Override
-            public void run() {
-                FloatManager.getInstance(mContext).showPanel();
-            }
-        });
-        return item;
-    }
 
     //音量 标准模式
     public QuickMenuItem getRingerModeNormalItem(){

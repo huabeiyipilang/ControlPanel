@@ -61,6 +61,7 @@
 	<!-- Settings Group -->
 	<string name="group_settings">设置</string>
 	<string name="show_tips">显示提示信息</string>
+	<string name="setting_preference">偏好</string>
 	
 	<!-- About Group -->
 	<string name="group_about">关于</string>
