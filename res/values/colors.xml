@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="translucent_background_dark">#E0000000</color>
-    <color name="translucent_background">#C0000000</color>
+    <color name="translucent_background_dark">#EE000000</color>
+    <color name="translucent_background">#E0000000</color>
     <color name="translucent_blue">#C00099FF</color>
     <color name="tag_view_bg">#C00099FF</color>
     <color name="tag_view_bg_pressed">#FF0099FF</color>

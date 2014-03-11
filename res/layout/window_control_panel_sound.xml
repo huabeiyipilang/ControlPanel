@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/module_sound" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/setting_divider"/>
+
+    <RadioGroup
+        android:id="@+id/rg_ringer_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <RadioButton
+            android:id="@+id/rb_ringer_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ringer_mode_normal" />
+
+        <RadioButton
+            android:id="@+id/rb_ringer_silent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ringer_mode_silent" />
+
+        <RadioButton
+            android:id="@+id/rb_ringer_vibrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ringer_mode_vibrate" />
+    </RadioGroup>
+
+    <cn.kli.controlwidgets.MusicControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <cn.kli.controlwidgets.AlarmControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <cn.kli.controlwidgets.RingControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/cb_silent_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/silent_all"
+        android:visibility="gone"/>
+</LinearLayout>

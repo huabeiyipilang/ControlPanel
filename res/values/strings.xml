@@ -17,6 +17,9 @@
     <string name="no">否</string>
     <string name="setting">设置</string>
     <string name="about">关于</string>
+    <string name="help">帮助</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="airplane_mode">飞行模式</string>
     
     <!-- launcher -->
     <string name="create_icon_on_launcher">拖动至桌面</string>
@@ -160,6 +163,7 @@
     <string name="ringer_mode_silent">静音模式</string>
     <string name="current">（当前）</string>
     <string name="ringer_mode_change">铃声切换为 </string>
+    <string name="silent_all">完全静音</string>
     
     <string name="flash_light">手电筒</string>
     <string name="flash_light_on">手电筒（已开启）</string>

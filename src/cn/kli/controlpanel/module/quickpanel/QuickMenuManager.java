@@ -3,6 +3,7 @@ package cn.kli.controlpanel.module.quickpanel;
 import android.content.Context;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.about.AboutWindow;
+import cn.kli.controlpanel.device.ControlPanelWindow;
 import cn.kli.controlpanel.device.SoundWindow;
 import cn.kli.controlpanel.settings.SettingsWindow;
 
@@ -16,36 +17,21 @@ public class QuickMenuManager {
     QuickMenuItem getMenuFromConfig(){
         MenuItemFactory factory = new MenuItemFactory(mContext);
 
-        // 音量
-        QuickMenuItem soundMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_sound), SoundWindow.class);
-
-        // 铃声
-        QuickMenuItem ringerMenu = factory.getFolderItem(R.drawable.ic_audio_ring_notif, R.string.module_ringer_mode);
-        ringerMenu.addChild(factory.getRingerModeNormalItem());
-        ringerMenu.addChild(factory.getRingerModeSilentItem());
-        ringerMenu.addChild(factory.getRingerModeVibrateItem());
-
-        // 网络
-        QuickMenuItem networkMenu = factory.getFolderItem(R.drawable.ic_settings_display, R.string.module_network);
-        networkMenu.addChild(factory.getMobileToggleItem());
-        networkMenu.addChild(factory.getWifiToggleItem());
-
         // 锁屏
         QuickMenuItem lockMenu = factory.getLockScreenItem();
+        QuickMenuItem controlPanelMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.setting), ControlPanelWindow.class);
 
         QuickMenuItem aboutMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.module_about), AboutWindow.class);
         QuickMenuItem preferenceMenu = factory.getWindowItem(R.drawable.ic_audio_alarm, getString(R.string.setting_preference), SettingsWindow.class);
-        QuickMenuItem settingsMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, getString(R.string.group_settings));
-        settingsMenu.addChild(preferenceMenu);
-        settingsMenu.addChild(aboutMenu);
+        QuickMenuItem helpMenu = factory.getFolderItem(R.drawable.ic_audio_alarm, getString(R.string.help));
+        helpMenu.addChild(preferenceMenu);
+        helpMenu.addChild(aboutMenu);
 
         //root menu
         QuickMenuItem root = new QuickMenuItem();
-        root.addChild(ringerMenu);
-        root.addChild(networkMenu);
-        root.addChild(soundMenu);
+        root.addChild(controlPanelMenu);
         root.addChild(lockMenu);
-        root.addChild(settingsMenu);
+        root.addChild(helpMenu);
         root.level = -1;
         return root;
 

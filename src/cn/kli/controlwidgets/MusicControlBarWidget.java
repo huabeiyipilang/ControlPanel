@@ -20,9 +20,13 @@ public class MusicControlBarWidget extends AControlBar{
 	}
 	
 	private void init(Context context){
-		am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+	    if(!isInEditMode()){
+	        am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+	    }
 		setIcon(R.drawable.ic_audio_vol);
-		setBar(am.getStreamMaxVolume(TYPE), am.getStreamVolume(TYPE));
+        if(!isInEditMode()){
+            setBar(am.getStreamMaxVolume(TYPE), am.getStreamVolume(TYPE));
+        }
 		setDescription(R.string.description_music);
 	}
 
