@@ -2,6 +2,7 @@ package cn.kli.controlpanel.device;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.provider.Settings;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -27,6 +28,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
     private CheckBox mWifi;
     private CheckBox mMobile;
     private CheckBox mAirPlane;
+    private CheckBox mDisplayRotation;
 
     @Override
     protected void onCreate() {
@@ -61,6 +63,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
         mWifi = (CheckBox)findViewById(R.id.cb_wifi);
         mMobile = (CheckBox)findViewById(R.id.cb_mobile);
         mAirPlane = (CheckBox)findViewById(R.id.cb_airplane);
+        mDisplayRotation = (CheckBox)findViewById(R.id.cb_display_rotation);
         
         switch(mAudioManager.getRingerMode()){
         case AudioManager.RINGER_MODE_NORMAL:
@@ -137,7 +140,17 @@ public class ControlPanelWindow extends BaseFloatWindow {
                 mNetworkManager.toggleAirplaneMode(isChecked);
             }
         });
-        
+
+        int flag = Settings.System.getInt(getContext().getContentResolver(),Settings.System.ACCELEROMETER_ROTATION,0);
+        mDisplayRotation.setChecked(flag == 1);
+        mDisplayRotation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Settings.System.putInt(getContext().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 
+                        isChecked ? 1 : 0);
+            }
+        });
     }
     
     private void updateSilentAll(){
