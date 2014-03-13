@@ -3,6 +3,10 @@ package cn.kli.controlpanel.device;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -29,6 +33,8 @@ public class ControlPanelWindow extends BaseFloatWindow {
     private CheckBox mMobile;
     private CheckBox mAirPlane;
     private CheckBox mDisplayRotation;
+    private CheckBox mScreenAutoBrightness;
+    private View mBrightnessWidgets;
 
     @Override
     protected void onCreate() {
@@ -64,6 +70,8 @@ public class ControlPanelWindow extends BaseFloatWindow {
         mMobile = (CheckBox)findViewById(R.id.cb_mobile);
         mAirPlane = (CheckBox)findViewById(R.id.cb_airplane);
         mDisplayRotation = (CheckBox)findViewById(R.id.cb_display_rotation);
+        mScreenAutoBrightness = (CheckBox)findViewById(R.id.cb_auto_brightness);
+        mBrightnessWidgets = findViewById(R.id.cw_screen_brightness);
         
         switch(mAudioManager.getRingerMode()){
         case AudioManager.RINGER_MODE_NORMAL:
@@ -141,8 +149,8 @@ public class ControlPanelWindow extends BaseFloatWindow {
             }
         });
 
-        int flag = Settings.System.getInt(getContext().getContentResolver(),Settings.System.ACCELEROMETER_ROTATION,0);
-        mDisplayRotation.setChecked(flag == 1);
+        int rotation = Settings.System.getInt(getContext().getContentResolver(),Settings.System.ACCELEROMETER_ROTATION,0);
+        mDisplayRotation.setChecked(rotation == 1);
         mDisplayRotation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             
             @Override
@@ -151,6 +159,45 @@ public class ControlPanelWindow extends BaseFloatWindow {
                         isChecked ? 1 : 0);
             }
         });
+
+        int autoBrightness = Settings.System.getInt(getContext().getContentResolver(),Settings.System.SCREEN_BRIGHTNESS_MODE,0);
+        mScreenAutoBrightness.setChecked(autoBrightness == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        mScreenAutoBrightness.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Settings.System.putInt(getContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, 
+                        isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                                : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                if(isChecked){
+                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_left);
+                    anim.setAnimationListener(new AnimationListener() {
+                        
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            
+                        }
+                        
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            
+                        }
+                        
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            mBrightnessWidgets.setVisibility(View.GONE);
+                        }
+                    });
+                    mBrightnessWidgets.startAnimation(anim);
+                }else{
+                    mBrightnessWidgets.setVisibility(View.VISIBLE);
+                    mBrightnessWidgets.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right));
+                }
+            }
+        });
+        
+        mBrightnessWidgets.setVisibility(autoBrightness == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                ? View.GONE : View.VISIBLE);
     }
     
     private void updateSilentAll(){

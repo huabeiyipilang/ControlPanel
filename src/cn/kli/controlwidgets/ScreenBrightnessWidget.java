@@ -41,9 +41,6 @@ public class ScreenBrightnessWidget extends AControlBar{
 		if(value == 0) return;
 		android.provider.Settings.System.putInt(mContext.getContentResolver(), 
 				android.provider.Settings.System.SCREEN_BRIGHTNESS, value);
-		WindowManager.LayoutParams lp = ((Activity)mContext).getWindow().getAttributes();
-		lp.screenBrightness = Float.valueOf(value)*(1f/255f);
-		((Activity)mContext).getWindow().setAttributes(lp);
 	}
 
 }
