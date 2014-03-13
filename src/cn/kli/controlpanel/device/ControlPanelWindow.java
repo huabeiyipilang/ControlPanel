@@ -1,5 +1,6 @@
 package cn.kli.controlpanel.device;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
@@ -21,6 +22,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
     //utils
     private AudioManager mAudioManager;
     private NetworkManager mNetworkManager;
+    private BluetoothAdapter mBluetoothManager;
     
     //views
     private RadioGroup mRingerGroup;
@@ -45,6 +47,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
         
         mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
         mNetworkManager = new NetworkManager(getContext());
+        mBluetoothManager = BluetoothAdapter.getDefaultAdapter();
         
         initViews();
     }
@@ -105,11 +108,16 @@ public class ControlPanelWindow extends BaseFloatWindow {
             
         });
         
+        mBluetooth.setChecked(mBluetoothManager.isEnabled());
         mBluetooth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                
+                if(isChecked){
+                    mBluetoothManager.enable();
+                }else{
+                    mBluetoothManager.disable();
+                }
             }
         });
         
