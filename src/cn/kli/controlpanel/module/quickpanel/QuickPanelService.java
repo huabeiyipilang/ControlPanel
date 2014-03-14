@@ -68,7 +68,7 @@ public class QuickPanelService extends Service {
 	}
 	
 	private void updateNotification(){
-	    boolean networkSpeed = Prefs.getPrefs(this).getBoolean(SettingsWindow.SETTING_NOTIFI_NETWORK_SPEED, false);
+	    boolean networkSpeed = Prefs.getPrefs().getBoolean(Prefs.SETTING_NOTIFI_NETWORK_SPEED, false);
 //        Intent intent_show = new Intent(this, FloatPanelLauncher.class);
 //        PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent_show,0);
         if(networkSpeed){

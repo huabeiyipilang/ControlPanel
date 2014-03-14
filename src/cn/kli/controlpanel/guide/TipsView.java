@@ -115,7 +115,7 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 			}
 			
 		});
-		SharedPreferences prefs = Prefs.getPrefs(getContext());
+		SharedPreferences prefs = Prefs.getPrefs();
 		boolean show = prefs.getBoolean(Prefs.PREF_GUIDE_SHOW, true);
 		this.setVisibility(show ? View.VISIBLE : View.GONE);
 	}
@@ -147,7 +147,7 @@ public class TipsView extends LinearLayout implements View.OnClickListener {
 		switch(view.getId()){
 		case R.id.iv_tips_close:
 			this.setVisibility(View.GONE);
-			SharedPreferences prefs = Prefs.getPrefs(getContext());
+			SharedPreferences prefs = Prefs.getPrefs();
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putBoolean(Prefs.PREF_GUIDE_SHOW, false);
 			editor.commit();

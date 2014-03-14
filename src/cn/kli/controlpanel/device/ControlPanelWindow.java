@@ -199,7 +199,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
                     mBrightnessWidgets.startAnimation(anim);
                 }else{
                     mBrightnessWidgets.setVisibility(View.VISIBLE);
-                    mBrightnessWidgets.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right));
+                    mBrightnessWidgets.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_left));
                 }
             }
         });

@@ -5,9 +5,10 @@
 
     <LinearLayout
         android:id="@+id/ll_handle"
-        android:layout_width="15dp"
-        android:layout_height="300dp"
-        android:orientation="vertical" >
+        android:layout_width="10dp"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@color/translucent_background_dark" >
     </LinearLayout>
 
     <LinearLayout

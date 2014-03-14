@@ -21,9 +21,11 @@
 			<View android:layout_height="20dp"
 			    android:layout_width="match_parent"/>
 			<include layout="@layout/window_control_panel_network"/>
+			
 			<View android:layout_height="20dp"
 			    android:layout_width="match_parent"/>
-			<include layout="@layout/window_control_panel_other"/>
+			<include layout="@layout/window_control_panel_other"
+			    android:visibility="gone"/>
             
         </LinearLayout>
     </ScrollView>

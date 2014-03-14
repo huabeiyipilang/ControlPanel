@@ -34,6 +34,7 @@ public class FloatIndicator extends FloatView{
 	private TextView mIndicatorDisplay;
 	private SharedPreferences mPref;
 	private boolean mIsStatusbarMode = false;
+    private SharedPreferences mPreference; 
 	
 	private Handler mHandler = new Handler(){
 
@@ -83,13 +84,14 @@ public class FloatIndicator extends FloatView{
 		//init lock
 		boolean lock = mPref.getBoolean(SettingsActivity.KEY_PREF_INDICATOR_LOCK, false);
 		lock(lock);
+        mPreference = Prefs.getPrefs();
 	}
 	
 	public void setStatusbarMode(boolean enable){
 		mIsStatusbarMode = enable;
 		if(mIsStatusbarMode){
 			UIUtils.isOrentationPortrait(getContext());
-			int statusbarHeight = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
+			int statusbarHeight = mPreference.getInt(Prefs.PREF_STATUSBAR_HEIGHT, 0);
 			klilog.info("statusbarHeight = "+statusbarHeight);
 			setLocation(0, -getScreenHeight()/2 + statusbarHeight/2);
 			setBgColor(Color.TRANSPARENT);
@@ -110,8 +112,8 @@ public class FloatIndicator extends FloatView{
 			setStatusbarMode(mIsStatusbarMode);
 		}else{
 			mScreenWidth = getScreenWidth();
-			int x = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_X, -1);
-			int y = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_Y, -1);
+			int x = mPreference.getInt(Prefs.PREF_INDICATOR_X, -1);
+			int y = mPreference.getInt(Prefs.PREF_INDICATOR_Y, -1);
 			if(x == -1 && y == -1){
 				//���ó�ʼλ��
 				setLocation(mScreenWidth / 2, 0);
@@ -160,7 +162,7 @@ public class FloatIndicator extends FloatView{
 			x = x > 0 ? mScreenWidth / 2 : - mScreenWidth / 2;
 		}
 		super.setLocation(x, y);
-		Editor editor = Prefs.getPrefs(getContext()).edit();
+		Editor editor = mPreference.edit();
 		editor.putInt(Prefs.PREF_INDICATOR_X, (int) x);
 		editor.putInt(Prefs.PREF_INDICATOR_Y, (int) y);
 		editor.commit();
@@ -188,15 +190,15 @@ public class FloatIndicator extends FloatView{
 			return;
 		}
 		mScreenWidth = getScreenWidth();
-		int x = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_X, -1);
-		int y = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_INDICATOR_Y, -1);
+		int x = mPreference.getInt(Prefs.PREF_INDICATOR_X, -1);
+		int y = mPreference.getInt(Prefs.PREF_INDICATOR_Y, -1);
 		int screenWidth = 0, screenHeight = 0;
 		if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
-			screenWidth = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
-			screenHeight = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+			screenWidth = mPreference.getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenHeight = mPreference.getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
         }else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-			screenHeight= Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_WIDTH, -1);
-			screenWidth = Prefs.getPrefs(getContext()).getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
+			screenHeight= mPreference.getInt(Prefs.PREF_SCREEN_WIDTH, -1);
+			screenWidth = mPreference.getInt(Prefs.PREF_SCREEN_HEIGHT, -1);
         }
 		setLocation(getMax(x, screenWidth/2), getMax(y, screenHeight/2));
 	}

@@ -1,6 +1,7 @@
 package cn.kli.controlpanel.settings;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ public class SettingItemToggle extends SettingItem implements OnCheckedChangeLis
 	private String mPrefKey;
 	private OnCheckedChangeListener mListener;
 	
+	private SharedPreferences mPreference; 
+	
 	public interface OnCheckedChangeListener{
 		void onCheckedChanged(String key, boolean enable);
 	}
@@ -25,6 +28,7 @@ public class SettingItemToggle extends SettingItem implements OnCheckedChangeLis
 		super(context);
 		mPrefKey = key;
 		mListener = listener;
+		mPreference = Prefs.getPrefs();
 	}
 
     public SettingItemToggle(Context context) {
@@ -54,7 +58,7 @@ public class SettingItemToggle extends SettingItem implements OnCheckedChangeLis
 	
 	public void setKey(String key){
 	    mPrefKey = key;
-        boolean enable = Prefs.getPrefs(getContext()).getBoolean(mPrefKey, false);
+        boolean enable = mPreference.getBoolean(mPrefKey, false);
         mEnable.setChecked(enable);
 	}
 	
@@ -73,7 +77,7 @@ public class SettingItemToggle extends SettingItem implements OnCheckedChangeLis
 
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-		Editor editor = Prefs.getPrefs(getContext()).edit();
+		Editor editor = mPreference.edit();
 		editor.putBoolean(mPrefKey, arg1);
 		editor.commit();
 		if(mListener != null){

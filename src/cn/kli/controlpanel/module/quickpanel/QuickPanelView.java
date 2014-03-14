@@ -193,7 +193,7 @@ class QuickPanelView extends RelativeLayout {
     }
     
     private class OnHandleTouchListener implements OnTouchListener{
-        private float handleDownX;
+//        private float handleDownX;
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             int action = event.getAction();
@@ -201,13 +201,15 @@ class QuickPanelView extends RelativeLayout {
             case HANDLE:
                 if(action == MotionEvent.ACTION_DOWN){
                     VibrateUtils.getInstance(getContext()).vibrateShortly();
-                    handleDownX = event.getRawX();
-                }else if(action == MotionEvent.ACTION_MOVE){
+                    switchState(State.PANEL);
+//                    handleDownX = event.getRawX();
+                }
+                /*else if(action == MotionEvent.ACTION_MOVE){
                     if(Math.abs(event.getRawX() - handleDownX) > 30){
                         switchState(State.PANEL);
                         handleDownX = 0;
                     }
-                }
+                }*/
                 return true;
             case PANEL:
                 if(action == MotionEvent.ACTION_MOVE){
