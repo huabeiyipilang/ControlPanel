@@ -1,10 +1,12 @@
 package cn.kli.controlpanel.module.quickpanel;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,14 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.utils.VibrateUtils;
-import cn.kli.utils.DeviceUtils;
 import cn.kli.utils.klilog;
 
 class QuickPanelView extends RelativeLayout {
     private klilog log = new klilog(QuickPanelView.class);
-
-    private int screenWidth;
-    private int screenHeight;
     
     private LinearLayout mHandleView;
     private LinearLayout mPanelView;
@@ -29,6 +27,8 @@ class QuickPanelView extends RelativeLayout {
 
     private QuickMenuItem mRootMenuItem;
     private List<QuickMenuItemView> mVisibleMenuList;
+    
+    private IndicatorManager mIndicatorManager;
     
     private State mState;
     private StateChangeListener mStateChangeListener; 
@@ -44,20 +44,21 @@ class QuickPanelView extends RelativeLayout {
     public QuickPanelView(Context context){
         super(context);
         LayoutInflater.from(context).inflate(R.layout.quick_panel, this, true);
-        DeviceUtils utils = new DeviceUtils(getContext());
-        DisplayMetrics metrics = utils.getDisplayMetrics();
-        screenWidth = metrics.widthPixels;
-        screenHeight = metrics.heightPixels;
+        mIndicatorManager = IndicatorManager.getInstance(getContext());
         initViews();
         switchState(State.HANDLE);
     }
     
     private void initViews(){
         mHandleView = (LinearLayout)findViewById(R.id.ll_handle);
+        mHandleView.getBackground().setAlpha(100);
         mPanelView = (LinearLayout)findViewById(R.id.ll_panel);
+        mIndicatorManager.setViews((LinearLayout)findViewById(R.id.ll_up),
+                (LinearLayout)findViewById(R.id.ll_down));
         
         mHandleView.setOnTouchListener(new OnHandleTouchListener());
 //        mPanelView.setLayoutParams(new LayoutParams(screenWidth, screenHeight));
+        mIndicatorManager.start();
     }
     
     public void setStateChangeListener(StateChangeListener listener){
@@ -148,7 +149,7 @@ class QuickPanelView extends RelativeLayout {
         itemView.post(item.getUpdateRunnable());
         itemView.setMenuItem(item);
         itemView.setVisibility(View.VISIBLE);
-        log.i("item visible:"+item);
+//        log.i("item visible:"+item);
     }
     
     private void showChildMenu(QuickMenuItem father, QuickMenuItemView fatherView) {

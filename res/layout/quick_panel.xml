@@ -8,7 +8,22 @@
         android:layout_width="10dp"
         android:layout_height="50dp"
         android:orientation="vertical"
-        android:background="@color/translucent_background_dark" >
+        android:background="@drawable/handle_bkg"
+        android:padding="1dp" >
+        <LinearLayout 
+            android:id="@+id/ll_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            />
+        <LinearLayout
+            android:id="@+id/ll_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#0099ff"/>
     </LinearLayout>
 
     <LinearLayout

@@ -14,6 +14,7 @@ import cn.kli.controlpanel.module.floatpanel.FloatManager;
 import cn.kli.controlpanel.modules.FlashLightManager;
 import cn.kli.controlpanel.modules.OneKeyLockScreen;
 import cn.kli.utils.NetworkManager;
+import cn.kli.utils.klilog;
 
 public class MenuItemFactory {
     private Context mContext;
@@ -46,6 +47,7 @@ public class MenuItemFactory {
             public void run() {
                 Intent intent = new Intent(mContext, cls);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                klilog.info("start activity:"+cls.getSimpleName());
                 mContext.startActivity(intent);
             }
         });

@@ -48,7 +48,7 @@
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
         android:configChanges="orientation"
-        android:name="App" >
+        android:name="cn.kli.controlpanel.App" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
             android:value="360 market" />

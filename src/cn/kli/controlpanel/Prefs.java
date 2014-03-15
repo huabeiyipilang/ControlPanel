@@ -3,7 +3,7 @@ package cn.kli.controlpanel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.preference.PreferenceManager;
+import cn.kli.controlpanel.module.quickpanel.IndicatorManager;
 import cn.kli.utils.klilog;
 
 import com.baidu.mobstat.StatService;
@@ -28,10 +28,12 @@ public class Prefs {
     public static final String SETTING_NOTIFI_NETWORK_SPEED = "setting_notifi_network_speed";
     //浮动菜单震动反馈
     public static final String SETTING_MENU_VIBRATE = "setting_menu_vibrate";
+    //浮动指示器模式
+    public static final String SETTING_INDICATOR_MODE = "setting_indicator_mode";
 	
 	private final static String SETTING_PREFS = "setting_prefs";
 	private static Prefs sInstance;
-	private SharedPreferences mPrefs;
+	private final SharedPreferences mPrefs;
 	private Context mContext;
 	private Prefs(Context context){
 		mContext = context;
@@ -41,6 +43,7 @@ public class Prefs {
 		    editor.putBoolean(BOOLEAN_FIRST_OPEN, false);
 		    editor.putBoolean(SETTING_NOTIFI_NETWORK_SPEED, true);
             editor.putBoolean(SETTING_MENU_VIBRATE, true);
+            editor.putInt(SETTING_INDICATOR_MODE, IndicatorManager.MODE_MEMORY);
 		    editor.commit();
 		}
 	}
@@ -57,7 +60,11 @@ public class Prefs {
 	}
 	
 	public static SharedPreferences getPrefs(){
-	    return getInstance().mPrefs;
+	    return getInstance().getSharedPreferences();
+	}
+	
+	private SharedPreferences getSharedPreferences(){
+	    return mPrefs;
 	}
 	
 	public boolean getDeviceAdminEnable(){

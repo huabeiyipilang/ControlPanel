@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
+import cn.kli.utils.klilog;
 
 import com.baidu.mobstat.StatService;
 
@@ -20,6 +21,7 @@ public class OneKeyLockScreen extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 		try {
+		    klilog.info("lock screen!");
 			devicePloicyManager = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 			devicePloicyManager.lockNow();
 			StatService.onEvent(this, Baidu.EVENT_LOCK_SCREEN, Baidu.LOCK_SCREEN);
