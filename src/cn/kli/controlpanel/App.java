@@ -19,11 +19,13 @@ public class App extends Application {
 	
 	private Config mModuleConfig;
 	private Prefs mPrefs;
+	private Statistic mStatistic;
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
         KliUtils.init(this);
+        mStatistic = Statistic.init(this);
         mPrefs = Prefs.init(this);
 		mModuleConfig = Config.getInstance();
 		initModules();

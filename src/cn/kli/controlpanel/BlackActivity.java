@@ -14,6 +14,7 @@ public class BlackActivity extends SherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black);
         Class<BaseFragment> fragment = (Class<BaseFragment>) getIntent().getSerializableExtra("fragment");
+        Statistic.onEvent("open window", fragment.getSimpleName());
         setContentFragment(fragment);
     }
     

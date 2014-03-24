@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import cn.kli.controlpanel.Baidu;
 import cn.kli.controlpanel.R;
 import cn.kli.utils.klilog;
 
@@ -233,7 +232,6 @@ public class ThemeSetting extends Activity implements OnSeekBarChangeListener, O
 		editor.putInt(THEME_HEADER_COLOR, mColorHeader);
 		editor.putInt(THEME_CONTAINER_COLOR, mColorContainer);
 		editor.commit();
-		StatService.onEvent(this, Baidu.EVENT_THEME_SETTINGS, Baidu.SET_THEME+"header: "+dumpColor(mColorHeader)+";   container: "+dumpColor(mColorContainer));
 		return true;
 	}
 	

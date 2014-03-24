@@ -1,12 +1,9 @@
 package cn.kli.controlpanel.module.quickpanel;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -53,6 +50,14 @@ class QuickPanelView extends RelativeLayout {
         mHandleView = (LinearLayout)findViewById(R.id.ll_handle);
         mHandleView.getBackground().setAlpha(100);
         mPanelView = (LinearLayout)findViewById(R.id.ll_panel);
+        mPanelView.setOnClickListener(new OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                switchState(State.HANDLE);
+            }
+            
+        });
         mIndicatorManager.setViews((LinearLayout)findViewById(R.id.ll_up),
                 (LinearLayout)findViewById(R.id.ll_down));
         

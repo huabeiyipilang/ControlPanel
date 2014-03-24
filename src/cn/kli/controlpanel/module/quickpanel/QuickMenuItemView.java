@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.Statistic;
 import cn.kli.controlpanel.utils.VibrateUtils;
 import cn.kli.utils.klilog;
 
@@ -127,6 +128,7 @@ public class QuickMenuItemView extends LinearLayout {
     }
     
     public void onSelect(){
+        Statistic.onEvent("menu selected", mItem.title);
         Runnable runnable = mItem.getOnSelectRunnable();
         if(runnable != null){
             post(runnable);

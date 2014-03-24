@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.Statistic;
 import cn.kli.controlpanel.base.BaseFloatWindow;
 import cn.kli.utils.NetworkManager;
 
@@ -104,6 +105,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
                     break;
                 }
                 mAudioManager.setRingerMode(mode);
+                Statistic.onEvent("contril panel window", "ringer setting");
             }
             
         });
@@ -118,6 +120,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
                 }else{
                     mBluetoothManager.disable();
                 }
+                Statistic.onEvent("contril panel window", "bluetooth setting");
             }
         });
         
@@ -127,6 +130,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mNetworkManager.toggleWiFi(isChecked);
+                Statistic.onEvent("contril panel window", "wifi setting");
             }
         });
         
@@ -145,6 +149,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
                     e.printStackTrace();
                     mMobile.toggle();
                 }
+                Statistic.onEvent("contril panel window", "mobile network setting");
             }
         });
         
@@ -154,6 +159,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mNetworkManager.toggleAirplaneMode(isChecked);
+                Statistic.onEvent("contril panel window", "airplane setting");
             }
         });
 
@@ -165,6 +171,7 @@ public class ControlPanelWindow extends BaseFloatWindow {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Settings.System.putInt(getContext().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 
                         isChecked ? 1 : 0);
+                Statistic.onEvent("contril panel window", "display rotation setting");
             }
         });
 
@@ -201,6 +208,8 @@ public class ControlPanelWindow extends BaseFloatWindow {
                     mBrightnessWidgets.setVisibility(View.VISIBLE);
                     mBrightnessWidgets.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_left));
                 }
+
+                Statistic.onEvent("contril panel window", "auto screen brightness setting");
             }
         });
         

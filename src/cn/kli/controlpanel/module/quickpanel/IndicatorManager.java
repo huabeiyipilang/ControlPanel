@@ -11,6 +11,7 @@ import android.os.Message;
 import android.widget.LinearLayout;
 import cn.kli.controlpanel.Prefs;
 import cn.kli.utils.DeviceUtils;
+import cn.kli.utils.klilog;
 
 public class IndicatorManager {
     public static final int MODE_MEMORY = 1;
@@ -134,7 +135,8 @@ public class IndicatorManager {
             public void onReceive(Context context, Intent intent) {
                 int level = intent.getIntExtra("level", 0);
                 int scale = intent.getIntExtra("scale", 100);
-                mValue = level / scale;
+                klilog.info("battery level:"+level+", scale:"+scale);
+                mValue = Float.valueOf(level) / Float.valueOf(scale);
             }
             
         };

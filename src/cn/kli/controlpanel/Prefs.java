@@ -73,7 +73,6 @@ public class Prefs {
 	}
 	
 	public void setDeviceAdminEnable(boolean enable){
-		StatService.onEvent(mContext, Baidu.EVENT_LOCK_SCREEN, Baidu.DEVICE_ADMIN+enable);
 		klilog.info("device admin changed  value = "+enable);
 		SharedPreferences.Editor editor = mPrefs.edit();
 		editor.putBoolean("device_admin_enable", enable);

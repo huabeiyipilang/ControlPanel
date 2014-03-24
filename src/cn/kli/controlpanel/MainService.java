@@ -94,7 +94,6 @@ public class MainService extends Service{
     }
     
     private void showNotification(){
-    	StatService.onEvent(this, Baidu.SETTINGS, "show notification");
     	/*
     	Intent intent = new Intent(this, Launcher.class);
     	intent.putExtra(Launcher.START_FROM, "Notification");*/
@@ -122,7 +121,6 @@ public class MainService extends Service{
     }
     
     private void cancelNotification(){
-    	StatService.onEvent(this, Baidu.SETTINGS, "cancel notification");
     	NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     	nm.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
     	isNotifShow = false;
