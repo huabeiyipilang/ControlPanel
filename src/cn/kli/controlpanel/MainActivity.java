@@ -1,8 +1,14 @@
 package cn.kli.controlpanel;
 
+import android.os.Bundle;
 import cn.kli.controlpanel.base.BaseActivity;
-import cn.kli.menuui.MenuUIActivity;
 
 public class MainActivity extends BaseActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentFragment(GuideFragment.class);
+    }
 
 }
