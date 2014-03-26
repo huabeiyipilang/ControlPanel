@@ -182,4 +182,8 @@
     <string name="indicator_mode_memory">内存使用率</string>
     <string name="indicator_mode_cpu">CPU使用率</string>
     <string name="indicator_mode_battery">电池使用率</string>
+    
+    <string name="device_monitor">状态监控</string>
+    <string name="battery_remaining">电量剩余</string>
+    <string name="memory_remaining">内存剩余</string>
 </resources>

@@ -3,6 +3,8 @@ package cn.kli.controlpanel.device;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,7 +18,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.kli.controlpanel.R;
 import cn.kli.controlpanel.Statistic;
 import cn.kli.controlpanel.base.BaseFloatWindow;
+import cn.kli.controlpanel.devicesmanager.KliBatteryManager;
+import cn.kli.utils.DeviceUtils;
 import cn.kli.utils.NetworkManager;
+import cn.kli.utils.view.RoundProgressBar;
 
 public class ControlPanelWindow extends BaseFloatWindow {
 
@@ -38,7 +43,24 @@ public class ControlPanelWindow extends BaseFloatWindow {
     private CheckBox mDisplayRotation;
     private CheckBox mScreenAutoBrightness;
     private View mBrightnessWidgets;
+    private RoundProgressBar mBatteryMonitorView;
+    private RoundProgressBar mMemoryMonitorView;
 
+    private Handler mFreshHandler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch(msg.what){
+            case 1:
+                freshView();
+                mFreshHandler.sendEmptyMessageDelayed(1, 3000);
+                break;
+            }
+        }
+        
+    };
+    
     @Override
     protected void onCreate() {
         super.onCreate();
@@ -51,16 +73,20 @@ public class ControlPanelWindow extends BaseFloatWindow {
         mBluetoothManager = BluetoothAdapter.getDefaultAdapter();
         
         initViews();
+        
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        mFreshHandler.removeMessages(1);
+        mFreshHandler.sendEmptyMessage(1);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        mFreshHandler.removeMessages(1);
     }
 
     private void initViews(){
@@ -76,6 +102,11 @@ public class ControlPanelWindow extends BaseFloatWindow {
         mDisplayRotation = (CheckBox)findViewById(R.id.cb_display_rotation);
         mScreenAutoBrightness = (CheckBox)findViewById(R.id.cb_auto_brightness);
         mBrightnessWidgets = findViewById(R.id.cw_screen_brightness);
+        mBatteryMonitorView = (RoundProgressBar) findViewById(R.id.rpb_battery);
+        mMemoryMonitorView = (RoundProgressBar) findViewById(R.id.rpb_memory);
+        
+        mMemoryMonitorView.setMax((int) DeviceUtils.getTotalMemory());
+        mBatteryMonitorView.setMax(100);
         
         switch(mAudioManager.getRingerMode()){
         case AudioManager.RINGER_MODE_NORMAL:
@@ -220,5 +251,12 @@ public class ControlPanelWindow extends BaseFloatWindow {
     private void updateSilentAll(){
         mSilentAll.setChecked(mAudioManager.getMode() == AudioManager.RINGER_MODE_SILENT
                 && mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC) == 0);
+    }
+    
+    private void freshView(){
+        int battery = (int) (KliBatteryManager.getInstance(getContext()).getValue() * 100f);
+        mBatteryMonitorView.setProgress(battery, true);
+        
+        mMemoryMonitorView.setProgress((int) DeviceUtils.getAvailMemory(getContext()), true);
     }
 }

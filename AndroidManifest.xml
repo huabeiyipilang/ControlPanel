@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.kli.controlpanel"
-    android:versionCode="9"
-    android:versionName="3.0" >
+    android:versionCode="10"
+    android:versionName="3.1" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -54,7 +54,7 @@
             android:value="baidu market" />
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
-            android:value="3c625eeff3" />  <!-- 3c625eeff3 -->
+            android:value="debug" />  <!-- 3c625eeff3 -->
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"
             android:value="true" />

@@ -15,4 +15,16 @@
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
     </style>
+    
+    <style name="round_progress_bar"
+        xmlns:android_custom="http://schemas.android.com/apk/res/cn.kli.controlpanel">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="roundColor">@color/translucent_background</item>
+        <item name="roundProgressColor">@color/translucent_blue</item>
+        <item name="textColor">@color/translucent_blue</item>
+        <item name="textIsDisplayable">true</item>
+        <item name="roundWidth">10dp</item>
+        <item name="textSize">18sp</item>
+    </style>
 </resources>

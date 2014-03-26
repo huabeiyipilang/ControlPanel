@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.LinearLayout;
 import cn.kli.controlpanel.Prefs;
+import cn.kli.controlpanel.devicesmanager.KliBatteryManager;
 import cn.kli.utils.DeviceUtils;
 import cn.kli.utils.klilog;
 
@@ -127,33 +128,13 @@ public class IndicatorManager {
     }
 
     private class BatteryPolicy extends Policy{
-        private float mValue = 1f;
-    
-        private BroadcastReceiver mReceiver = new BroadcastReceiver(){
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                int level = intent.getIntExtra("level", 0);
-                int scale = intent.getIntExtra("scale", 100);
-                klilog.info("battery level:"+level+", scale:"+scale);
-                mValue = Float.valueOf(level) / Float.valueOf(scale);
-            }
-            
-        };
         
         public BatteryPolicy() {
             super();
-            mContext.registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         }
 
         public float getValue() {
-            return mValue;
-        }
-
-        @Override
-        protected void release() {
-            super.release();
-            mContext.unregisterReceiver(mReceiver);
+            return KliBatteryManager.getInstance(mContext).getValue();
         }
     
     }
