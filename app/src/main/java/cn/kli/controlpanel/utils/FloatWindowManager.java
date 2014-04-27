@@ -2,7 +2,7 @@ package cn.kli.controlpanel.utils;
 
 import android.content.Context;
 
-import cn.kli.controlpanel.base.BaseFloatWindow;
+import cn.kli.controlpanel.framework.BaseFloatWindow;
 
 public class FloatWindowManager {
     public static void startWindow(Context context, Class<? extends BaseFloatWindow> window){

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="声音" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/divider_horizontal_bright"/>
+
+    <RadioGroup
+        android:id="@+id/rg_ringer_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <RadioButton
+            android:id="@+id/rb_ringer_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="普通模式" />
+
+        <RadioButton
+            android:id="@+id/rb_ringer_silent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="静音模式" />
+
+        <RadioButton
+            android:id="@+id/rb_ringer_vibrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="静音模式" />
+    </RadioGroup>
+
+    <cn.kli.controlpanel.framework.widget.MusicControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <cn.kli.controlpanel.framework.widget.AlarmControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <cn.kli.controlpanel.framework.widget.RingControlBarWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/cb_silent_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="静音"
+        android:visibility="gone"/>
+</LinearLayout>

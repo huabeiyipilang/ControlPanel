@@ -22,7 +22,7 @@ public class Prefs {
         return sInstance;
     }
 
-    public Prefs getInstance(){
+    public static Prefs getInstance(){
         return sInstance;
     }
 

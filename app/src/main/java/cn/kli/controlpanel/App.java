@@ -11,6 +11,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Init.init(this);
+        Init.loadConfig(this);
     }
 
 }

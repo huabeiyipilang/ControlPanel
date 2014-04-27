@@ -1,6 +1,6 @@
 package cn.kli.controlpanel;
 
-import cn.kli.controlpanel.base.BaseFragment;
+import cn.kli.controlpanel.framework.BaseFragment;
 
 /**
  * Created by carl on 14-4-2.

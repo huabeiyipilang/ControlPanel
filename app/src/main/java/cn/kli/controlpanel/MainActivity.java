@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import cn.kli.controlpanel.base.BaseFragment;
+import cn.kli.controlpanel.framework.BaseFragment;
 
 
 public class MainActivity extends ActionBarActivity

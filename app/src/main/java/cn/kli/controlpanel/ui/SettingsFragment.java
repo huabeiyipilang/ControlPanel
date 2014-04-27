@@ -9,13 +9,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import cn.kli.controlpanel.R;
-import cn.kli.controlpanel.base.BaseFragment;
+import cn.kli.controlpanel.framework.BaseFragment;
 import cn.kli.controlpanel.service.MainService;
+import cn.kli.controlpanel.utils.Prefs;
 
 /**
  * Created by carl on 14-4-16.
  */
 public class SettingsFragment extends BaseFragment {
+
+    private CheckBox mServiceSwitch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,12 +29,14 @@ public class SettingsFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((CheckBox)getView().findViewById(R.id.cb_enable_service)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mServiceSwitch = (CheckBox)getView().findViewById(R.id.cb_enable_service);
+        mServiceSwitch.setChecked(Prefs.getInstance().getBoolean(Prefs.BOOLEAN_SERVICE_ENABLE, true));
+        mServiceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if (b) {
                     getActivity().startService(new Intent(getActivity(), MainService.class));
-                }else{
+                } else {
                     getActivity().stopService(new Intent(getActivity(), MainService.class));
                 }
             }
