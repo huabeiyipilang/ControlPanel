@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 import cn.kli.controlpanel.R;
+import cn.kli.controlpanel.utils.FloatWindowManager;
 
 public class BaseFloatWindow{
     
@@ -26,9 +27,12 @@ public class BaseFloatWindow{
     private Context mContext;
     private int type = TYPE_WINDOW;
     private boolean mAnimating;
+    private boolean mVisibility;
+    private FloatWindowManager mWindowManager;
     
     public void setContext(Context context){
         mContext = context;
+        mWindowManager = FloatWindowManager.getInstance(mContext);
         mRootView = (WindowRootView)LayoutInflater.from(context).inflate(R.layout.window_base, null);
         mWindowView = (ViewGroup)mRootView.findViewById(R.id.ll_window);
         mRootView.setOnBackKeyPressedListener(new WindowRootView.OnBackKeyPressedListener() {
@@ -38,27 +42,7 @@ public class BaseFloatWindow{
                 if(mAnimating){
                     return;
                 }
-                Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_out);
-                anim.setAnimationListener(new AnimationListener(){
-
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                        mAnimating = true;
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        hide();
-                        mAnimating = false;
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                        
-                    }
-                    
-                });
-                mWindowView.startAnimation(anim);
+                mWindowManager.backStack();
             }
         });
         mWinManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -157,21 +141,59 @@ public class BaseFloatWindow{
                 });
                 mWinManager.addView(mRootView, mParams);
                 mWindowView.startAnimation(anim);
+                mVisibility = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         
     }
-    
-    public void hide(){
+
+    public void hideWithoutAnim(){
         if(mWinManager != null){
             try {
                 mWinManager.removeView(mRootView);
                 onStop();
+                mVisibility = false;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void hide(){
+        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_out);
+        anim.setAnimationListener(new AnimationListener(){
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+                mAnimating = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                hideWithoutAnim();
+                mAnimating = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
+        });
+        mWindowView.startAnimation(anim);
+    }
+
+    public boolean isVisibility(){
+        return mVisibility;
+    }
+
+    protected void startWindow(Class<? extends BaseFloatWindow> window){
+        mWindowManager.openWindow(window);
+    }
+
+    protected void replaceWindow(Class<? extends BaseFloatWindow> window){
+        mWindowManager.replaceWindow(window);
     }
 }

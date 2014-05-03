@@ -18,10 +18,12 @@ public class IndicatorView extends FloatView {
 
     private static IndicatorView sInstance;
     private DeviceInfoManager mDeviceInfo;
+    private FloatWindowManager mWindowManager;
 
     private IndicatorView(Context context) {
         super(context);
         mDeviceInfo = DeviceInfoManager.getInstance(context);
+        mWindowManager = FloatWindowManager.getInstance(context);
         View contentView = LayoutInflater.from(context).inflate(R.layout.view_indicator, null);
         setContentView(contentView);
         setOnLongClickListener(new View.OnLongClickListener() {
@@ -35,7 +37,7 @@ public class IndicatorView extends FloatView {
         setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FloatWindowManager.startWindow(getContext(), ControlPanelWindow.class);
+                mWindowManager.openWindow(ControlPanelWindow.class);
             }
         });
 
