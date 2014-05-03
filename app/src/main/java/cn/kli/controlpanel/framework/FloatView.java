@@ -2,6 +2,7 @@ package cn.kli.controlpanel.framework;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,10 +23,14 @@ public class FloatView {
 	private WindowManager.LayoutParams mParams;
 	private boolean isPanelShow = false;
 	private boolean isLock = false;
+    private View.OnLongClickListener mOnLongClickListener;
+    private OnClickListener mOnClickListener;
+    private Handler mHandler;
 	
 	public FloatView(Context context){
 	    mContext = context;
-		mWinManager =  (WindowManager) getContext().getSystemService("window");
+		mWinManager =  (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        mHandler = new Handler();
 	}
 	
 	protected Context getContext() {
@@ -35,12 +40,6 @@ public class FloatView {
     public void setContentView(View view){
 		mContentView = view;
         onFloatPrepare();
-        mContentView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FloatWindowManager.startWindow(mContext, ControlPanelWindow.class);
-            }
-        });
 	}
 	
 	protected int onInitDragView(){
@@ -79,9 +78,15 @@ public class FloatView {
 		float startY;
 		int originX, originY;
 		float downTime;
+        boolean dragMode;
+        boolean action;
+
+        LongClickCheck checkLongClick = new LongClickCheck();
 		
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
+            float moveX = event.getRawX() - startX;
+            float moveY = event.getRawY() - startY;
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				startX = event.getRawX();
@@ -89,22 +94,39 @@ public class FloatView {
 				originX = mParams.x;
 				originY = mParams.y;
 				downTime = System.currentTimeMillis();
+                mHandler.postDelayed(checkLongClick, 500);
 				return false;
 			case MotionEvent.ACTION_MOVE:
-				updateLocation(event.getRawX() - startX,event.getRawY() - startY, originX, originY);
-				break;
+                if(Math.abs(moveX) > 20 || Math.abs(moveY) > 20){
+                    dragMode = true;
+                }
+				updateLocation(moveX, moveY, originX, originY);
+                return false;
 			case MotionEvent.ACTION_UP:
-				float moveX = event.getRawX() - startX;
-				float moveY = event.getRawY() - startY;
-				if(Math.abs(moveX) < 15 && Math.abs(moveY) < 15 && System.currentTimeMillis() - downTime < 500){
-					return false;
-				}
+                log.i("action up");
 				onActionUp(moveX, moveY, originX, originY);
+                if(System.currentTimeMillis() - downTime < 500 && !dragMode && mOnClickListener != null){
+                    mOnClickListener.onClick(getContentView());
+                }
+                mHandler.removeCallbacks(checkLongClick);
+                dragMode = false;
 				break;
 			}
-			return true;
+			return false;
 		}
+
+        private class LongClickCheck implements Runnable {
+
+            @Override
+            public void run() {
+                if(!dragMode && mOnLongClickListener != null){
+                    mOnLongClickListener.onLongClick(getContentView());
+                }
+            }
+        }
 	}
+
+
 	
 	protected void onActionUp(float x, float y, int originX, int originY){
 		if(isLock){
@@ -180,4 +202,12 @@ public class FloatView {
 	protected void onConfigurationChanged(Configuration newConfig) {
 		
 	}
+
+    protected void setOnLongClickListener(View.OnLongClickListener longClickListener){
+        mOnLongClickListener = longClickListener;
+    }
+
+    protected void setOnClickListener(OnClickListener clickListener){
+        mOnClickListener = clickListener;
+    }
 }

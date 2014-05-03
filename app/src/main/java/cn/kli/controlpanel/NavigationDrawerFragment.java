@@ -84,8 +84,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         initNavList();
 
-        // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
     }
 
     private void initNavList(){
@@ -207,6 +205,10 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+
+        // Select either the default item (0) or the last selected item.
+        selectItem(mCurrentSelectedPosition);
     }
 
     private void selectItem(int position) {

@@ -1,6 +1,7 @@
 package cn.kli.controlpanel.service;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
@@ -67,7 +68,8 @@ public class MainService extends Service {
     private void initNotification(){
         mNotification = new Notification();
         mNotification.flags = Notification.FLAG_NO_CLEAR|Notification.FLAG_ONGOING_EVENT;
-
+        PendingIntent pendingIntent = PendingIntent.getService(this, 1, new Intent(this, MainService.class), PendingIntent.FLAG_CANCEL_CURRENT);
+        mNotification.contentIntent = pendingIntent;
     }
 
     private void updateNotification(){
